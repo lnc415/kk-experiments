@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Copper Whisk — Homemade Comfort in Every Bite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f5e6c8;
+            --parchment: #ede0c4;
+            --parchment-dark: #e0ccaa;
+            --light-tan: #e8d5a3;
+            --tan: #c9a06a;
+            --copper: #b87333;
+            --copper-light: #d4955a;
+            --copper-mid: #c8843e;
+            --copper-deep: #8b5828;
+            --copper-sheen: #e8b070;
+            --brown: #8b5e3c;
+            --dark-brown: #5c3317;
+            --text-dark: #3d2410;
+            --text-medium: #6b4226;
+            --text-light: #9b7350;
+            --warm-white: #faf5ea;
+
+            /* Copper gradients used throughout */
+            --grad-copper-btn:   linear-gradient(135deg, #c8893e 0%, #b87333 35%, #d4a055 58%, #a86828 100%);
+            --grad-copper-text:  linear-gradient(175deg, #e8b070 0%, #c07838 22%, #7a4820 45%, #c8883c 65%, #9a5e28 85%, #d4a055 100%);
+            --grad-copper-line:  linear-gradient(to right, transparent, #c8883c, #e8b070, #c8883c, transparent);
+            --grad-copper-card:  linear-gradient(135deg, rgba(216,140,60,0.18) 0%, rgba(184,115,51,0.08) 100%);
+            --glow-copper:       0 0 18px rgba(184, 115, 51, 0.45);
+            --glow-copper-soft:  0 4px 22px rgba(184, 115, 51, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background-color: var(--parchment);
+        }
+
+        /* Parchment grain overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.055;
+            pointer-events: none;
+            z-index: 9998;
+            mix-blend-mode: multiply;
+        }
+
+        /* ============================
+           NAVIGATION
+        ============================ */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 1.1rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+        nav.scrolled {
+            background: rgba(237, 224, 196, 0.96);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 2px 24px rgba(92, 51, 23, 0.1);
+        }
+        .nav-logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.55rem;
+            color: var(--dark-brown);
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        nav.scrolled .nav-logo {
+            opacity: 1;
+            pointer-events: auto;
+            background: linear-gradient(
+                168deg,
+                #7a3c10 0%, #c07828 20%, #f5bf60 35%,
+                #ffe0a0 42%, #e8a040 50%, #7a3c10 62%,
+                #c07828 72%, #f0b850 82%, #8b4a18 100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 1px 3px rgba(50,20,5,0.45));
+            animation: copperShimmer 6s ease-in-out infinite;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-medium);
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--copper); }
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            color: var(--brown);
+            transition: color 0.3s ease;
+            padding: 0.4rem;
+        }
+        .cart-icon:hover { color: var(--copper); }
+        .cart-count {
+            position: absolute;
+            top: -4px; right: -4px;
+            background: var(--copper);
+            color: white;
+            font-size: 0.6rem;
+            width: 17px; height: 17px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* ============================
+           SHARED SECTION STYLES
+        ============================ */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 5.5rem 2rem;
+        }
+        .section-title {
+            font-family: 'Lora', serif;
+            font-size: clamp(1.9rem, 4vw, 2.7rem);
+            color: var(--dark-brown);
+            text-align: center;
+            margin-bottom: 0.4rem;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 2px;
+            background: var(--grad-copper-line);
+            margin: 0.9rem auto 0;
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(200, 136, 60, 0.35);
+        }
+
+        /* ============================
+           SECTION 1: HERO
+        ============================ */
+        #hero {
+            background:
+                radial-gradient(ellipse at 25% 35%, rgba(184, 115, 51, 0.18) 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 65%, rgba(139, 94, 60, 0.14) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 10%, rgba(201, 160, 106, 0.12) 0%, transparent 45%),
+                radial-gradient(ellipse at 80% 90%, rgba(184, 115, 51, 0.1) 0%, transparent 40%),
+                linear-gradient(150deg, #f2e3ba 0%, #ead5a0 45%, #dfc68d 100%);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Floating baked good decoration */
+        .hero-items {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .hi {
+            position: absolute;
+            font-size: 4rem;
+            opacity: 0.13;
+            filter: sepia(0.9) saturate(0.4) brightness(0.85);
+            line-height: 1;
+            user-select: none;
+        }
+        .hi:nth-child(1)  { top: 8%;  left: 4%;   font-size: 5.5rem; animation: floatA 7s ease-in-out infinite; }
+        .hi:nth-child(2)  { top: 15%; right: 6%;  font-size: 4.5rem; animation: floatB 6s ease-in-out infinite 1s; }
+        .hi:nth-child(3)  { bottom: 12%; left: 8%; font-size: 5rem;  animation: floatA 8s ease-in-out infinite 0.5s; }
+        .hi:nth-child(4)  { bottom: 18%; right: 4%; font-size: 4rem; animation: floatB 7s ease-in-out infinite 1.5s; }
+        .hi:nth-child(5)  { top: 48%; left: 1%;   font-size: 3rem;  animation: floatA 6s ease-in-out infinite 2s; }
+        .hi:nth-child(6)  { top: 42%; right: 2%;  font-size: 3.5rem; animation: floatB 7s ease-in-out infinite 0.8s; }
+        .hi:nth-child(7)  { top: 3%;  left: 42%;  font-size: 2.8rem; animation: floatA 5s ease-in-out infinite 3s; }
+        .hi:nth-child(8)  { bottom: 4%; left: 38%; font-size: 3.5rem; animation: floatB 6s ease-in-out infinite 1.2s; }
+        .hi:nth-child(9)  { top: 32%; left: 14%;  font-size: 2.5rem; animation: floatA 8s ease-in-out infinite 2.5s; }
+        .hi:nth-child(10) { top: 28%; right: 14%; font-size: 2.5rem; animation: floatB 7s ease-in-out infinite 0.3s; }
+
+        @keyframes floatA {
+            0%, 100% { transform: translateY(0) rotate(-4deg); }
+            50%       { transform: translateY(-18px) rotate(4deg); }
+        }
+        @keyframes floatB {
+            0%, 100% { transform: translateY(0) rotate(3deg); }
+            50%       { transform: translateY(-14px) rotate(-5deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 740px;
+        }
+        .hero-eyebrow {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--copper);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .hero-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(3.8rem, 11vw, 7.5rem);
+            line-height: 1.05;
+            margin-bottom: 1.1rem;
+
+            /* ── Polished forged-copper gradient ──
+               Simulates real metallic specular bands:
+               dark base → warm copper → bright shine → deep shadow
+               → second shine peak → back to dark base              */
+            background: linear-gradient(
+                168deg,
+                #2e1205 0%,
+                #7a3c10 6%,
+                #b86820 12%,
+                #d98c35 18%,
+                #f5bf60 23%,    /* first specular highlight */
+                #ffeaaa 27%,    /* peak shine – near white-gold */
+                #ffd878 30%,
+                #e8a040 35%,
+                #c07828 41%,
+                #7a3c10 48%,
+                #3d1a06 54%,    /* deep shadow valley */
+                #7a3c10 59%,
+                #b87333 64%,
+                #d99040 69%,
+                #f5c060 74%,    /* second specular highlight */
+                #ffe090 78%,    /* second shine peak */
+                #e0a040 82%,
+                #c07828 87%,
+                #8b4a18 92%,
+                #4a2008 97%,
+                #2e1205 100%
+            );
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+
+            /* Emboss depth: warm golden highlight above, deep shadow below */
+            filter:
+                drop-shadow(0 -1px 0px rgba(255, 220, 130, 0.55))
+                drop-shadow(0  2px 6px  rgba(50, 20, 5, 0.55))
+                drop-shadow(0  4px 18px rgba(100, 50, 10, 0.35));
+
+            animation: copperShimmer 5s ease-in-out infinite;
+        }
+
+        @keyframes copperShimmer {
+            0%   { background-position: 0%   50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0%   50%; }
+        }
+        .hero-tagline {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: var(--text-medium);
+            margin-bottom: 2.8rem;
+            letter-spacing: 0.03em;
+        }
+        .hero-cta {
+            display: inline-block;
+            background: var(--grad-copper-btn);
+            color: #fff8ee;
+            padding: 0.95rem 2.6rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.93rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: all 0.35s ease;
+            box-shadow: 0 5px 22px rgba(184, 115, 51, 0.38), inset 0 1px 0 rgba(255,210,140,0.25);
+            border: 1px solid rgba(200, 140, 60, 0.4);
+        }
+        .hero-cta:hover {
+            background: linear-gradient(135deg, #d4955a 0%, #c8843e 35%, #e8b070 58%, #b07030 100%);
+            transform: translateY(-3px);
+            box-shadow: var(--glow-copper), 0 8px 28px rgba(184, 115, 51, 0.45);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-light);
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            animation: scrollBounce 2.4s ease-in-out infinite;
+            opacity: 0.8;
+        }
+        .scroll-chevron {
+            width: 18px; height: 18px;
+            border-right: 1.5px solid var(--copper-mid);
+            border-bottom: 1.5px solid var(--copper-mid);
+            transform: rotate(45deg);
+            margin-top: -6px;
+            box-shadow: 2px 2px 4px rgba(184, 115, 51, 0.2);
+        }
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.8; }
+            50%       { transform: translateX(-50%) translateY(9px); opacity: 0.5; }
+        }
+
+        /* ============================
+           SECTION 2: SPECIALTIES
+        ============================ */
+        #specialties {
+            background:
+                radial-gradient(ellipse at 85% 15%, rgba(184, 115, 51, 0.09) 0%, transparent 50%),
+                linear-gradient(180deg, #f0e4cb 0%, #ede0c4 100%);
+        }
+        .specialties-container {
+            width: 100%;
+            max-width: 1120px;
+        }
+        .specialties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1.4rem;
+            margin: 2.8rem 0 1.8rem;
+        }
+        .specialty-card {
+            background: rgba(255, 250, 238, 0.75);
+            border: 1px solid rgba(184, 115, 51, 0.22);
+            border-radius: 18px;
+            padding: 0;
+            text-align: center;
+            transition: all 0.35s ease;
+            cursor: pointer;
+            box-shadow: 0 3px 16px rgba(139, 94, 60, 0.07);
+            overflow: hidden;
+            position: relative;
+        }
+        .specialty-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            border: 1.5px solid transparent;
+            background: linear-gradient(135deg, rgba(232,176,112,0.5), transparent 50%, rgba(184,115,51,0.3)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            pointer-events: none;
+        }
+        .specialty-card:hover::before { opacity: 1; }
+        .specialty-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 35px rgba(184, 115, 51, 0.22), var(--glow-copper-soft);
+            background: rgba(255, 250, 238, 0.97);
+            border-color: rgba(184, 115, 51, 0.4);
+        }
+        .specialty-img {
+            width: 100%;
+            height: 145px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .specialty-img::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.9;
+        }
+        .specialty-img.bg1::before { background: linear-gradient(135deg, #f2d9b0 0%, #e4b97a 100%); }
+        .specialty-img.bg2::before { background: linear-gradient(135deg, #e8c9a0 0%, #d4a050 100%); }
+        .specialty-img.bg3::before { background: linear-gradient(135deg, #d8c4a8 0%, #c4a070 100%); }
+        .specialty-img.bg4::before { background: linear-gradient(135deg, #ecd8b8 0%, #d8b060 100%); }
+        .specialty-img.bg5::before { background: linear-gradient(135deg, #f0d8b8 0%, #dfc090 100%); }
+        .specialty-img.bg6::before { background: linear-gradient(135deg, #e8d4b0 0%, #c8a070 100%); }
+        .specialty-img span {
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 2px 8px rgba(92, 51, 23, 0.2));
+        }
+        .specialty-body {
+            padding: 1.1rem 1.2rem 1.3rem;
+        }
+        .specialty-name {
+            font-family: 'Lora', serif;
+            font-size: 1rem;
+            color: var(--dark-brown);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        .specialty-desc {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            margin-bottom: 0.8rem;
+            line-height: 1.45;
+        }
+        .specialty-price {
+            font-family: 'Lora', serif;
+            font-size: 1rem;
+            color: var(--copper);
+            font-weight: 600;
+            margin-bottom: 0.9rem;
+        }
+        .add-to-cart-btn {
+            background: transparent;
+            border: 1.5px solid rgba(184, 115, 51, 0.5);
+            color: var(--copper-deep);
+            padding: 0.42rem 1.3rem;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Nunito', sans-serif;
+            letter-spacing: 0.03em;
+        }
+        .add-to-cart-btn:hover,
+        .add-to-cart-btn.added {
+            background: var(--grad-copper-btn);
+            border-color: transparent;
+            color: #fff8ee;
+            box-shadow: 0 3px 12px rgba(184, 115, 51, 0.38);
+        }
+        .specialties-footer {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+        }
+        .delivery-note {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+        .view-menu-btn {
+            background: var(--grad-copper-btn);
+            color: #fff8ee;
+            border: 1px solid rgba(200, 140, 60, 0.35);
+            padding: 1rem 2.1rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.35s ease;
+            box-shadow: 0 5px 22px rgba(184, 115, 51, 0.38), inset 0 1px 0 rgba(255,210,140,0.22);
+            font-family: 'Nunito', sans-serif;
+            letter-spacing: 0.05em;
+        }
+        .view-menu-btn:hover {
+            background: linear-gradient(135deg, #d4955a 0%, #c8843e 35%, #e8b070 58%, #b07030 100%);
+            transform: translateY(-3px);
+            box-shadow: var(--glow-copper), 0 10px 30px rgba(184, 115, 51, 0.45);
+        }
+
+        /* ============================
+           SECTION 3: OUR STORY
+        ============================ */
+        #story {
+            background:
+                radial-gradient(ellipse at 15% 75%, rgba(184, 115, 51, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 85% 25%, rgba(139, 94, 60, 0.06) 0%, transparent 45%),
+                linear-gradient(180deg, #ede0c4 0%, #f0e5cc 100%);
+        }
+        .story-container {
+            max-width: 680px;
+            text-align: center;
+        }
+        .story-icon {
+            font-size: 2.8rem;
+            display: block;
+            margin-bottom: 1.6rem;
+            opacity: 0.55;
+            filter: sepia(0.6);
+        }
+        .story-divider {
+            width: 120px;
+            height: 1.5px;
+            background: var(--grad-copper-line);
+            margin: 1.2rem auto 1.8rem;
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(200, 136, 60, 0.3);
+            position: relative;
+        }
+        .story-divider::before {
+            content: '✦';
+            position: absolute;
+            left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.65rem;
+            color: var(--copper-mid);
+            background: linear-gradient(135deg, #f0e5cc, #ede0c4);
+            padding: 0 0.4rem;
+            line-height: 1;
+        }
+        .story-text {
+            font-family: 'Lora', serif;
+            font-size: clamp(1rem, 2vw, 1.12rem);
+            line-height: 1.95;
+            color: var(--text-medium);
+            margin-bottom: 1.4rem;
+        }
+        .story-text em {
+            color: var(--copper);
+            font-style: normal;
+            font-weight: 600;
+        }
+        .story-signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.9rem;
+            margin-top: 1.8rem;
+            background: linear-gradient(
+                168deg,
+                #3d1a06 0%, #8b4a18 10%, #c47a28 20%,
+                #e8a040 30%, #ffd878 38%, #ffe9a8 43%,
+                #f0b055 48%, #c07828 56%, #6b3010 65%,
+                #b06820 73%, #e0a040 81%, #ffc860 88%,
+                #c07828 94%, #5a2a08 100%
+            );
+            background-size: 220% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 1px 4px rgba(50,20,5,0.4)) drop-shadow(0 -1px 0 rgba(255,210,120,0.4));
+            animation: copperShimmer 7s ease-in-out infinite;
+            animation-delay: 1.5s;
+        }
+
+        /* ============================
+           SECTION 4: SOCIALS
+        ============================ */
+        #socials {
+            background:
+                radial-gradient(ellipse at 65% 30%, rgba(139, 94, 60, 0.09) 0%, transparent 50%),
+                linear-gradient(180deg, #ede0c4 0%, #e0ccaa 100%);
+        }
+        .socials-container {
+            max-width: 580px;
+            text-align: center;
+        }
+        .socials-tagline {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            color: var(--text-medium);
+            font-size: 1.05rem;
+            margin: 1.2rem 0 2.8rem;
+            line-height: 1.8;
+        }
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            background: rgba(255, 250, 238, 0.82);
+            border: 1.5px solid rgba(184, 115, 51, 0.32);
+            color: var(--copper-deep);
+            padding: 0.85rem 1.9rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.35s ease;
+            box-shadow: 0 3px 14px rgba(184, 115, 51, 0.1);
+            font-family: 'Nunito', sans-serif;
+        }
+        .social-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--glow-copper-soft), 0 8px 22px rgba(184, 115, 51, 0.2);
+            background: rgba(255, 250, 238, 1);
+            border-color: rgba(184, 115, 51, 0.6);
+        }
+        .social-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+        /* Brand colours only on hover — copper by default */
+        .social-btn.instagram:hover { border-color: #c13584; color: #c13584; box-shadow: 0 0 18px rgba(193,53,132,0.25), 0 8px 22px rgba(139,94,60,0.1); }
+        .social-btn.facebook:hover  { border-color: #1877f2; color: #1877f2; box-shadow: 0 0 18px rgba(24,119,242,0.25), 0 8px 22px rgba(139,94,60,0.1); }
+        .social-btn.pinterest:hover { border-color: #e60023; color: #e60023; box-shadow: 0 0 18px rgba(230,0,35,0.25),   0 8px 22px rgba(139,94,60,0.1); }
+
+        .socials-sub {
+            font-size: 0.87rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 2.5rem;
+        }
+        .site-footer {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(201, 160, 106, 0.28);
+            font-size: 0.78rem;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* ============================
+           CART SLIDE-IN
+        ============================ */
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(50, 28, 8, 0.38);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: flex;
+            justify-content: flex-end;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+        .cart-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .cart-panel {
+            width: min(440px, 100vw);
+            height: 100vh;
+            background:
+                radial-gradient(ellipse at 20% 10%, rgba(184, 115, 51, 0.07) 0%, transparent 50%),
+                #faf5ea;
+            padding: 2.2rem;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: -6px 0 50px rgba(92, 51, 23, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+        .cart-overlay.open .cart-panel {
+            transform: translateX(0);
+        }
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.6rem;
+            padding-bottom: 1.1rem;
+            border-bottom: 1px solid rgba(201, 160, 106, 0.3);
+        }
+        .cart-header h2 {
+            font-family: 'Lora', serif;
+            color: var(--dark-brown);
+            font-size: 1.4rem;
+        }
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 0.3rem 0.6rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+            line-height: 1;
+        }
+        .close-cart:hover {
+            background: rgba(201, 160, 106, 0.2);
+            color: var(--brown);
+        }
+        .cart-empty {
+            text-align: center;
+            color: var(--text-light);
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 1rem;
+            padding: 3rem 0;
+            flex: 1;
+        }
+        #cartItems { flex: 1; }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid rgba(201, 160, 106, 0.15);
+        }
+        .cart-item-info { flex: 1; }
+        .cart-item-name {
+            font-family: 'Lora', serif;
+            font-size: 0.95rem;
+            color: var(--dark-brown);
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+        .cart-item-price {
+            font-size: 0.84rem;
+            color: var(--copper);
+            font-weight: 600;
+        }
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+        }
+        .qty-btn {
+            background: rgba(201, 160, 106, 0.18);
+            border: none;
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--brown);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 600;
+        }
+        .qty-btn:hover { background: rgba(201, 160, 106, 0.4); }
+        .cart-item-qty {
+            font-weight: 700;
+            color: var(--dark-brown);
+            min-width: 22px;
+            text-align: center;
+            font-size: 1rem;
+        }
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.1rem;
+            margin-top: 0.5rem;
+            border-top: 1.5px solid rgba(201, 160, 106, 0.3);
+        }
+        .cart-total-label {
+            font-family: 'Lora', serif;
+            font-size: 1.05rem;
+            color: var(--dark-brown);
+            font-weight: 600;
+        }
+        .cart-total-amt {
+            font-family: 'Lora', serif;
+            font-size: 1.25rem;
+            color: var(--copper);
+            font-weight: 600;
+        }
+        .checkout-btn {
+            width: 100%;
+            background: var(--grad-copper-btn);
+            color: #fff8ee;
+            border: 1px solid rgba(200, 140, 60, 0.3);
+            padding: 1.05rem;
+            border-radius: 50px;
+            font-size: 0.97rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 1.4rem;
+            transition: all 0.3s;
+            font-family: 'Nunito', sans-serif;
+            letter-spacing: 0.05em;
+            box-shadow: 0 4px 18px rgba(184, 115, 51, 0.32), inset 0 1px 0 rgba(255,210,140,0.2);
+        }
+        .checkout-btn:hover {
+            background: linear-gradient(135deg, #d4955a 0%, #c8843e 35%, #e8b070 58%, #b07030 100%);
+            transform: translateY(-2px);
+            box-shadow: var(--glow-copper), 0 8px 24px rgba(184, 115, 51, 0.4);
+        }
+        .cart-delivery-note {
+            margin-top: 1rem;
+            font-size: 0.76rem;
+            color: var(--text-light);
+            text-align: center;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        /* ============================
+           FADE-IN SCROLL ANIMATIONS
+        ============================ */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.75s ease, transform 0.75s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fd1 { transition-delay: 0.08s; }
+        .fd2 { transition-delay: 0.18s; }
+        .fd3 { transition-delay: 0.28s; }
+        .fd4 { transition-delay: 0.38s; }
+        .fd5 { transition-delay: 0.48s; }
+        .fd6 { transition-delay: 0.56s; }
+
+        /* ============================
+           RESPONSIVE
+        ============================ */
+        /* ============================
+           SECTION: FULL MENU
+        ============================ */
+        #fullmenu {
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(184, 115, 51, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(139, 94, 60, 0.07) 0%, transparent 45%),
+                linear-gradient(180deg, #ede0c4 0%, #f0e5cc 100%);
+            align-items: center;
+        }
+        .fullmenu-container {
+            width: 100%;
+            max-width: 920px;
+        }
+        .menu-note {
+            text-align: center;
+            font-family: 'Lora', serif;
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 0.88rem;
+            margin-top: 0.6rem;
+            margin-bottom: 2.8rem;
+        }
+        .menu-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 1.6rem;
+        }
+        .menu-category {
+            background: rgba(255, 250, 238, 0.78);
+            border: 1px solid rgba(184, 115, 51, 0.25);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 3px 16px rgba(139, 94, 60, 0.07);
+            transition: box-shadow 0.35s ease, transform 0.35s ease, border-color 0.35s ease;
+        }
+        .menu-category:hover {
+            box-shadow: 0 10px 32px rgba(184, 115, 51, 0.2), var(--glow-copper-soft);
+            transform: translateY(-4px);
+            border-color: rgba(200, 132, 62, 0.5);
+        }
+        .menu-cat-header {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 1rem 1.4rem;
+            background: var(--grad-copper-card);
+            border-bottom: 1px solid rgba(184, 115, 51, 0.2);
+            position: relative;
+        }
+        .menu-cat-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 1.4rem; right: 1.4rem;
+            height: 1px;
+            background: var(--grad-copper-line);
+            opacity: 0.6;
+        }
+        .menu-cat-icon { font-size: 1.25rem; }
+        .menu-cat-name {
+            font-family: 'Lora', serif;
+            font-size: 1.05rem;
+            color: var(--dark-brown);
+            font-weight: 600;
+        }
+        .menu-items-list { padding: 0.6rem 0.6rem 0.8rem; }
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 0.6rem 0.8rem;
+            border-radius: 10px;
+            transition: background 0.2s ease;
+        }
+        .menu-item:hover {
+            background: linear-gradient(135deg, rgba(216,140,60,0.1) 0%, rgba(232,176,112,0.07) 100%);
+            border-radius: 10px;
+        }
+        .menu-item-left { flex: 1; }
+        .menu-item-name {
+            font-family: 'Lora', serif;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        .menu-item-sub {
+            font-size: 0.76rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-top: 0.18rem;
+            line-height: 1.45;
+        }
+        .menu-item-price {
+            font-family: 'Lora', serif;
+            font-size: 0.88rem;
+            font-weight: 700;
+            white-space: nowrap;
+            margin-left: 1rem;
+            padding-top: 0.1rem;
+            background: linear-gradient(175deg, #d4955a, #9a5e28);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .menu-order-note {
+            text-align: center;
+            margin-top: 2.2rem;
+            font-family: 'Lora', serif;
+            font-style: italic;
+            color: var(--text-medium);
+            font-size: 0.9rem;
+        }
+        .menu-order-note a {
+            color: var(--copper);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .menu-order-note a:hover { text-decoration: underline; }
+
+        /* ============================
+           BACK TO TOP
+        ============================ */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            background: var(--grad-copper-btn);
+            color: #fff8ee;
+            border: 1px solid rgba(200, 140, 60, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 18px rgba(184, 115, 51, 0.35), inset 0 1px 0 rgba(255,210,140,0.2);
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.35s ease, transform 0.35s ease, box-shadow 0.25s ease;
+            z-index: 999;
+            pointer-events: none;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+        .back-to-top:hover {
+            background: linear-gradient(135deg, #d4955a 0%, #c8843e 35%, #e8b070 55%, #b07030 100%);
+            transform: translateY(-3px);
+            box-shadow: var(--glow-copper), 0 8px 22px rgba(184, 115, 51, 0.4);
+        }
+
+        /* ============================
+           RESPONSIVE
+        ============================ */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .specialties-grid { grid-template-columns: repeat(2, 1fr); }
+            .specialties-footer { align-items: center; }
+            .delivery-note { text-align: center; }
+            .menu-categories { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 500px) {
+            section { padding: 4.5rem 1.2rem; }
+            .specialties-grid { gap: 0.9rem; }
+            .specialty-img { height: 120px; font-size: 2.8rem; }
+            .social-links { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav id="navbar">
+        <span class="nav-logo">The Copper Whisk</span>
+        <ul class="nav-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#specialties">Specialties</a></li>
+            <li><a href="#fullmenu">Full Menu</a></li>
+            <li><a href="#story">Our Story</a></li>
+            <li><a href="#socials">Connect</a></li>
+        </ul>
+        <div class="cart-icon" onclick="toggleCart()" title="View cart">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 01-8 0"/>
+            </svg>
+            <span class="cart-count" id="cartCount">0</span>
+        </div>
+    </nav>
+
+    <!-- ============================
+         SECTION 1: HERO
+    ============================ -->
+    <section id="hero">
+        <div class="hero-items" aria-hidden="true">
+            <span class="hi">🥐</span>
+            <span class="hi">🍞</span>
+            <span class="hi">🍪</span>
+            <span class="hi">🧁</span>
+            <span class="hi">🥧</span>
+            <span class="hi">🍩</span>
+            <span class="hi">🥖</span>
+            <span class="hi">🍰</span>
+            <span class="hi">🧇</span>
+            <span class="hi">🥐</span>
+        </div>
+        <div class="hero-content">
+            <p class="hero-eyebrow fade-in">Est. with love</p>
+            <h1 class="hero-title fade-in fd1">The Copper Whisk</h1>
+            <p class="hero-tagline fade-in fd2">Homemade Comfort in Every Bite</p>
+            <a href="#fullmenu" class="hero-cta fade-in fd3" onclick="event.preventDefault(); document.getElementById('fullmenu').scrollIntoView({behavior:'smooth'})">Explore Our Bakes</a>
+        </div>
+        <div class="scroll-indicator" onclick="scrollTo('#specialties')" aria-label="Scroll down">
+            <span>scroll</span>
+            <div class="scroll-chevron"></div>
+        </div>
+    </section>
+
+    <!-- ============================
+         SECTION 2: SPECIALTIES
+    ============================ -->
+    <section id="specialties">
+        <div class="specialties-container">
+            <h2 class="section-title fade-in">Our Specialties</h2>
+            <div class="specialties-grid" id="specialtiesGrid"></div>
+            <div class="specialties-footer fade-in fd3">
+                <p class="delivery-note">🚗 Orders available in the Tri-Cities area, Tennessee only</p>
+                <button class="view-menu-btn" onclick="document.getElementById('fullmenu').scrollIntoView({behavior:'smooth'})">View Full Menu &amp; Order</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         SECTION: FULL MENU
+    ============================ -->
+    <section id="fullmenu">
+        <div class="fullmenu-container">
+            <h2 class="section-title fade-in">Full Menu</h2>
+            <p class="menu-note fade-in fd1">Everything made fresh, by hand, in small batches &mdash; Tri-Cities, TN</p>
+
+            <div class="menu-categories">
+
+                <!-- PASTRIES -->
+                <div class="menu-category fade-in fd1">
+                    <div class="menu-cat-header">
+                        <span class="menu-cat-icon">🍥</span>
+                        <span class="menu-cat-name">Pastries</span>
+                    </div>
+                    <div class="menu-items-list">
+                        <div class="menu-item">
+                            <div class="menu-item-left">
+                                <div class="menu-item-name">Cinnamon Rolls</div>
+                                <div class="menu-item-sub">Soft, gooey & spiced just right</div>
+                            </div>
+                            <span class="menu-item-price">$4.50</span>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-left">
+                                <div class="menu-item-name">Strawberry Cinnamon Rolls</div>
+                                <div class="menu-item-sub">Classic roll with a fresh strawberry twist</div>
+                            </div>
+                            <span class="menu-item-price">$4.75</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FUDGE -->
+                <div class="menu-category fade-in fd2">
+                    <div class="menu-cat-header">
+                        <span class="menu-cat-icon">🍫</span>
+                        <span class="menu-cat-name">Fudge</span>
+                    </div>
+                    <div class="menu-items-list">
+                        <div class="menu-item">
+                            <div class="menu-item-left">
+                                <div class="menu-item-name">Chocolate Fudge</div>
+                                <div class="menu-item-sub">Rich, dense & deeply chocolatey</div>
+                            </div>
+                            <span class="menu-item-price">$6.00</span>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-left">
+                                <div class="menu-item-name">Biscoff Fudge</div>
+                                <div class="menu-item-sub">Warm spiced cookie butter in every bite</div>
+                            </div>
+                            <span class="menu-item-price">$6.50</span>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-left">
+                                <div class="menu-item-name">Peanut Butter Fudge</div>
+                                <div class="menu-item-sub">Creamy, sweet & smooth</div>
+                            </div>
+                            <span class="menu-item-price">$6.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COOKIES -->
+                <div class="menu-category fade-in fd1">
+                    <div class="menu-cat-header">
+                        <span class="menu-cat-icon">🍪</span>
+                        <span class="menu-cat-name">Cookies</span>
+                    </div>
+                    <div class="menu-items-list">
+                        <div class="menu-item">
+                            <div class="menu-item-left">
+                                <div class="menu-item-name">Chocolate Chip Cookies</div>
+                                <div class="menu-item-sub">Crisp edges, soft centers, real chocolate</div>
+                            </div>
+                            <span class="menu-item-price">$2.75</span>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-left">
+                                <div class="menu-item-name">White Chocolate Macadamia Nut</div>
+                                <div class="menu-item-sub">Buttery, chewy & perfectly sweet</div>
+                            </div>
+                            <span class="menu-item-price">$3.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BREADS & EXTRAS -->
+                <div class="menu-category fade-in fd2">
+                    <div class="menu-cat-header">
+                        <span class="menu-cat-icon">🍞</span>
+                        <span class="menu-cat-name">Breads &amp; Extras</span>
+                    </div>
+                    <div class="menu-items-list">
+                        <div class="menu-item">
+                            <div class="menu-item-left">
+                                <div class="menu-item-name">Artisan Bread</div>
+                                <div class="menu-item-sub">Crusty outside, chewy & warm inside</div>
+                            </div>
+                            <span class="menu-item-price">$9.00</span>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-left">
+                                <div class="menu-item-name">Biscuits</div>
+                                <div class="menu-item-sub">Flaky, buttery & golden brown</div>
+                            </div>
+                            <span class="menu-item-price">$2.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SAUCES -->
+                <div class="menu-category fade-in fd1">
+                    <div class="menu-cat-header">
+                        <span class="menu-cat-icon">🍓</span>
+                        <span class="menu-cat-name">Sauces</span>
+                    </div>
+                    <div class="menu-items-list">
+                        <div class="menu-item">
+                            <div class="menu-item-left">
+                                <div class="menu-item-name">Blueberry Sauce</div>
+                                <div class="menu-item-sub">Sweet, jammy & perfect over anything</div>
+                            </div>
+                            <span class="menu-item-price">$5.00</span>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-left">
+                                <div class="menu-item-name">Strawberry Sauce</div>
+                                <div class="menu-item-sub">Bright, fresh & made from real fruit</div>
+                            </div>
+                            <span class="menu-item-price">$5.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COMBOS -->
+                <div class="menu-category fade-in fd2">
+                    <div class="menu-cat-header">
+                        <span class="menu-cat-icon">🍽️</span>
+                        <span class="menu-cat-name">Combos</span>
+                    </div>
+                    <div class="menu-items-list">
+                        <div class="menu-item">
+                            <div class="menu-item-left">
+                                <div class="menu-item-name">Breakfast Meal</div>
+                                <div class="menu-item-sub">One cinnamon roll &bull; small loaf of artisan bread &bull; sauce of your choice &bull; one biscuit</div>
+                            </div>
+                            <span class="menu-item-price">$14.00</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /menu-categories -->
+
+            <p class="menu-order-note fade-in fd3">
+                Ready to order? Reach out to us on <a href="#socials">social media</a> or scroll down to connect &mdash; we&rsquo;d love to hear from you. 🧡
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================
+         SECTION 3: OUR STORY
+    ============================ -->
+    <section id="story">
+        <div class="story-container">
+            <span class="story-icon fade-in" aria-hidden="true">🌾</span>
+            <h2 class="section-title fade-in fd1">Our Story</h2>
+            <div class="story-divider fade-in fd2"></div>
+            <p class="story-text fade-in fd2">
+                It all started on a quiet Sunday morning with flour dusting the countertops, the smell of butter
+                melting in a warm oven, and a kitchen full of <em>love</em>. The Copper Whisk was never meant to
+                be a business — it was simply a way of sharing the thing that brought our family the most joy.
+            </p>
+            <p class="story-text fade-in fd3">
+                Every loaf, every roll, every cookie is made entirely by hand — <em>from scratch</em>, with care,
+                using recipes that have been folded and re-folded over years of Sunday mornings and birthday
+                celebrations. We bake in small batches because we believe the best things in life can't be rushed.
+            </p>
+            <p class="story-text fade-in fd4">
+                Whether you're treating yourself after a long week or bringing something warm to the table for someone
+                you love, we hope every bite feels like <em>coming home</em>.
+            </p>
+            <p class="story-signature fade-in fd5">— The Copper Whisk Family</p>
+        </div>
+    </section>
+
+    <!-- ============================
+         SECTION 4: SOCIALS
+    ============================ -->
+    <section id="socials">
+        <div class="socials-container">
+            <h2 class="section-title fade-in">Stay Connected</h2>
+            <p class="socials-tagline fade-in fd1">
+                Follow along for behind-the-scenes baking, seasonal specials,<br>
+                new menu drops, and all the warm golden moments<br>from our kitchen to yours.
+            </p>
+            <div class="social-links fade-in fd2">
+                <a href="#" class="social-btn instagram" aria-label="Follow on Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                        <circle cx="12" cy="12" r="4"/>
+                        <circle cx="17.5" cy="6.5" r="0.7" fill="currentColor" stroke="none"/>
+                    </svg>
+                    Instagram
+                </a>
+                <a href="#" class="social-btn facebook" aria-label="Follow on Facebook">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                    </svg>
+                    Facebook
+                </a>
+                <a href="#" class="social-btn pinterest" aria-label="Follow on Pinterest">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
+                    </svg>
+                    Pinterest
+                </a>
+            </div>
+            <p class="socials-sub fade-in fd3">Tag us in your photos — we love seeing our bakes in your home! 🧡</p>
+            <div class="site-footer fade-in fd4">
+                © 2025 The Copper Whisk &nbsp;·&nbsp; Made with love in the Tri-Cities, TN<br>
+                <span style="font-size:0.72rem; opacity:0.7;">Homemade goods, small batches, big heart.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         CART PANEL
+    ============================ -->
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"/>
+        </svg>
+    </button>
+
+    <div class="cart-overlay" id="cartOverlay" onclick="handleOverlayClick(event)">
+        <div class="cart-panel" id="cartPanel">
+            <div class="cart-header">
+                <h2>Your Order 🧺</h2>
+                <button class="close-cart" onclick="toggleCart()" aria-label="Close cart">✕</button>
+            </div>
+            <div id="cartItems">
+                <p class="cart-empty">Your cart is empty —<br>add something sweet! 🍪</p>
+            </div>
+            <div id="cartFooter" style="display:none;">
+                <div class="cart-total-row">
+                    <span class="cart-total-label">Order Total</span>
+                    <span class="cart-total-amt" id="cartTotal">$0.00</span>
+                </div>
+                <button class="checkout-btn" onclick="handleCheckout()">Place My Order</button>
+                <p class="cart-delivery-note">
+                    🚗 Delivery &amp; pickup available in the Tri-Cities, TN area only.<br>
+                    We'll reach out to confirm your order and arrange a time.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================
+        // MENU DATA
+        // ============================
+        const menu = [
+            { id:1, name:'Butter Croissants',   desc:'Flaky, golden layers of pure joy',              price:3.50, emoji:'🥐', bg:'bg1' },
+            { id:2, name:'Cinnamon Rolls',       desc:'Soft, gooey & spiced just right',              price:4.50, emoji:'🌀', bg:'bg2' },
+            { id:3, name:'Artisan Sourdough',    desc:'Crusty outside, chewy & warm inside',          price:9.00, emoji:'🍞', bg:'bg3' },
+            { id:4, name:'Signature Cookies',    desc:'Crisp edges, soft centers, real chocolate',    price:2.75, emoji:'🍪', bg:'bg4' },
+            { id:5, name:'Seasonal Cupcakes',    desc:'Fluffy cake with housemade frosting',          price:4.00, emoji:'🧁', bg:'bg5' },
+            { id:6, name:'Fruit Tarts',          desc:'Buttery crust, cream & fresh seasonal fruit',  price:5.50, emoji:'🥧', bg:'bg6' },
+        ];
+
+        let cart = {};
+
+        // ============================
+        // RENDER SPECIALTY CARDS
+        // ============================
+        function renderCards() {
+            const grid = document.getElementById('specialtiesGrid');
+            grid.innerHTML = menu.map((item, i) => `
+                <div class="specialty-card fade-in fd${(i % 4) + 1}">
+                    <div class="specialty-img ${item.bg}">
+                        <span>${item.emoji}</span>
+                    </div>
+                    <div class="specialty-body">
+                        <div class="specialty-name">${item.name}</div>
+                        <div class="specialty-desc">${item.desc}</div>
+                        <div class="specialty-price">$${item.price.toFixed(2)}</div>
+                        <button class="add-to-cart-btn" onclick="addToCart(${item.id}, this)">Add to Order</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ============================
+        // CART LOGIC
+        // ============================
+        function addToCart(id, btn) {
+            if (cart[id]) cart[id].qty++;
+            else cart[id] = { ...menu.find(i => i.id === id), qty: 1 };
+            btn.textContent = 'Added ✓';
+            btn.classList.add('added');
+            setTimeout(() => {
+                btn.textContent = 'Add to Order';
+                btn.classList.remove('added');
+            }, 1300);
+            refreshCartUI();
+        }
+
+        function changeQty(id, delta) {
+            if (!cart[id]) return;
+            cart[id].qty += delta;
+            if (cart[id].qty <= 0) delete cart[id];
+            refreshCartUI();
+        }
+
+        function refreshCartUI() {
+            const totalQty = Object.values(cart).reduce((s, i) => s + i.qty, 0);
+            const countEl  = document.getElementById('cartCount');
+            countEl.textContent = totalQty;
+            countEl.style.display = totalQty > 0 ? 'flex' : 'none';
+
+            const itemsEl  = document.getElementById('cartItems');
+            const footerEl = document.getElementById('cartFooter');
+
+            if (totalQty === 0) {
+                itemsEl.innerHTML = '<p class="cart-empty">Your cart is empty —<br>add something sweet! 🍪</p>';
+                footerEl.style.display = 'none';
+                return;
+            }
+
+            const total = Object.values(cart).reduce((s, i) => s + i.price * i.qty, 0);
+            document.getElementById('cartTotal').textContent = `$${total.toFixed(2)}`;
+            footerEl.style.display = 'block';
+
+            itemsEl.innerHTML = Object.values(cart).map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.emoji} ${item.name}</div>
+                        <div class="cart-item-price">$${(item.price * item.qty).toFixed(2)}</div>
+                    </div>
+                    <div class="cart-item-controls">
+                        <button class="qty-btn" onclick="changeQty(${item.id}, -1)" aria-label="Remove one">−</button>
+                        <span class="cart-item-qty">${item.qty}</span>
+                        <button class="qty-btn" onclick="changeQty(${item.id}, 1)" aria-label="Add one">+</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleCart() {
+            const overlay = document.getElementById('cartOverlay');
+            overlay.classList.toggle('open');
+            document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
+        }
+
+        function handleOverlayClick(e) {
+            if (e.target === document.getElementById('cartOverlay')) toggleCart();
+        }
+
+        function handleCheckout() {
+            alert('Thank you so much! 🧡\n\nYour order has been received. We\'ll reach out shortly to confirm everything and arrange pickup or delivery in the Tri-Cities, TN area.\n\n— The Copper Whisk');
+            cart = {};
+            refreshCartUI();
+            toggleCart();
+        }
+
+        // ============================
+        // SCROLL ANIMATIONS
+        // ============================
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) e.target.classList.add('visible');
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+        function observeAll() {
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        }
+
+        // Hero appears on load
+        window.addEventListener('load', () => {
+            document.querySelectorAll('#hero .fade-in').forEach((el, i) => {
+                setTimeout(() => el.classList.add('visible'), 150 + i * 120);
+            });
+        });
+
+        // ============================
+        // NAVBAR SCROLL STYLE
+        // ============================
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY;
+            document.getElementById('navbar').classList.toggle('scrolled', y > 40);
+            document.getElementById('backToTop').classList.toggle('visible', y > 400);
+        }, { passive: true });
+
+        // ============================
+        // SMOOTH SCROLL HELPER
+        // ============================
+        function scrollTo(selector) {
+            document.querySelector(selector)?.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ============================
+        // INIT
+        // ============================
+        renderCards();
+        observeAll();
+    </script>
+</body>
+</html>
