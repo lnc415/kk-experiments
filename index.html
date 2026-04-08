@@ -830,6 +830,210 @@
         .fd6 { transition-delay: 0.56s; }
 
         /* ============================
+           PHOTO SLOT SYSTEM
+        ============================ */
+
+        /* — Hero background photo — */
+        .hero-photo-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .hero-photo-bg img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .hero-photo-bg img.loaded { opacity: 1; }
+        /* warm parchment overlay keeps text readable over any photo */
+        .hero-photo-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(230, 200, 150, 0.68) 0%,
+                rgba(210, 175, 120, 0.6) 60%,
+                rgba(190, 155, 100, 0.72) 100%
+            );
+            z-index: 1;
+        }
+        /* make sure hero children sit above overlay */
+        #hero .hero-items { z-index: 2; }
+        #hero .hero-content { z-index: 3; }
+        #hero .scroll-indicator { z-index: 3; }
+
+        /* — Specialty card real photos — */
+        .specialty-img { position: relative; }
+        .specialty-photo {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 2;
+            border-radius: 0;
+        }
+        .specialty-photo.loaded { opacity: 1; }
+        /* emoji stays as background fallback */
+        .specialty-img .specialty-emoji {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* — Generic photo placeholder — */
+        .photo-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 0.82rem;
+            text-align: center;
+            pointer-events: none;
+            border: 2px dashed rgba(184, 115, 51, 0.3);
+            border-radius: inherit;
+            padding: 1rem;
+        }
+        .photo-placeholder span:first-child { font-size: 1.8rem; opacity: 0.5; }
+        .photo-placeholder code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.68rem;
+            font-style: normal;
+            color: var(--copper);
+            opacity: 0.8;
+            background: rgba(184, 115, 51, 0.08);
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+        }
+        /* hide placeholder once a real img loads */
+        .has-photo .photo-placeholder { display: none; }
+
+        /* — Photo strip — */
+        .photo-strip {
+            min-height: unset;
+            height: 340px;
+            flex-direction: row;
+            padding: 0;
+            gap: 0;
+            background: var(--dark-brown);
+            overflow: hidden;
+            position: relative;
+        }
+        .strip-slot {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--parchment-dark);
+            border-right: 1px solid rgba(92, 51, 23, 0.3);
+        }
+        .strip-slot:last-child { border-right: none; }
+        .strip-slot img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.6s ease;
+        }
+        .strip-slot img.loaded { opacity: 1; }
+        .strip-slot:hover img { transform: scale(1.06); }
+        .strip-slot .photo-placeholder {
+            border: none;
+            background: linear-gradient(135deg,
+                rgba(232, 208, 160, 0.6) 0%,
+                rgba(201, 160, 106, 0.4) 100%);
+        }
+        .strip-slot-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 1.2rem 1rem 0.9rem;
+            background: linear-gradient(to top, rgba(40,16,4,0.65), transparent);
+            color: rgba(255, 240, 210, 0.9);
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 0.85rem;
+            transform: translateY(100%);
+            transition: transform 0.35s ease;
+            z-index: 5;
+        }
+        .strip-slot:hover .strip-slot-overlay { transform: translateY(0); }
+        .strip-cta {
+            position: absolute;
+            bottom: 1.5rem; right: 1.5rem;
+            background: var(--grad-copper-btn);
+            color: #fff8ee;
+            border: none;
+            padding: 0.65rem 1.4rem;
+            border-radius: 50px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            text-decoration: none;
+            z-index: 6;
+            box-shadow: 0 3px 14px rgba(184,115,51,0.4);
+            transition: all 0.3s ease;
+        }
+        .strip-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--glow-copper);
+        }
+
+        /* — Our Story 2-column layout — */
+        .story-inner {
+            display: flex;
+            gap: 3.5rem;
+            align-items: flex-start;
+            max-width: 1000px;
+            width: 100%;
+        }
+        .story-text-col {
+            flex: 1;
+            text-align: center;
+        }
+        .story-photo-col {
+            flex: 0 0 300px;
+            position: relative;
+        }
+        .story-photo-slot {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 3/4;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 2px solid rgba(184, 115, 51, 0.3);
+            box-shadow: 0 8px 30px rgba(92, 51, 23, 0.15), inset 0 0 0 1px rgba(255,210,140,0.15);
+            background: linear-gradient(135deg, #e8d4a8 0%, #d4b870 100%);
+        }
+        .story-photo-slot img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            border-radius: inherit;
+        }
+        .story-photo-slot img.loaded { opacity: 1; }
+        .story-photo-slot .photo-placeholder {
+            border-radius: 16px;
+        }
+        .story-photo-caption {
+            margin-top: 0.8rem;
+            text-align: center;
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 0.78rem;
+            color: var(--text-light);
+        }
+
+        /* ============================
            RESPONSIVE
         ============================ */
         /* ============================
@@ -989,18 +1193,36 @@
         /* ============================
            RESPONSIVE
         ============================ */
+        @media (max-width: 900px) {
+            /* Story collapses to single column */
+            .story-inner {
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+            }
+            .story-photo-col {
+                flex: 0 0 auto;
+                width: min(280px, 90%);
+            }
+            .story-text-col { text-align: center; }
+        }
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .specialties-grid { grid-template-columns: repeat(2, 1fr); }
             .specialties-footer { align-items: center; }
             .delivery-note { text-align: center; }
             .menu-categories { grid-template-columns: 1fr; }
+            /* Photo strip: hide middle slot on tablet */
+            .photo-strip { height: 260px; }
+            .strip-slot:nth-child(2) { display: none; }
+            .strip-cta { bottom: 1rem; right: 1rem; }
         }
         @media (max-width: 500px) {
             section { padding: 4.5rem 1.2rem; }
             .specialties-grid { gap: 0.9rem; }
             .specialty-img { height: 120px; font-size: 2.8rem; }
             .social-links { flex-direction: column; align-items: center; }
+            .photo-strip { height: 200px; }
         }
     </style>
 </head>
@@ -1013,6 +1235,7 @@
             <li><a href="#hero">Home</a></li>
             <li><a href="#specialties">Specialties</a></li>
             <li><a href="#fullmenu">Full Menu</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
             <li><a href="#story">Our Story</a></li>
             <li><a href="#socials">Connect</a></li>
         </ul>
@@ -1030,6 +1253,13 @@
          SECTION 1: HERO
     ============================ -->
     <section id="hero">
+        <!-- Photo slot: replace photos/hero.jpg with your own hero image -->
+        <div class="hero-photo-bg">
+            <img src="photos/hero.jpg" alt="Fresh baked goods from The Copper Whisk"
+                 onload="this.classList.add('loaded'); this.parentElement.parentElement.classList.add('has-photo')"
+                 onerror="this.remove()">
+            <div class="hero-photo-overlay"></div>
+        </div>
         <div class="hero-items" aria-hidden="true">
             <span class="hi">🥐</span>
             <span class="hi">🍞</span>
@@ -1066,6 +1296,44 @@
                 <button class="view-menu-btn" onclick="document.getElementById('fullmenu').scrollIntoView({behavior:'smooth'})">View Full Menu &amp; Order</button>
             </div>
         </div>
+    </section>
+
+    <!-- ============================
+         PHOTO STRIP — "From Our Kitchen"
+         Photo slots: photos/strip-1.jpg, strip-2.jpg, strip-3.jpg
+    ============================ -->
+    <section class="photo-strip" aria-label="Photo gallery preview">
+        <div class="strip-slot" onclick="window.location='gallery.html'">
+            <img src="photos/strip-1.jpg" alt="From our kitchen"
+                 onload="this.classList.add('loaded')" onerror="this.remove()">
+            <div class="photo-placeholder">
+                <span>📷</span>
+                <span>Add a photo</span>
+                <code>photos/strip-1.jpg</code>
+            </div>
+            <div class="strip-slot-overlay">Fresh from the oven</div>
+        </div>
+        <div class="strip-slot" onclick="window.location='gallery.html'">
+            <img src="photos/strip-2.jpg" alt="Behind the scenes"
+                 onload="this.classList.add('loaded')" onerror="this.remove()">
+            <div class="photo-placeholder">
+                <span>📷</span>
+                <span>Add a photo</span>
+                <code>photos/strip-2.jpg</code>
+            </div>
+            <div class="strip-slot-overlay">Made with love</div>
+        </div>
+        <div class="strip-slot" onclick="window.location='gallery.html'">
+            <img src="photos/strip-3.jpg" alt="Our baked goods"
+                 onload="this.classList.add('loaded')" onerror="this.remove()">
+            <div class="photo-placeholder">
+                <span>📷</span>
+                <span>Add a photo</span>
+                <code>photos/strip-3.jpg</code>
+            </div>
+            <div class="strip-slot-overlay">Small batches, big heart</div>
+        </div>
+        <a href="gallery.html" class="strip-cta">View Gallery →</a>
     </section>
 
     <!-- ============================
@@ -1234,25 +1502,42 @@
          SECTION 3: OUR STORY
     ============================ -->
     <section id="story">
-        <div class="story-container">
-            <span class="story-icon fade-in" aria-hidden="true">🌾</span>
-            <h2 class="section-title fade-in fd1">Our Story</h2>
-            <div class="story-divider fade-in fd2"></div>
-            <p class="story-text fade-in fd2">
-                It all started on a quiet Sunday morning with flour dusting the countertops, the smell of butter
-                melting in a warm oven, and a kitchen full of <em>love</em>. The Copper Whisk was never meant to
-                be a business — it was simply a way of sharing the thing that brought our family the most joy.
-            </p>
-            <p class="story-text fade-in fd3">
-                Every loaf, every roll, every cookie is made entirely by hand — <em>from scratch</em>, with care,
-                using recipes that have been folded and re-folded over years of Sunday mornings and birthday
-                celebrations. We bake in small batches because we believe the best things in life can't be rushed.
-            </p>
-            <p class="story-text fade-in fd4">
-                Whether you're treating yourself after a long week or bringing something warm to the table for someone
-                you love, we hope every bite feels like <em>coming home</em>.
-            </p>
-            <p class="story-signature fade-in fd5">— The Copper Whisk Family</p>
+        <div class="story-inner">
+            <!-- Text column -->
+            <div class="story-text-col">
+                <span class="story-icon fade-in" aria-hidden="true">🌾</span>
+                <h2 class="section-title fade-in fd1">Our Story</h2>
+                <div class="story-divider fade-in fd2"></div>
+                <p class="story-text fade-in fd2">
+                    It all started on a quiet Sunday morning with flour dusting the countertops, the smell of butter
+                    melting in a warm oven, and a kitchen full of <em>love</em>. The Copper Whisk was never meant to
+                    be a business — it was simply a way of sharing the thing that brought our family the most joy.
+                </p>
+                <p class="story-text fade-in fd3">
+                    Every loaf, every roll, every cookie is made entirely by hand — <em>from scratch</em>, with care,
+                    using recipes that have been folded and re-folded over years of Sunday mornings and birthday
+                    celebrations. We bake in small batches because we believe the best things in life can't be rushed.
+                </p>
+                <p class="story-text fade-in fd4">
+                    Whether you're treating yourself after a long week or bringing something warm to the table for someone
+                    you love, we hope every bite feels like <em>coming home</em>.
+                </p>
+                <p class="story-signature fade-in fd5">— The Copper Whisk Family</p>
+            </div>
+            <!-- Photo column — replace photos/story.jpg with a photo of your kitchen or yourself -->
+            <div class="story-photo-col fade-in fd3">
+                <div class="story-photo-slot">
+                    <img src="photos/story.jpg" alt="The baker behind The Copper Whisk"
+                         onload="this.classList.add('loaded'); this.parentElement.classList.add('has-photo')"
+                         onerror="this.remove()">
+                    <div class="photo-placeholder">
+                        <span>📷</span>
+                        <span>Add a photo of<br>your kitchen or yourself</span>
+                        <code>photos/story.jpg</code>
+                    </div>
+                </div>
+                <p class="story-photo-caption">Behind the scenes at The Copper Whisk</p>
+            </div>
         </div>
     </section>
 
@@ -1334,12 +1619,12 @@
         // MENU DATA
         // ============================
         const menu = [
-            { id:1, name:'Butter Croissants',   desc:'Flaky, golden layers of pure joy',              price:3.50, emoji:'🥐', bg:'bg1' },
-            { id:2, name:'Cinnamon Rolls',       desc:'Soft, gooey & spiced just right',              price:4.50, emoji:'🌀', bg:'bg2' },
-            { id:3, name:'Artisan Sourdough',    desc:'Crusty outside, chewy & warm inside',          price:9.00, emoji:'🍞', bg:'bg3' },
-            { id:4, name:'Signature Cookies',    desc:'Crisp edges, soft centers, real chocolate',    price:2.75, emoji:'🍪', bg:'bg4' },
-            { id:5, name:'Seasonal Cupcakes',    desc:'Fluffy cake with housemade frosting',          price:4.00, emoji:'🧁', bg:'bg5' },
-            { id:6, name:'Fruit Tarts',          desc:'Buttery crust, cream & fresh seasonal fruit',  price:5.50, emoji:'🥧', bg:'bg6' },
+            { id:1, name:'Butter Croissants',   desc:'Flaky, golden layers of pure joy',              price:3.50, emoji:'🥐', bg:'bg1', photo:'photos/specialty-croissants.jpg' },
+            { id:2, name:'Cinnamon Rolls',       desc:'Soft, gooey & spiced just right',              price:4.50, emoji:'🌀', bg:'bg2', photo:'photos/specialty-cinnamon-rolls.jpg' },
+            { id:3, name:'Artisan Sourdough',    desc:'Crusty outside, chewy & warm inside',          price:9.00, emoji:'🍞', bg:'bg3', photo:'photos/specialty-sourdough.jpg' },
+            { id:4, name:'Signature Cookies',    desc:'Crisp edges, soft centers, real chocolate',    price:2.75, emoji:'🍪', bg:'bg4', photo:'photos/specialty-cookies.jpg' },
+            { id:5, name:'Seasonal Cupcakes',    desc:'Fluffy cake with housemade frosting',          price:4.00, emoji:'🧁', bg:'bg5', photo:'photos/specialty-cupcakes.jpg' },
+            { id:6, name:'Fruit Tarts',          desc:'Buttery crust, cream & fresh seasonal fruit',  price:5.50, emoji:'🥧', bg:'bg6', photo:'photos/specialty-tarts.jpg' },
         ];
 
         let cart = {};
@@ -1352,7 +1637,10 @@
             grid.innerHTML = menu.map((item, i) => `
                 <div class="specialty-card fade-in fd${(i % 4) + 1}">
                     <div class="specialty-img ${item.bg}">
-                        <span>${item.emoji}</span>
+                        <img class="specialty-photo" src="${item.photo}" alt="${item.name}"
+                             onload="this.classList.add('loaded'); this.closest('.specialty-card').classList.add('has-photo')"
+                             onerror="this.remove()">
+                        <span class="specialty-emoji">${item.emoji}</span>
                     </div>
                     <div class="specialty-body">
                         <div class="specialty-name">${item.name}</div>
