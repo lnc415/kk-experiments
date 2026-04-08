@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Menu — The Copper Whisk</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f5e6c8;
+            --parchment: #ede0c4;
+            --parchment-dark: #e0ccaa;
+            --tan: #c9a06a;
+            --copper: #b87333;
+            --copper-light: #d4955a;
+            --copper-mid: #c8843e;
+            --copper-deep: #8b5828;
+            --copper-sheen: #e8b070;
+            --brown: #8b5e3c;
+            --dark-brown: #5c3317;
+            --text-dark: #3d2410;
+            --text-medium: #6b4226;
+            --text-light: #9b7350;
+            --warm-white: #faf5ea;
+            --grad-copper-btn:  linear-gradient(135deg, #c8893e 0%, #b87333 35%, #d4a055 58%, #a86828 100%);
+            --grad-copper-text: linear-gradient(175deg, #e8b070 0%, #c07838 22%, #7a4820 45%, #c8883c 65%, #9a5e28 85%, #d4a055 100%);
+            --grad-copper-line: linear-gradient(to right, transparent, #c8883c, #e8b070, #c8883c, transparent);
+            --grad-copper-card: linear-gradient(135deg, rgba(216,140,60,0.18) 0%, rgba(184,115,51,0.08) 100%);
+            --glow-copper:      0 0 18px rgba(184, 115, 51, 0.45);
+            --glow-copper-soft: 0 4px 22px rgba(184, 115, 51, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background-color: #c8933a;
+            min-height: 100vh;
+        }
+
+        /* Burned parchment edge vignette */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 110% 110% at 0%   0%,   rgba(18,7,2,0.09)   0%,  transparent 42%),
+                radial-gradient(ellipse 110% 110% at 100% 0%,   rgba(18,7,2,0.09)   0%,  transparent 42%),
+                radial-gradient(ellipse 110% 110% at 0%   100%, rgba(18,7,2,0.09)   0%,  transparent 42%),
+                radial-gradient(ellipse 110% 110% at 100% 100%, rgba(18,7,2,0.09)   0%,  transparent 42%),
+                radial-gradient(ellipse 160% 20%  at 50%  0%,   rgba(12,4,1,0.07)   0%,  transparent 100%),
+                radial-gradient(ellipse 160% 20%  at 50%  100%, rgba(12,4,1,0.08)   0%,  transparent 100%),
+                radial-gradient(ellipse 20%  160% at 0%   50%,  rgba(12,4,1,0.07)   0%,  transparent 100%),
+                radial-gradient(ellipse 20%  160% at 100% 50%,  rgba(12,4,1,0.07)   0%,  transparent 100%),
+                radial-gradient(ellipse 30%  22%  at 22%  35%,  rgba(90,42,8,0.03)  0%,  transparent 100%),
+                radial-gradient(ellipse 22%  18%  at 72%  58%,  rgba(70,30,5,0.03)  0%,  transparent 100%),
+                radial-gradient(ellipse 18%  14%  at 50%  75%,  rgba(100,48,10,0.02) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 9997;
+            mix-blend-mode: multiply;
+        }
+
+        /* Parchment grain */
+        body::after {
+            content: '';
+            position: fixed; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.13;
+            pointer-events: none;
+            z-index: 9998;
+            mix-blend-mode: multiply;
+        }
+
+        /* ============================
+           NAVIGATION
+        ============================ */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 1.1rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(180, 100, 28, 0.94);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 2px 24px rgba(20, 8, 2, 0.35);
+        }
+        .nav-logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.55rem;
+            font-weight: 700;
+            text-decoration: none;
+            background: linear-gradient(
+                168deg,
+                #ffe8a0 0%, #ffd060 15%, #ffffff 28%,
+                #ffe090 35%, #f0b840 48%, #ffe8a0 60%,
+                #ffffff 70%, #ffd060 82%, #ffe8a0 100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 1px 4px rgba(10,3,0,0.8)) drop-shadow(0 2px 8px rgba(10,3,0,0.5));
+            animation: copperShimmer 6s ease-in-out infinite;
+        }
+        @keyframes copperShimmer {
+            0%   { background-position: 0%   50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0%   50%; }
+        }
+        .nav-links {
+            display: flex; gap: 2.2rem; list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #fde9c0;
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            text-shadow: 0 1px 4px rgba(20, 8, 2, 0.4);
+        }
+        .nav-links a:hover,
+        .nav-links a.active { color: #fff5d8; }
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(255, 235, 180, 0.18);
+            border: 1.5px solid rgba(255, 210, 120, 0.4);
+            color: #fde9c0;
+            padding: 0.5rem 1.1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'Nunito', sans-serif;
+            text-shadow: 0 1px 3px rgba(10,3,0,0.5);
+        }
+        .nav-back:hover {
+            background: rgba(255, 235, 180, 0.3);
+            border-color: rgba(255, 220, 140, 0.7);
+            box-shadow: var(--glow-copper-soft);
+        }
+
+        /* ============================
+           PAGE HEADER
+        ============================ */
+        .menu-header {
+            padding: 8rem 2rem 3.5rem;
+            text-align: center;
+            background:
+                radial-gradient(ellipse 70% 70% at 50% 50%, #e8c070 0%, #c8882a 55%, #8a4e10 100%),
+                radial-gradient(ellipse at 30% 55%, rgba(130, 62, 10, 0.32) 0%, transparent 45%),
+                radial-gradient(ellipse at 72% 28%, rgba(90, 40, 6, 0.26) 0%, transparent 40%);
+            position: relative;
+            overflow: hidden;
+        }
+        .menu-header::before {
+            content: '🍽️';
+            position: absolute;
+            font-size: 12rem;
+            opacity: 0.04;
+            top: -2rem; right: 5%;
+            filter: sepia(1) saturate(0.3);
+        }
+        .menu-header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            background: linear-gradient(
+                168deg,
+                #2e1205 0%, #7a3c10 6%, #b86820 12%,
+                #d98c35 18%, #f5bf60 23%, #ffeaaa 27%,
+                #ffd878 30%, #e8a040 35%, #c07828 41%,
+                #7a3c10 48%, #3d1a06 54%, #7a3c10 59%,
+                #b87333 64%, #d99040 69%, #f5c060 74%,
+                #ffe090 78%, #e0a040 82%, #c07828 87%,
+                #8b4a18 92%, #4a2008 97%, #2e1205 100%
+            );
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter:
+                drop-shadow(0 -1px 2px rgba(255, 240, 180, 0.8))
+                drop-shadow(0 2px 5px rgba(15, 4, 0, 0.7))
+                drop-shadow(0 4px 16px rgba(15, 4, 0, 0.45));
+            animation: copperShimmer 5s ease-in-out infinite;
+            margin-bottom: 0.6rem;
+        }
+        .menu-header p {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: clamp(0.95rem, 2vw, 1.15rem);
+            color: #fde9c0;
+            text-shadow: 0 1px 4px rgba(10,3,0,0.4);
+            margin-bottom: 0.5rem;
+        }
+        .header-divider {
+            width: 70px; height: 2px;
+            background: var(--grad-copper-line);
+            margin: 1.2rem auto 0;
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(200, 136, 60, 0.3);
+        }
+
+        /* ============================
+           MENU CONTENT
+        ============================ */
+        .menu-section {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 3rem 2rem 5rem;
+        }
+        .menu-note {
+            text-align: center;
+            font-family: 'Lora', serif;
+            font-style: italic;
+            color: #fde9c0;
+            font-size: 0.92rem;
+            margin-bottom: 2.8rem;
+            text-shadow: 0 1px 3px rgba(10,3,0,0.4);
+        }
+        .menu-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 1.6rem;
+        }
+        .menu-category {
+            background: rgba(255, 250, 238, 0.88);
+            border: 1px solid rgba(184, 115, 51, 0.25);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 3px 16px rgba(30, 10, 0, 0.18);
+            transition: box-shadow 0.35s ease, transform 0.35s ease, border-color 0.35s ease;
+            opacity: 0;
+            transform: translateY(22px);
+        }
+        .menu-category.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+        }
+        .menu-category:hover {
+            box-shadow: 0 10px 32px rgba(184, 115, 51, 0.2), var(--glow-copper-soft);
+            transform: translateY(-4px);
+            border-color: rgba(200, 132, 62, 0.5);
+        }
+        .menu-cat-header {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 1rem 1.4rem;
+            background: var(--grad-copper-card);
+            border-bottom: 1px solid rgba(184, 115, 51, 0.2);
+            position: relative;
+        }
+        .menu-cat-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 1.4rem; right: 1.4rem;
+            height: 1px;
+            background: var(--grad-copper-line);
+            opacity: 0.6;
+        }
+        .menu-cat-icon { font-size: 1.25rem; }
+        .menu-cat-name {
+            font-family: 'Lora', serif;
+            font-size: 1.05rem;
+            color: var(--dark-brown);
+            font-weight: 600;
+        }
+        .menu-items-list { padding: 0.6rem 0.6rem 0.8rem; }
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 0.6rem 0.8rem;
+            border-radius: 10px;
+            transition: background 0.2s ease;
+        }
+        .menu-item:hover {
+            background: linear-gradient(135deg, rgba(216,140,60,0.1) 0%, rgba(232,176,112,0.07) 100%);
+        }
+        .menu-item-left { flex: 1; }
+        .menu-item-name {
+            font-family: 'Lora', serif;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        .menu-item-sub {
+            font-size: 0.76rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-top: 0.18rem;
+            line-height: 1.45;
+        }
+        .menu-item-price {
+            font-family: 'Lora', serif;
+            font-size: 0.88rem;
+            font-weight: 700;
+            white-space: nowrap;
+            margin-left: 1rem;
+            padding-top: 0.1rem;
+            background: linear-gradient(175deg, #d4955a, #9a5e28);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .menu-order-note {
+            text-align: center;
+            margin-top: 2.8rem;
+            font-family: 'Lora', serif;
+            font-style: italic;
+            color: #fde9c0;
+            font-size: 0.95rem;
+            text-shadow: 0 1px 3px rgba(10,3,0,0.4);
+        }
+        .menu-order-note a {
+            color: #ffd878;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .menu-order-note a:hover { text-decoration: underline; }
+
+        /* ============================
+           BACK TO TOP
+        ============================ */
+        #backToTop {
+            position: fixed;
+            bottom: 2rem; right: 2rem;
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: var(--grad-copper-btn);
+            border: none;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 18px rgba(184,115,51,0.4);
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 999;
+        }
+        #backToTop.visible { opacity: 1; pointer-events: auto; }
+        #backToTop:hover { transform: translateY(-3px); box-shadow: var(--glow-copper); }
+        #backToTop svg { width: 18px; height: 18px; fill: none; stroke: #fff8ee; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* ============================
+           RESPONSIVE
+        ============================ */
+        @media (max-width: 700px) {
+            .menu-categories { grid-template-columns: 1fr; }
+            nav { padding: 1rem 1.2rem; }
+            .nav-links { gap: 1.2rem; }
+            .nav-links li:nth-child(n+3) { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="index.html" class="nav-logo">The Copper Whisk</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html" class="active">Full Menu</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="index.html#story">Our Story</a></li>
+            <li><a href="index.html#socials">Connect</a></li>
+        </ul>
+        <a href="index.html" class="nav-back">← Back to Site</a>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <div class="menu-header">
+        <h1>Full Menu</h1>
+        <p>Everything made fresh, by hand, in small batches</p>
+        <div class="header-divider"></div>
+    </div>
+
+    <!-- MENU CONTENT -->
+    <div class="menu-section">
+        <p class="menu-note">Tri-Cities, TN &nbsp;·&nbsp; Made with love, baked from scratch</p>
+
+        <div class="menu-categories">
+
+            <!-- PASTRIES -->
+            <div class="menu-category">
+                <div class="menu-cat-header">
+                    <span class="menu-cat-icon">🍥</span>
+                    <span class="menu-cat-name">Pastries</span>
+                </div>
+                <div class="menu-items-list">
+                    <div class="menu-item">
+                        <div class="menu-item-left">
+                            <div class="menu-item-name">Cinnamon Rolls</div>
+                            <div class="menu-item-sub">Soft, gooey &amp; spiced just right</div>
+                        </div>
+                        <span class="menu-item-price">$4.50</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-left">
+                            <div class="menu-item-name">Strawberry Cinnamon Rolls</div>
+                            <div class="menu-item-sub">Classic roll with a fresh strawberry twist</div>
+                        </div>
+                        <span class="menu-item-price">$4.75</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FUDGE -->
+            <div class="menu-category">
+                <div class="menu-cat-header">
+                    <span class="menu-cat-icon">🍫</span>
+                    <span class="menu-cat-name">Fudge</span>
+                </div>
+                <div class="menu-items-list">
+                    <div class="menu-item">
+                        <div class="menu-item-left">
+                            <div class="menu-item-name">Chocolate Fudge</div>
+                            <div class="menu-item-sub">Rich, dense &amp; deeply chocolatey</div>
+                        </div>
+                        <span class="menu-item-price">$6.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-left">
+                            <div class="menu-item-name">Biscoff Fudge</div>
+                            <div class="menu-item-sub">Warm spiced cookie butter in every bite</div>
+                        </div>
+                        <span class="menu-item-price">$6.50</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-left">
+                            <div class="menu-item-name">Peanut Butter Fudge</div>
+                            <div class="menu-item-sub">Creamy, sweet &amp; smooth</div>
+                        </div>
+                        <span class="menu-item-price">$6.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COOKIES -->
+            <div class="menu-category">
+                <div class="menu-cat-header">
+                    <span class="menu-cat-icon">🍪</span>
+                    <span class="menu-cat-name">Cookies</span>
+                </div>
+                <div class="menu-items-list">
+                    <div class="menu-item">
+                        <div class="menu-item-left">
+                            <div class="menu-item-name">Chocolate Chip Cookies</div>
+                            <div class="menu-item-sub">Crisp edges, soft centers, real chocolate</div>
+                        </div>
+                        <span class="menu-item-price">$2.75</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-left">
+                            <div class="menu-item-name">White Chocolate Macadamia Nut</div>
+                            <div class="menu-item-sub">Buttery, chewy &amp; perfectly sweet</div>
+                        </div>
+                        <span class="menu-item-price">$3.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BREADS & EXTRAS -->
+            <div class="menu-category">
+                <div class="menu-cat-header">
+                    <span class="menu-cat-icon">🍞</span>
+                    <span class="menu-cat-name">Breads &amp; Extras</span>
+                </div>
+                <div class="menu-items-list">
+                    <div class="menu-item">
+                        <div class="menu-item-left">
+                            <div class="menu-item-name">Artisan Bread</div>
+                            <div class="menu-item-sub">Crusty outside, chewy &amp; warm inside</div>
+                        </div>
+                        <span class="menu-item-price">$9.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-left">
+                            <div class="menu-item-name">Biscuits</div>
+                            <div class="menu-item-sub">Flaky, buttery &amp; golden brown</div>
+                        </div>
+                        <span class="menu-item-price">$2.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SAUCES -->
+            <div class="menu-category">
+                <div class="menu-cat-header">
+                    <span class="menu-cat-icon">🍓</span>
+                    <span class="menu-cat-name">Sauces</span>
+                </div>
+                <div class="menu-items-list">
+                    <div class="menu-item">
+                        <div class="menu-item-left">
+                            <div class="menu-item-name">Blueberry Sauce</div>
+                            <div class="menu-item-sub">Sweet, jammy &amp; perfect over anything</div>
+                        </div>
+                        <span class="menu-item-price">$5.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-left">
+                            <div class="menu-item-name">Strawberry Sauce</div>
+                            <div class="menu-item-sub">Bright, fresh &amp; made from real fruit</div>
+                        </div>
+                        <span class="menu-item-price">$5.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMBOS -->
+            <div class="menu-category">
+                <div class="menu-cat-header">
+                    <span class="menu-cat-icon">🍽️</span>
+                    <span class="menu-cat-name">Combos</span>
+                </div>
+                <div class="menu-items-list">
+                    <div class="menu-item">
+                        <div class="menu-item-left">
+                            <div class="menu-item-name">Breakfast Meal</div>
+                            <div class="menu-item-sub">One cinnamon roll &bull; small loaf of artisan bread &bull; sauce of your choice &bull; one biscuit</div>
+                        </div>
+                        <span class="menu-item-price">$14.00</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /menu-categories -->
+
+        <p class="menu-order-note">
+            Ready to order? Reach out on <a href="index.html#socials">social media</a> or head to our <a href="index.html#socials">Connect</a> page &mdash; we&rsquo;d love to hear from you. 🧡
+        </p>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <button id="backToTop" aria-label="Back to top">
+        <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+
+    <script>
+        // Scroll-in animation for menu cards
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.menu-category').forEach(el => observer.observe(el));
+
+        // Back to top
+        const btt = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => { btt.classList.toggle('visible', window.scrollY > 300); });
+        btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    </script>
+</body>
+</html>

@@ -40,7 +40,32 @@
             font-family: 'Nunito', sans-serif;
             color: var(--text-dark);
             overflow-x: hidden;
-            background-color: var(--parchment);
+            background-color: #c8933a;
+        }
+
+        /* Burned parchment edge vignette — dark scorched corners/edges */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 110% 110% at 0%   0%,   rgba(18,7,2,0.09)   0%,  transparent 42%),
+                radial-gradient(ellipse 110% 110% at 100% 0%,   rgba(18,7,2,0.09)   0%,  transparent 42%),
+                radial-gradient(ellipse 110% 110% at 0%   100%, rgba(18,7,2,0.09)   0%,  transparent 42%),
+                radial-gradient(ellipse 110% 110% at 100% 100%, rgba(18,7,2,0.09)   0%,  transparent 42%),
+                radial-gradient(ellipse 160% 20%  at 50%  0%,   rgba(12,4,1,0.07)   0%,  transparent 100%),
+                radial-gradient(ellipse 160% 20%  at 50%  100%, rgba(12,4,1,0.08)   0%,  transparent 100%),
+                radial-gradient(ellipse 20%  160% at 0%   50%,  rgba(12,4,1,0.07)   0%,  transparent 100%),
+                radial-gradient(ellipse 20%  160% at 100% 50%,  rgba(12,4,1,0.07)   0%,  transparent 100%),
+                /* staining spots */
+                radial-gradient(ellipse 30%  22%  at 18%  28%,  rgba(90,42,8,0.03)  0%,  transparent 100%),
+                radial-gradient(ellipse 22%  18%  at 78%  62%,  rgba(70,30,5,0.03)  0%,  transparent 100%),
+                radial-gradient(ellipse 18%  14%  at 55%  80%,  rgba(100,48,10,0.02) 0%, transparent 100%),
+                radial-gradient(ellipse 14%  20%  at 30%  72%,  rgba(80,36,6,0.02)  0%,  transparent 100%),
+                radial-gradient(ellipse 25%  16%  at 68%  18%,  rgba(60,26,4,0.02)  0%,  transparent 100%);
+            pointer-events: none;
+            z-index: 9997;
+            mix-blend-mode: multiply;
         }
 
         /* Parchment grain overlay */
@@ -49,8 +74,8 @@
             position: fixed;
             inset: 0;
             background-image:
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-            opacity: 0.055;
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.13;
             pointer-events: none;
             z-index: 9998;
             mix-blend-mode: multiply;
@@ -70,9 +95,9 @@
             transition: all 0.4s ease;
         }
         nav.scrolled {
-            background: rgba(237, 224, 196, 0.96);
+            background: rgba(180, 100, 28, 0.94);
             backdrop-filter: blur(12px);
-            box-shadow: 0 2px 24px rgba(92, 51, 23, 0.1);
+            box-shadow: 0 2px 24px rgba(20, 8, 2, 0.35);
         }
         .nav-logo {
             font-family: 'Dancing Script', cursive;
@@ -89,15 +114,15 @@
             pointer-events: auto;
             background: linear-gradient(
                 168deg,
-                #7a3c10 0%, #c07828 20%, #f5bf60 35%,
-                #ffe0a0 42%, #e8a040 50%, #7a3c10 62%,
-                #c07828 72%, #f0b850 82%, #8b4a18 100%
+                #ffe8a0 0%, #ffd060 15%, #ffffff 28%,
+                #ffe090 35%, #f0b840 48%, #ffe8a0 60%,
+                #ffffff 70%, #ffd060 82%, #ffe8a0 100%
             );
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            filter: drop-shadow(0 1px 3px rgba(50,20,5,0.45));
+            filter: drop-shadow(0 1px 4px rgba(10,3,0,0.8)) drop-shadow(0 2px 8px rgba(10,3,0,0.5));
             animation: copperShimmer 6s ease-in-out infinite;
         }
         .nav-links {
@@ -107,14 +132,15 @@
         }
         .nav-links a {
             text-decoration: none;
-            color: var(--text-medium);
+            color: #fde9c0;
             font-size: 0.88rem;
             font-weight: 500;
             letter-spacing: 0.06em;
             text-transform: uppercase;
             transition: color 0.3s ease;
+            text-shadow: 0 1px 4px rgba(20, 8, 2, 0.4);
         }
-        .nav-links a:hover { color: var(--copper); }
+        .nav-links a:hover { color: #fff5d8; }
         .cart-icon {
             position: relative;
             cursor: pointer;
@@ -172,11 +198,12 @@
         ============================ */
         #hero {
             background:
-                radial-gradient(ellipse at 25% 35%, rgba(184, 115, 51, 0.18) 0%, transparent 55%),
-                radial-gradient(ellipse at 75% 65%, rgba(139, 94, 60, 0.14) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 10%, rgba(201, 160, 106, 0.12) 0%, transparent 45%),
-                radial-gradient(ellipse at 80% 90%, rgba(184, 115, 51, 0.1) 0%, transparent 40%),
-                linear-gradient(150deg, #f2e3ba 0%, #ead5a0 45%, #dfc68d 100%);
+                radial-gradient(ellipse 70% 60% at 50% 50%, #e8c070 0%, #c8882a 55%, #8a4e10 100%),
+                /* parchment stain patches */
+                radial-gradient(ellipse at 30% 40%, rgba(140, 72, 12, 0.35) 0%, transparent 45%),
+                radial-gradient(ellipse at 70% 60%, rgba(100, 50, 8, 0.28) 0%, transparent 40%),
+                radial-gradient(ellipse at 20% 70%, rgba(160, 88, 18, 0.25) 0%, transparent 35%),
+                radial-gradient(ellipse at 75% 20%, rgba(80, 36, 6, 0.22) 0%, transparent 38%);
             text-align: center;
             overflow: hidden;
         }
@@ -191,8 +218,8 @@
         .hi {
             position: absolute;
             font-size: 4rem;
-            opacity: 0.13;
-            filter: sepia(0.9) saturate(0.4) brightness(0.85);
+            opacity: 0.18;
+            filter: sepia(1) saturate(0.25) brightness(0.55) contrast(1.2);
             line-height: 1;
             user-select: none;
         }
@@ -220,6 +247,10 @@
             position: relative;
             z-index: 2;
             max-width: 740px;
+            /* subtle dark halo behind text so copper pops */
+            background: radial-gradient(ellipse 80% 70% at 50% 42%, rgba(12,4,0,0.28) 0%, transparent 100%);
+            border-radius: 50%;
+            padding: 1rem 2rem 2rem;
         }
         .hero-eyebrow {
             font-family: 'Lora', serif;
@@ -271,9 +302,9 @@
 
             /* Emboss depth: warm golden highlight above, deep shadow below */
             filter:
-                drop-shadow(0 -1px 0px rgba(255, 220, 130, 0.55))
-                drop-shadow(0  2px 6px  rgba(50, 20, 5, 0.55))
-                drop-shadow(0  4px 18px rgba(100, 50, 10, 0.35));
+                drop-shadow(0 -1px 2px rgba(255, 240, 180, 0.8))
+                drop-shadow(0  2px 5px  rgba(15, 4, 0, 0.7))
+                drop-shadow(0  4px 16px rgba(15, 4, 0, 0.45));
 
             animation: copperShimmer 5s ease-in-out infinite;
         }
@@ -347,8 +378,9 @@
         ============================ */
         #specialties {
             background:
-                radial-gradient(ellipse at 85% 15%, rgba(184, 115, 51, 0.09) 0%, transparent 50%),
-                linear-gradient(180deg, #f0e4cb 0%, #ede0c4 100%);
+                radial-gradient(ellipse 70% 70% at 50% 50%, #dda030 0%, #b87020 60%, #7a4010 100%),
+                radial-gradient(ellipse at 80% 15%, rgba(90, 42, 8, 0.3) 0%, transparent 45%),
+                radial-gradient(ellipse at 20% 80%, rgba(110, 52, 10, 0.26) 0%, transparent 40%);
         }
         .specialties-container {
             width: 100%;
@@ -500,9 +532,9 @@
         ============================ */
         #story {
             background:
-                radial-gradient(ellipse at 15% 75%, rgba(184, 115, 51, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 85% 25%, rgba(139, 94, 60, 0.06) 0%, transparent 45%),
-                linear-gradient(180deg, #ede0c4 0%, #f0e5cc 100%);
+                radial-gradient(ellipse 70% 70% at 50% 50%, #e0a838 0%, #b87020 58%, #7a4010 100%),
+                radial-gradient(ellipse at 15% 75%, rgba(80, 36, 6, 0.3) 0%, transparent 45%),
+                radial-gradient(ellipse at 82% 22%, rgba(100, 48, 8, 0.26) 0%, transparent 40%);
         }
         .story-container {
             max-width: 680px;
@@ -530,8 +562,8 @@
             left: 50%; top: 50%;
             transform: translate(-50%, -50%);
             font-size: 0.65rem;
-            color: var(--copper-mid);
-            background: linear-gradient(135deg, #f0e5cc, #ede0c4);
+            color: #ffd878;
+            background: linear-gradient(135deg, #c8822a, #a86018);
             padding: 0 0.4rem;
             line-height: 1;
         }
@@ -573,8 +605,9 @@
         ============================ */
         #socials {
             background:
-                radial-gradient(ellipse at 65% 30%, rgba(139, 94, 60, 0.09) 0%, transparent 50%),
-                linear-gradient(180deg, #ede0c4 0%, #e0ccaa 100%);
+                radial-gradient(ellipse 70% 70% at 50% 50%, #d49830 0%, #a86018 60%, #6a3808 100%),
+                radial-gradient(ellipse at 65% 30%, rgba(90, 40, 6, 0.32) 0%, transparent 45%),
+                radial-gradient(ellipse at 25% 70%, rgba(70, 30, 4, 0.28) 0%, transparent 40%);
         }
         .socials-container {
             max-width: 580px;
@@ -625,17 +658,19 @@
 
         .socials-sub {
             font-size: 0.87rem;
-            color: var(--text-light);
+            color: #fde9c0;
             font-style: italic;
             margin-bottom: 2.5rem;
+            text-shadow: 0 1px 4px rgba(10,3,0,0.5);
         }
         .site-footer {
             margin-top: 1.5rem;
             padding-top: 1.5rem;
-            border-top: 1px solid rgba(201, 160, 106, 0.28);
+            border-top: 1px solid rgba(255, 220, 150, 0.25);
             font-size: 0.78rem;
-            color: var(--text-light);
+            color: rgba(253, 220, 160, 0.75);
             line-height: 1.7;
+            text-shadow: 0 1px 3px rgba(10,3,0,0.45);
         }
 
         /* ============================
@@ -932,8 +967,8 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
-            background: var(--parchment-dark);
-            border-right: 1px solid rgba(92, 51, 23, 0.3);
+            background: #8a4a10;
+            border-right: 1px solid rgba(20, 8, 2, 0.4);
         }
         .strip-slot:last-child { border-right: none; }
         .strip-slot img {
@@ -1037,125 +1072,6 @@
            RESPONSIVE
         ============================ */
         /* ============================
-           SECTION: FULL MENU
-        ============================ */
-        #fullmenu {
-            background:
-                radial-gradient(ellipse at 20% 20%, rgba(184, 115, 51, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(139, 94, 60, 0.07) 0%, transparent 45%),
-                linear-gradient(180deg, #ede0c4 0%, #f0e5cc 100%);
-            align-items: center;
-        }
-        .fullmenu-container {
-            width: 100%;
-            max-width: 920px;
-        }
-        .menu-note {
-            text-align: center;
-            font-family: 'Lora', serif;
-            font-style: italic;
-            color: var(--text-light);
-            font-size: 0.88rem;
-            margin-top: 0.6rem;
-            margin-bottom: 2.8rem;
-        }
-        .menu-categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-            gap: 1.6rem;
-        }
-        .menu-category {
-            background: rgba(255, 250, 238, 0.78);
-            border: 1px solid rgba(184, 115, 51, 0.25);
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 3px 16px rgba(139, 94, 60, 0.07);
-            transition: box-shadow 0.35s ease, transform 0.35s ease, border-color 0.35s ease;
-        }
-        .menu-category:hover {
-            box-shadow: 0 10px 32px rgba(184, 115, 51, 0.2), var(--glow-copper-soft);
-            transform: translateY(-4px);
-            border-color: rgba(200, 132, 62, 0.5);
-        }
-        .menu-cat-header {
-            display: flex;
-            align-items: center;
-            gap: 0.65rem;
-            padding: 1rem 1.4rem;
-            background: var(--grad-copper-card);
-            border-bottom: 1px solid rgba(184, 115, 51, 0.2);
-            position: relative;
-        }
-        .menu-cat-header::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 1.4rem; right: 1.4rem;
-            height: 1px;
-            background: var(--grad-copper-line);
-            opacity: 0.6;
-        }
-        .menu-cat-icon { font-size: 1.25rem; }
-        .menu-cat-name {
-            font-family: 'Lora', serif;
-            font-size: 1.05rem;
-            color: var(--dark-brown);
-            font-weight: 600;
-        }
-        .menu-items-list { padding: 0.6rem 0.6rem 0.8rem; }
-        .menu-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 0.6rem 0.8rem;
-            border-radius: 10px;
-            transition: background 0.2s ease;
-        }
-        .menu-item:hover {
-            background: linear-gradient(135deg, rgba(216,140,60,0.1) 0%, rgba(232,176,112,0.07) 100%);
-            border-radius: 10px;
-        }
-        .menu-item-left { flex: 1; }
-        .menu-item-name {
-            font-family: 'Lora', serif;
-            font-size: 0.95rem;
-            color: var(--text-dark);
-            font-weight: 500;
-        }
-        .menu-item-sub {
-            font-size: 0.76rem;
-            color: var(--text-light);
-            font-style: italic;
-            margin-top: 0.18rem;
-            line-height: 1.45;
-        }
-        .menu-item-price {
-            font-family: 'Lora', serif;
-            font-size: 0.88rem;
-            font-weight: 700;
-            white-space: nowrap;
-            margin-left: 1rem;
-            padding-top: 0.1rem;
-            background: linear-gradient(175deg, #d4955a, #9a5e28);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .menu-order-note {
-            text-align: center;
-            margin-top: 2.2rem;
-            font-family: 'Lora', serif;
-            font-style: italic;
-            color: var(--text-medium);
-            font-size: 0.9rem;
-        }
-        .menu-order-note a {
-            color: var(--copper);
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .menu-order-note a:hover { text-decoration: underline; }
-
-        /* ============================
            BACK TO TOP
         ============================ */
         .back-to-top {
@@ -1234,7 +1150,7 @@
         <ul class="nav-links">
             <li><a href="#hero">Home</a></li>
             <li><a href="#specialties">Specialties</a></li>
-            <li><a href="#fullmenu">Full Menu</a></li>
+            <li><a href="menu.html">Full Menu</a></li>
             <li><a href="gallery.html">Gallery</a></li>
             <li><a href="#story">Our Story</a></li>
             <li><a href="#socials">Connect</a></li>
@@ -1276,7 +1192,7 @@
             <p class="hero-eyebrow fade-in">Est. with love</p>
             <h1 class="hero-title fade-in fd1">The Copper Whisk</h1>
             <p class="hero-tagline fade-in fd2">Homemade Comfort in Every Bite</p>
-            <a href="#fullmenu" class="hero-cta fade-in fd3" onclick="event.preventDefault(); document.getElementById('fullmenu').scrollIntoView({behavior:'smooth'})">Explore Our Bakes</a>
+            <a href="menu.html" class="hero-cta fade-in fd3">Explore Our Bakes</a>
         </div>
         <div class="scroll-indicator" onclick="scrollTo('#specialties')" aria-label="Scroll down">
             <span>scroll</span>
@@ -1293,7 +1209,7 @@
             <div class="specialties-grid" id="specialtiesGrid"></div>
             <div class="specialties-footer fade-in fd3">
                 <p class="delivery-note">🚗 Orders available in the Tri-Cities area, Tennessee only</p>
-                <button class="view-menu-btn" onclick="document.getElementById('fullmenu').scrollIntoView({behavior:'smooth'})">View Full Menu &amp; Order</button>
+                <button class="view-menu-btn" onclick="window.location.href='menu.html'">View Full Menu &amp; Order</button>
             </div>
         </div>
     </section>
@@ -1334,168 +1250,6 @@
             <div class="strip-slot-overlay">Small batches, big heart</div>
         </div>
         <a href="gallery.html" class="strip-cta">View Gallery →</a>
-    </section>
-
-    <!-- ============================
-         SECTION: FULL MENU
-    ============================ -->
-    <section id="fullmenu">
-        <div class="fullmenu-container">
-            <h2 class="section-title fade-in">Full Menu</h2>
-            <p class="menu-note fade-in fd1">Everything made fresh, by hand, in small batches &mdash; Tri-Cities, TN</p>
-
-            <div class="menu-categories">
-
-                <!-- PASTRIES -->
-                <div class="menu-category fade-in fd1">
-                    <div class="menu-cat-header">
-                        <span class="menu-cat-icon">🍥</span>
-                        <span class="menu-cat-name">Pastries</span>
-                    </div>
-                    <div class="menu-items-list">
-                        <div class="menu-item">
-                            <div class="menu-item-left">
-                                <div class="menu-item-name">Cinnamon Rolls</div>
-                                <div class="menu-item-sub">Soft, gooey & spiced just right</div>
-                            </div>
-                            <span class="menu-item-price">$4.50</span>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-left">
-                                <div class="menu-item-name">Strawberry Cinnamon Rolls</div>
-                                <div class="menu-item-sub">Classic roll with a fresh strawberry twist</div>
-                            </div>
-                            <span class="menu-item-price">$4.75</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FUDGE -->
-                <div class="menu-category fade-in fd2">
-                    <div class="menu-cat-header">
-                        <span class="menu-cat-icon">🍫</span>
-                        <span class="menu-cat-name">Fudge</span>
-                    </div>
-                    <div class="menu-items-list">
-                        <div class="menu-item">
-                            <div class="menu-item-left">
-                                <div class="menu-item-name">Chocolate Fudge</div>
-                                <div class="menu-item-sub">Rich, dense & deeply chocolatey</div>
-                            </div>
-                            <span class="menu-item-price">$6.00</span>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-left">
-                                <div class="menu-item-name">Biscoff Fudge</div>
-                                <div class="menu-item-sub">Warm spiced cookie butter in every bite</div>
-                            </div>
-                            <span class="menu-item-price">$6.50</span>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-left">
-                                <div class="menu-item-name">Peanut Butter Fudge</div>
-                                <div class="menu-item-sub">Creamy, sweet & smooth</div>
-                            </div>
-                            <span class="menu-item-price">$6.00</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- COOKIES -->
-                <div class="menu-category fade-in fd1">
-                    <div class="menu-cat-header">
-                        <span class="menu-cat-icon">🍪</span>
-                        <span class="menu-cat-name">Cookies</span>
-                    </div>
-                    <div class="menu-items-list">
-                        <div class="menu-item">
-                            <div class="menu-item-left">
-                                <div class="menu-item-name">Chocolate Chip Cookies</div>
-                                <div class="menu-item-sub">Crisp edges, soft centers, real chocolate</div>
-                            </div>
-                            <span class="menu-item-price">$2.75</span>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-left">
-                                <div class="menu-item-name">White Chocolate Macadamia Nut</div>
-                                <div class="menu-item-sub">Buttery, chewy & perfectly sweet</div>
-                            </div>
-                            <span class="menu-item-price">$3.00</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- BREADS & EXTRAS -->
-                <div class="menu-category fade-in fd2">
-                    <div class="menu-cat-header">
-                        <span class="menu-cat-icon">🍞</span>
-                        <span class="menu-cat-name">Breads &amp; Extras</span>
-                    </div>
-                    <div class="menu-items-list">
-                        <div class="menu-item">
-                            <div class="menu-item-left">
-                                <div class="menu-item-name">Artisan Bread</div>
-                                <div class="menu-item-sub">Crusty outside, chewy & warm inside</div>
-                            </div>
-                            <span class="menu-item-price">$9.00</span>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-left">
-                                <div class="menu-item-name">Biscuits</div>
-                                <div class="menu-item-sub">Flaky, buttery & golden brown</div>
-                            </div>
-                            <span class="menu-item-price">$2.00</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SAUCES -->
-                <div class="menu-category fade-in fd1">
-                    <div class="menu-cat-header">
-                        <span class="menu-cat-icon">🍓</span>
-                        <span class="menu-cat-name">Sauces</span>
-                    </div>
-                    <div class="menu-items-list">
-                        <div class="menu-item">
-                            <div class="menu-item-left">
-                                <div class="menu-item-name">Blueberry Sauce</div>
-                                <div class="menu-item-sub">Sweet, jammy & perfect over anything</div>
-                            </div>
-                            <span class="menu-item-price">$5.00</span>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-left">
-                                <div class="menu-item-name">Strawberry Sauce</div>
-                                <div class="menu-item-sub">Bright, fresh & made from real fruit</div>
-                            </div>
-                            <span class="menu-item-price">$5.00</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- COMBOS -->
-                <div class="menu-category fade-in fd2">
-                    <div class="menu-cat-header">
-                        <span class="menu-cat-icon">🍽️</span>
-                        <span class="menu-cat-name">Combos</span>
-                    </div>
-                    <div class="menu-items-list">
-                        <div class="menu-item">
-                            <div class="menu-item-left">
-                                <div class="menu-item-name">Breakfast Meal</div>
-                                <div class="menu-item-sub">One cinnamon roll &bull; small loaf of artisan bread &bull; sauce of your choice &bull; one biscuit</div>
-                            </div>
-                            <span class="menu-item-price">$14.00</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div><!-- /menu-categories -->
-
-            <p class="menu-order-note fade-in fd3">
-                Ready to order? Reach out to us on <a href="#socials">social media</a> or scroll down to connect &mdash; we&rsquo;d love to hear from you. 🧡
-            </p>
-        </div>
     </section>
 
     <!-- ============================
