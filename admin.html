@@ -23,17 +23,12 @@
         body { font-family:'Nunito',sans-serif; background:#f4ede0; color:var(--text-dark); min-height:100vh; }
 
         /* ── LOGIN ── */
-        #loginScreen {
-            min-height:100vh; display:flex; align-items:center; justify-content:center; padding:2rem;
-        }
+        #loginScreen { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:2rem; }
         .login-card {
             background:var(--cream); border-radius:20px; padding:2.8rem 2.4rem; width:100%; max-width:360px;
             box-shadow:0 8px 40px rgba(92,51,23,0.15); border:1px solid var(--border);
         }
-        .login-logo {
-            font-family:'Dancing Script',cursive; font-size:1.9rem; color:var(--copper); text-align:center;
-            margin-bottom:0.3rem;
-        }
+        .login-logo { font-family:'Dancing Script',cursive; font-size:1.9rem; color:var(--copper); text-align:center; margin-bottom:0.3rem; }
         .login-sub { text-align:center; font-size:0.82rem; color:var(--text-light); margin-bottom:2rem; font-style:italic; }
         .login-card input[type=password] {
             width:100%; border:1.5px solid var(--border); border-radius:12px; padding:0.85rem 1rem;
@@ -42,6 +37,8 @@
         }
         .login-card input[type=password]:focus { border-color:var(--copper); box-shadow:0 0 0 3px var(--ring); }
         .login-err { color:#c0392b; font-size:0.82rem; margin-bottom:0.6rem; display:none; }
+
+        /* ── BUTTONS ── */
         .btn-copper {
             width:100%; background:var(--copper-btn); color:#fff8ee; border:none; padding:0.9rem;
             border-radius:50px; font-weight:700; font-size:0.95rem; font-family:'Nunito',sans-serif;
@@ -49,110 +46,6 @@
         }
         .btn-copper:hover:not(:disabled) { opacity:0.9; transform:translateY(-1px); }
         .btn-copper:disabled { opacity:0.45; cursor:not-allowed; }
-
-        /* ── ADMIN SHELL ── */
-        #adminShell { display:none; min-height:100vh; flex-direction:column; }
-        #adminShell.visible { display:flex; }
-        .admin-header {
-            background:var(--dark-brown); color:#fde9c0; padding:0.95rem 1.6rem;
-            display:flex; align-items:center; justify-content:space-between;
-            box-shadow:0 2px 12px rgba(20,8,2,0.3);
-        }
-        .admin-header-logo { font-family:'Dancing Script',cursive; font-size:1.35rem; color:var(--copper-light); }
-        .admin-header-right { display:flex; align-items:center; gap:1rem; }
-        .view-site-link {
-            font-size:0.8rem; color:rgba(253,220,160,0.65); text-decoration:none;
-            transition:color 0.2s;
-        }
-        .view-site-link:hover { color:#fde9c0; }
-        .logout-btn {
-            background:none; border:1px solid rgba(253,220,160,0.3); color:rgba(253,220,160,0.7);
-            padding:0.35rem 0.9rem; border-radius:50px; font-size:0.8rem; cursor:pointer;
-            font-family:'Nunito',sans-serif; transition:all 0.2s;
-        }
-        .logout-btn:hover { border-color:rgba(253,220,160,0.7); color:#fde9c0; }
-
-        .tab-bar {
-            background:#fff; border-bottom:1px solid var(--border); padding:0 1.2rem;
-            display:flex; gap:0.25rem; overflow-x:auto;
-        }
-        .tab-btn {
-            background:none; border:none; border-bottom:2.5px solid transparent; padding:0.9rem 1.1rem;
-            font-size:0.88rem; font-weight:600; color:var(--text-light); cursor:pointer;
-            font-family:'Nunito',sans-serif; white-space:nowrap; transition:color 0.2s, border-color 0.2s;
-        }
-        .tab-btn.active { border-bottom-color:var(--copper); color:var(--copper); }
-        .tab-btn:hover:not(.active) { color:var(--text-mid); }
-
-        .tab-content { display:none; flex:1; }
-        .tab-content.active { display:block; }
-
-        .content-wrap { max-width:860px; margin:0 auto; padding:2rem 1.4rem 4rem; }
-
-        /* ── CARDS ── */
-        .card {
-            background:var(--cream); border:1px solid var(--border); border-radius:16px; padding:1.4rem;
-            margin-bottom:0.85rem; box-shadow:0 2px 10px rgba(92,51,23,0.07);
-        }
-        .card-header { display:flex; align-items:center; gap:0.6rem; margin-bottom:0; }
-        .card-emoji { font-size:1.5rem; line-height:1; }
-        .card-info { flex:1; }
-        .card-name { font-family:'Lora',serif; font-size:0.97rem; font-weight:600; color:var(--dark-brown); }
-        .card-desc { font-size:0.78rem; color:var(--text-light); margin-top:0.15rem; line-height:1.4; }
-        .card-meta { display:flex; gap:0.7rem; margin-top:0.3rem; align-items:center; }
-        .card-price { font-family:'Lora',serif; font-size:0.9rem; font-weight:700; color:var(--copper); }
-        .card-category {
-            font-size:0.7rem; background:rgba(184,115,51,0.12); color:var(--copper);
-            padding:0.15rem 0.6rem; border-radius:50px; font-weight:600;
-        }
-        .card-badge {
-            font-size:0.7rem; padding:0.15rem 0.6rem; border-radius:50px; font-weight:700;
-            background:linear-gradient(135deg,#e05a20,#c03010); color:#fff; letter-spacing:0.04em;
-        }
-        .card-actions { display:flex; gap:0.5rem; align-items:center; flex-shrink:0; }
-        .btn-edit {
-            background:none; border:1.5px solid var(--border); color:var(--text-mid); padding:0.35rem 0.85rem;
-            border-radius:50px; font-size:0.78rem; font-weight:600; cursor:pointer; font-family:'Nunito',sans-serif;
-            transition:all 0.2s;
-        }
-        .btn-edit:hover { border-color:var(--copper); color:var(--copper); background:rgba(184,115,51,0.06); }
-        .btn-delete {
-            background:none; border:1.5px solid rgba(192,57,43,0.25); color:#c0392b; padding:0.35rem 0.75rem;
-            border-radius:50px; font-size:0.78rem; font-weight:600; cursor:pointer; font-family:'Nunito',sans-serif;
-            transition:all 0.2s;
-        }
-        .btn-delete:hover { background:rgba(192,57,43,0.08); border-color:rgba(192,57,43,0.5); }
-
-        /* ── CATEGORY GROUP ── */
-        .cat-group { margin-bottom:1.8rem; }
-        .cat-label {
-            font-family:'Lora',serif; font-size:0.82rem; font-weight:600; color:var(--copper);
-            text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.65rem;
-            padding-bottom:0.45rem; border-bottom:1px solid var(--border);
-        }
-
-        /* ── FORM ── */
-        .form-card {
-            background:#fff; border:1.5px solid var(--copper-light); border-radius:16px; padding:1.5rem;
-            margin-bottom:1.2rem; box-shadow:0 4px 20px rgba(184,115,51,0.12);
-        }
-        .form-title { font-family:'Lora',serif; font-size:1rem; font-weight:600; color:var(--dark-brown); margin-bottom:1.1rem; }
-        .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; }
-        .form-grid.three { grid-template-columns:1fr 1fr 1fr; }
-        @media(max-width:560px) { .form-grid,.form-grid.three { grid-template-columns:1fr; } }
-        .form-group { display:flex; flex-direction:column; gap:0.35rem; }
-        .form-group.full { grid-column:1/-1; }
-        label { font-size:0.78rem; font-weight:600; color:var(--text-mid); }
-        input[type=text], input[type=number], select, textarea {
-            border:1.5px solid var(--border); border-radius:10px; padding:0.65rem 0.85rem;
-            font-size:0.9rem; font-family:'Nunito',sans-serif; background:#fff; outline:none;
-            transition:border-color 0.2s, box-shadow 0.2s; color:var(--text-dark);
-        }
-        input:focus, select:focus, textarea:focus {
-            border-color:var(--copper); box-shadow:0 0 0 3px var(--ring);
-        }
-        textarea { resize:vertical; min-height:70px; }
-        .form-actions { display:flex; gap:0.65rem; margin-top:1rem; }
         .btn-save {
             background:var(--copper-btn); color:#fff8ee; border:none; padding:0.7rem 1.8rem;
             border-radius:50px; font-weight:700; font-size:0.88rem; font-family:'Nunito',sans-serif;
@@ -165,8 +58,6 @@
             transition:all 0.2s;
         }
         .btn-cancel:hover { border-color:var(--text-mid); }
-
-        /* ── ADD BUTTON ── */
         .add-btn {
             display:inline-flex; align-items:center; gap:0.45rem;
             background:var(--copper-btn); color:#fff8ee; border:none; padding:0.7rem 1.5rem;
@@ -176,21 +67,155 @@
         }
         .add-btn:hover { opacity:0.9; transform:translateY(-1px); box-shadow:0 5px 18px rgba(184,115,51,0.4); }
         .add-btn svg { width:16px; height:16px; stroke:currentColor; stroke-width:2.5; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+        .btn-sm {
+            padding:0.32rem 0.85rem; border-radius:50px; font-size:0.76rem; font-weight:700;
+            font-family:'Nunito',sans-serif; cursor:pointer; border:none; transition:all 0.2s;
+        }
+        .btn-confirm  { background:#e8f5e9; color:#2e7d32; }
+        .btn-confirm:hover  { background:#c8e6c9; }
+        .btn-ready    { background:#fff3e0; color:#e65100; }
+        .btn-ready:hover    { background:#ffe0b2; }
+        .btn-complete { background:#ede7f6; color:#4527a0; }
+        .btn-complete:hover { background:#d1c4e9; }
+        .btn-cancel-order { background:#fce4ec; color:#b71c1c; }
+        .btn-cancel-order:hover { background:#f8bbd0; }
+
+        /* ── ADMIN SHELL ── */
+        #adminShell { display:none; min-height:100vh; flex-direction:column; }
+        #adminShell.visible { display:flex; }
+        .admin-header {
+            background:var(--dark-brown); color:#fde9c0; padding:0.95rem 1.6rem;
+            display:flex; align-items:center; justify-content:space-between;
+            box-shadow:0 2px 12px rgba(20,8,2,0.3); position:sticky; top:0; z-index:100;
+        }
+        .admin-header-logo { font-family:'Dancing Script',cursive; font-size:1.35rem; color:var(--copper-light); }
+        .admin-header-right { display:flex; align-items:center; gap:1rem; }
+        .view-site-link { font-size:0.8rem; color:rgba(253,220,160,0.65); text-decoration:none; transition:color 0.2s; }
+        .view-site-link:hover { color:#fde9c0; }
+        .logout-btn {
+            background:none; border:1px solid rgba(253,220,160,0.3); color:rgba(253,220,160,0.7);
+            padding:0.35rem 0.9rem; border-radius:50px; font-size:0.8rem; cursor:pointer;
+            font-family:'Nunito',sans-serif; transition:all 0.2s;
+        }
+        .logout-btn:hover { border-color:rgba(253,220,160,0.7); color:#fde9c0; }
+
+        .tab-bar {
+            background:#fff; border-bottom:1px solid var(--border); padding:0 1.2rem;
+            display:flex; gap:0.25rem; overflow-x:auto; position:sticky; top:52px; z-index:99;
+        }
+        .tab-btn {
+            background:none; border:none; border-bottom:2.5px solid transparent; padding:0.9rem 1.1rem;
+            font-size:0.88rem; font-weight:600; color:var(--text-light); cursor:pointer;
+            font-family:'Nunito',sans-serif; white-space:nowrap; transition:color 0.2s, border-color 0.2s;
+        }
+        .tab-btn.active { border-bottom-color:var(--copper); color:var(--copper); }
+        .tab-btn:hover:not(.active) { color:var(--text-mid); }
+
+        .tab-content { display:none; flex:1; }
+        .tab-content.active { display:block; }
+        .content-wrap { max-width:900px; margin:0 auto; padding:2rem 1.4rem 4rem; }
+
+        /* ── STAT PILLS ── */
+        .stats-row { display:flex; gap:0.85rem; flex-wrap:wrap; margin-bottom:1.6rem; }
+        .stat-pill {
+            background:var(--cream); border:1px solid var(--border); border-radius:12px;
+            padding:0.7rem 1.2rem; text-align:center; min-width:90px;
+        }
+        .stat-num { font-family:'Lora',serif; font-size:1.5rem; font-weight:600; color:var(--copper); line-height:1; }
+        .stat-label { font-size:0.72rem; color:var(--text-light); margin-top:0.2rem; }
+
+        /* ── CARDS ── */
+        .card {
+            background:var(--cream); border:1px solid var(--border); border-radius:16px; padding:1.4rem;
+            margin-bottom:0.85rem; box-shadow:0 2px 10px rgba(92,51,23,0.07);
+        }
+        .card.expandable { cursor:pointer; }
+        .card.expandable:hover { border-color:var(--copper-light); }
+        .card-header { display:flex; align-items:center; gap:0.65rem; }
+        .card-emoji { font-size:1.5rem; line-height:1; }
+        .card-info { flex:1; min-width:0; }
+        .card-name { font-family:'Lora',serif; font-size:0.97rem; font-weight:600; color:var(--dark-brown); }
+        .card-desc { font-size:0.78rem; color:var(--text-light); margin-top:0.15rem; line-height:1.4; }
+        .card-meta { display:flex; gap:0.7rem; margin-top:0.3rem; align-items:center; flex-wrap:wrap; }
+        .card-price { font-family:'Lora',serif; font-size:0.9rem; font-weight:700; color:var(--copper); }
+        .card-category { font-size:0.7rem; background:rgba(184,115,51,0.12); color:var(--copper); padding:0.15rem 0.6rem; border-radius:50px; font-weight:600; }
+        .card-badge-red { font-size:0.7rem; padding:0.15rem 0.6rem; border-radius:50px; font-weight:700; background:linear-gradient(135deg,#e05a20,#c03010); color:#fff; letter-spacing:0.04em; }
+        .card-actions { display:flex; gap:0.5rem; align-items:center; flex-shrink:0; }
+        .btn-edit { background:none; border:1.5px solid var(--border); color:var(--text-mid); padding:0.35rem 0.85rem; border-radius:50px; font-size:0.78rem; font-weight:600; cursor:pointer; font-family:'Nunito',sans-serif; transition:all 0.2s; }
+        .btn-edit:hover { border-color:var(--copper); color:var(--copper); background:rgba(184,115,51,0.06); }
+        .btn-delete { background:none; border:1.5px solid rgba(192,57,43,0.25); color:#c0392b; padding:0.35rem 0.75rem; border-radius:50px; font-size:0.78rem; font-weight:600; cursor:pointer; font-family:'Nunito',sans-serif; transition:all 0.2s; }
+        .btn-delete:hover { background:rgba(192,57,43,0.08); border-color:rgba(192,57,43,0.5); }
+
+        /* ── CATEGORY GROUP ── */
+        .cat-group { margin-bottom:1.8rem; }
+        .cat-label { font-family:'Lora',serif; font-size:0.82rem; font-weight:600; color:var(--copper); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.65rem; padding-bottom:0.45rem; border-bottom:1px solid var(--border); }
+
+        /* ── STATUS BADGES ── */
+        .status { display:inline-block; font-size:0.7rem; font-weight:700; padding:0.18rem 0.65rem; border-radius:50px; letter-spacing:0.04em; }
+        .status-new      { background:#e3f2fd; color:#1565c0; }
+        .status-confirmed{ background:#e8f5e9; color:#2e7d32; }
+        .status-ready    { background:#fff3e0; color:#e65100; }
+        .status-complete { background:#ede7f6; color:#4527a0; }
+        .status-cancelled{ background:#fce4ec; color:#b71c1c; }
+
+        /* ── ORDER EXPAND ── */
+        .order-body { display:none; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border); }
+        .order-body.open { display:block; }
+        .order-items-list { background:#fff; border:1px solid var(--border); border-radius:10px; padding:0.65rem 0.85rem; margin-bottom:0.85rem; }
+        .order-item-row { display:flex; justify-content:space-between; font-size:0.85rem; padding:0.25rem 0; color:var(--text-mid); }
+        .order-item-row:not(:last-child) { border-bottom:1px solid rgba(184,115,51,0.1); }
+        .order-total-row { display:flex; justify-content:space-between; font-family:'Lora',serif; font-weight:600; font-size:0.9rem; color:var(--dark-brown); margin-top:0.4rem; }
+        .order-contact { display:grid; grid-template-columns:1fr 1fr; gap:0.5rem 1.2rem; margin-bottom:0.85rem; font-size:0.84rem; }
+        .order-contact label { font-size:0.72rem; font-weight:600; color:var(--text-light); display:block; margin-bottom:0.1rem; }
+        .order-contact span { color:var(--text-dark); }
+        .order-actions { display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.85rem; }
+        .expand-chevron { font-size:0.75rem; color:var(--text-light); transition:transform 0.25s; flex-shrink:0; }
+        .card.open .expand-chevron { transform:rotate(180deg); }
+
+        /* ── FORM ── */
+        .form-card { background:#fff; border:1.5px solid var(--copper-light); border-radius:16px; padding:1.5rem; margin-bottom:1.2rem; box-shadow:0 4px 20px rgba(184,115,51,0.12); }
+        .form-title { font-family:'Lora',serif; font-size:1rem; font-weight:600; color:var(--dark-brown); margin-bottom:1.1rem; }
+        .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; }
+        .form-grid.three { grid-template-columns:1fr 1fr 1fr; }
+        @media(max-width:560px) { .form-grid,.form-grid.three { grid-template-columns:1fr; } }
+        .form-group { display:flex; flex-direction:column; gap:0.35rem; }
+        .form-group.full { grid-column:1/-1; }
+        label { font-size:0.78rem; font-weight:600; color:var(--text-mid); }
+        input[type=text],input[type=number],input[type=tel],input[type=email],input[type=url],select,textarea {
+            border:1.5px solid var(--border); border-radius:10px; padding:0.65rem 0.85rem;
+            font-size:0.9rem; font-family:'Nunito',sans-serif; background:#fff; outline:none;
+            transition:border-color 0.2s, box-shadow 0.2s; color:var(--text-dark);
+        }
+        input:focus,select:focus,textarea:focus { border-color:var(--copper); box-shadow:0 0 0 3px var(--ring); }
+        textarea { resize:vertical; min-height:70px; }
+        .form-actions { display:flex; gap:0.65rem; margin-top:1rem; }
+
+        /* ── GALLERY GRID ── */
+        .gallery-admin-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:0.85rem; margin-top:0.5rem; }
+        .gallery-admin-card { background:var(--cream); border:1px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(92,51,23,0.07); }
+        .gallery-thumb { width:100%; height:130px; object-fit:cover; display:block; background:#e8d5a3; }
+        .gallery-thumb-placeholder { width:100%; height:130px; background:linear-gradient(135deg,#e8d4a8,#d4b870); display:flex; align-items:center; justify-content:center; font-size:2.5rem; opacity:0.5; }
+        .gallery-card-info { padding:0.65rem 0.75rem 0.75rem; }
+        .gallery-card-caption { font-size:0.8rem; font-family:'Lora',serif; color:var(--text-dark); margin-bottom:0.3rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .gallery-card-cat { font-size:0.68rem; color:var(--copper); font-weight:600; }
+        .gallery-card-actions { display:flex; justify-content:flex-end; margin-top:0.4rem; }
+
+        /* ── SEARCH ── */
+        .search-row { display:flex; gap:0.75rem; margin-bottom:1.2rem; align-items:center; flex-wrap:wrap; }
+        .search-input { flex:1; min-width:200px; border:1.5px solid var(--border); border-radius:50px; padding:0.65rem 1.1rem; font-size:0.88rem; font-family:'Nunito',sans-serif; background:#fff; outline:none; transition:border-color 0.2s; }
+        .search-input:focus { border-color:var(--copper); }
+
+        /* ── CUSTOMER CARD ── */
+        .customer-card-detail { display:grid; grid-template-columns:1fr 1fr; gap:0.4rem 1.2rem; margin-bottom:0.75rem; font-size:0.84rem; }
+        .customer-card-detail label { font-size:0.72rem; font-weight:600; color:var(--text-light); }
+
+        /* ── NOTE BAND ── */
+        .info-band { background:rgba(184,115,51,0.08); border:1px solid rgba(184,115,51,0.2); border-radius:10px; padding:0.75rem 1rem; font-size:0.8rem; color:var(--text-mid); line-height:1.6; margin-bottom:1.2rem; }
+        .info-band strong { color:var(--copper); }
 
         /* ── EMPTY STATE ── */
-        .empty-state {
-            text-align:center; padding:3rem 1.5rem; color:var(--text-light);
-            font-family:'Lora',serif; font-style:italic;
-        }
+        .empty-state { text-align:center; padding:3rem 1.5rem; color:var(--text-light); font-family:'Lora',serif; font-style:italic; }
         .empty-state span { display:block; font-size:2rem; margin-bottom:0.7rem; }
-
-        /* ── FEATURED BADGE PREVIEW ── */
-        .badge-preview {
-            display:inline-block; font-size:0.7rem; padding:0.15rem 0.6rem; border-radius:50px;
-            font-weight:700; background:linear-gradient(135deg,#e05a20,#c03010); color:#fff;
-            letter-spacing:0.04em; margin-left:0.5rem; vertical-align:middle;
-        }
-        .badge-none { color:var(--text-light); font-size:0.78rem; font-style:italic; }
 
         /* ── SETTINGS ── */
         .settings-section { max-width:440px; }
@@ -207,7 +232,6 @@
         }
         #toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
 
-        /* ── FEATURED LIMIT NOTICE ── */
         .limit-note { font-size:0.78rem; color:var(--text-light); margin-bottom:1rem; font-style:italic; }
     </style>
 </head>
@@ -237,45 +261,88 @@
     </div>
 
     <div class="tab-bar">
-        <button class="tab-btn active" onclick="switchTab('menu',this)">Menu Items</button>
+        <button class="tab-btn active" onclick="switchTab('orders',this)">Orders</button>
+        <button class="tab-btn" onclick="switchTab('customers',this)">Customers</button>
+        <button class="tab-btn" onclick="switchTab('menu',this)">Menu Items</button>
         <button class="tab-btn" onclick="switchTab('featured',this)">Featured</button>
+        <button class="tab-btn" onclick="switchTab('gallery',this)">Gallery</button>
         <button class="tab-btn" onclick="switchTab('settings',this)">Settings</button>
     </div>
 
-    <!-- ===== TAB: MENU ITEMS ===== -->
-    <div class="tab-content active" id="tab-menu">
+    <!-- ===== ORDERS ===== -->
+    <div class="tab-content active" id="tab-orders">
+        <div class="content-wrap">
+            <div class="stats-row" id="orderStats"></div>
+            <button class="add-btn" onclick="openOrderForm()">
+                <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Add Order Manually
+            </button>
+            <div id="orderFormContainer"></div>
+            <div id="orderList"></div>
+        </div>
+    </div>
+
+    <!-- ===== CUSTOMERS ===== -->
+    <div class="tab-content" id="tab-customers">
+        <div class="content-wrap">
+            <div class="search-row">
+                <input class="search-input" id="custSearch" placeholder="Search by name, phone, or email…" oninput="renderCustomerList()">
+                <button class="add-btn" style="margin-bottom:0;" onclick="openCustomerForm()">
+                    <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    Add Customer
+                </button>
+            </div>
+            <div id="customerFormContainer"></div>
+            <div id="customerList"></div>
+        </div>
+    </div>
+
+    <!-- ===== MENU ITEMS ===== -->
+    <div class="tab-content" id="tab-menu">
         <div class="content-wrap">
             <button class="add-btn" onclick="openItemForm()">
                 <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 Add Item
             </button>
-
             <div id="itemFormContainer"></div>
             <div id="menuList"></div>
         </div>
     </div>
 
-    <!-- ===== TAB: FEATURED ===== -->
+    <!-- ===== FEATURED ===== -->
     <div class="tab-content" id="tab-featured">
         <div class="content-wrap">
             <p class="limit-note">Featured items appear as spotlight cards on your homepage. Add up to 6. Use the badge to call out sales, limited items, or seasonal specials.</p>
-
             <button class="add-btn" onclick="openFeaturedForm()">
                 <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 Add Featured Item
             </button>
-
             <div id="featuredFormContainer"></div>
             <div id="featuredList"></div>
         </div>
     </div>
 
-    <!-- ===== TAB: SETTINGS ===== -->
+    <!-- ===== GALLERY ===== -->
+    <div class="tab-content" id="tab-gallery">
+        <div class="content-wrap">
+            <div class="info-band">
+                <strong>Adding photos:</strong> Paste any image URL — Google Photos share link, Imgur, or any image hosting service. You can also use a path like <code style="font-family:monospace;font-size:0.78em;background:rgba(184,115,51,0.1);padding:0 4px;border-radius:4px;">photos/gallery/my-photo.jpg</code> if the file is saved in the photos/gallery folder and pushed to the repo.
+            </div>
+            <button class="add-btn" onclick="openGalleryForm()">
+                <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Add Photo
+            </button>
+            <div id="galleryFormContainer"></div>
+            <div id="galleryAdminGrid"></div>
+        </div>
+    </div>
+
+    <!-- ===== SETTINGS ===== -->
     <div class="tab-content" id="tab-settings">
         <div class="content-wrap">
             <div class="settings-section">
                 <div class="settings-label">Change Password</div>
-                <p class="settings-note">This password protects the admin panel. Keep it simple — something your daughter can remember.</p>
+                <p class="settings-note">This password protects the admin panel. Keep it simple — something easy to remember.</p>
                 <div class="form-card">
                     <div class="form-group" style="margin-bottom:0.75rem;">
                         <label>Current Password</label>
@@ -301,51 +368,65 @@
 
 <script>
 // ============================================================
-// DATA & STORAGE
+// KEYS & DEFAULTS
 // ============================================================
 const PASS_KEY     = 'cw_password';
 const ITEMS_KEY    = 'cw_items';
 const FEATURED_KEY = 'cw_featured';
+const ORDERS_KEY   = 'cw_orders';
+const CUSTOMERS_KEY= 'cw_customers';
+const GALLERY_KEY  = 'cw_gallery';
 const AUTH_KEY     = 'cw_authed';
 
-const CATEGORIES = ['Pastries','Fudge','Cookies','Breads & Extras','Sauces','Combos','Cakes','Pies','Other'];
-const BG_CLASSES = ['bg1','bg2','bg3','bg4','bg5','bg6'];
+const CATEGORIES  = ['Pastries','Fudge','Cookies','Breads & Extras','Sauces','Combos','Cakes','Pies','Other'];
+const GAL_CATS    = ['Pastries','Fudge','Cookies','Breads & Extras','Sauces','Behind the Scenes','Other'];
+const STATUS_FLOW = ['new','confirmed','ready','complete'];
+const STATUS_NEXT_LABEL = { new:'Confirm', confirmed:'Mark Ready', ready:'Mark Complete' };
 
 const DEFAULT_ITEMS = [
-    { id:'1', name:'Cinnamon Rolls',               desc:'Soft, gooey & spiced just right',                  price:4.50,  emoji:'🌀', category:'Pastries' },
-    { id:'2', name:'Strawberry Cinnamon Rolls',    desc:'Classic roll with a fresh strawberry twist',        price:4.75,  emoji:'🌸', category:'Pastries' },
-    { id:'3', name:'Chocolate Fudge',              desc:'Rich, dense & deeply chocolatey',                  price:6.00,  emoji:'🍫', category:'Fudge' },
-    { id:'4', name:'Biscoff Fudge',                desc:'Warm spiced cookie butter in every bite',          price:6.50,  emoji:'🍂', category:'Fudge' },
-    { id:'5', name:'Peanut Butter Fudge',          desc:'Creamy, sweet & smooth',                           price:6.00,  emoji:'🥜', category:'Fudge' },
-    { id:'6', name:'Chocolate Chip Cookies',       desc:'Crisp edges, soft centers, real chocolate',        price:2.75,  emoji:'🍪', category:'Cookies' },
-    { id:'7', name:'White Chocolate Macadamia Nut',desc:'Buttery, chewy & perfectly sweet',                 price:3.00,  emoji:'🍪', category:'Cookies' },
-    { id:'8', name:'Artisan Bread',                desc:'Crusty outside, chewy & warm inside',              price:9.00,  emoji:'🍞', category:'Breads & Extras' },
-    { id:'9', name:'Biscuits',                     desc:'Flaky, buttery & golden brown',                    price:2.00,  emoji:'🍞', category:'Breads & Extras' },
-    { id:'10',name:'Blueberry Sauce',              desc:'Sweet, jammy & perfect over anything',             price:5.00,  emoji:'🫐', category:'Sauces' },
-    { id:'11',name:'Strawberry Sauce',             desc:'Bright, fresh & made from real fruit',             price:5.00,  emoji:'🍓', category:'Sauces' },
-    { id:'12',name:'Breakfast Meal',               desc:'Cinnamon roll · artisan bread · sauce · biscuit',  price:14.00, emoji:'🍽️', category:'Combos' },
+    { id:'1',  name:'Cinnamon Rolls',                desc:'Soft, gooey & spiced just right',                   price:4.50,  emoji:'🌀', category:'Pastries' },
+    { id:'2',  name:'Strawberry Cinnamon Rolls',     desc:'Classic roll with a fresh strawberry twist',         price:4.75,  emoji:'🌸', category:'Pastries' },
+    { id:'3',  name:'Chocolate Fudge',               desc:'Rich, dense & deeply chocolatey',                   price:6.00,  emoji:'🍫', category:'Fudge' },
+    { id:'4',  name:'Biscoff Fudge',                 desc:'Warm spiced cookie butter in every bite',            price:6.50,  emoji:'🍂', category:'Fudge' },
+    { id:'5',  name:'Peanut Butter Fudge',           desc:'Creamy, sweet & smooth',                            price:6.00,  emoji:'🥜', category:'Fudge' },
+    { id:'6',  name:'Chocolate Chip Cookies',        desc:'Crisp edges, soft centers, real chocolate',         price:2.75,  emoji:'🍪', category:'Cookies' },
+    { id:'7',  name:'White Chocolate Macadamia Nut', desc:'Buttery, chewy & perfectly sweet',                  price:3.00,  emoji:'🍪', category:'Cookies' },
+    { id:'8',  name:'Artisan Bread',                 desc:'Crusty outside, chewy & warm inside',               price:9.00,  emoji:'🍞', category:'Breads & Extras' },
+    { id:'9',  name:'Biscuits',                      desc:'Flaky, buttery & golden brown',                     price:2.00,  emoji:'🍞', category:'Breads & Extras' },
+    { id:'10', name:'Blueberry Sauce',               desc:'Sweet, jammy & perfect over anything',              price:5.00,  emoji:'🫐', category:'Sauces' },
+    { id:'11', name:'Strawberry Sauce',              desc:'Bright, fresh & made from real fruit',              price:5.00,  emoji:'🍓', category:'Sauces' },
+    { id:'12', name:'Breakfast Meal',                desc:'Cinnamon roll · artisan bread · sauce · biscuit',   price:14.00, emoji:'🍽️', category:'Combos' },
 ];
-
 const DEFAULT_FEATURED = [
-    { id:'f1', name:'Cinnamon Rolls',        desc:'Soft, gooey & spiced just right',         price:4.50, emoji:'🌀', badge:'' },
-    { id:'f2', name:'Chocolate Fudge',       desc:'Rich, dense & deeply chocolatey',         price:6.00, emoji:'🍫', badge:'' },
-    { id:'f3', name:'Artisan Bread',         desc:'Crusty outside, chewy & warm inside',     price:9.00, emoji:'🍞', badge:'' },
-    { id:'f4', name:'Signature Cookies',     desc:'Crisp edges, soft centers, real chocolate',price:2.75,emoji:'🍪', badge:'' },
+    { id:'f1', name:'Cinnamon Rolls',   desc:'Soft, gooey & spiced just right',       price:4.50, emoji:'🌀', badge:'' },
+    { id:'f2', name:'Chocolate Fudge',  desc:'Rich, dense & deeply chocolatey',       price:6.00, emoji:'🍫', badge:'' },
+    { id:'f3', name:'Artisan Bread',    desc:'Crusty outside, chewy & warm inside',   price:9.00, emoji:'🍞', badge:'' },
+    { id:'f4', name:'Signature Cookies',desc:'Crisp edges, soft centers, real choc.', price:2.75, emoji:'🍪', badge:'' },
 ];
 
-function getPass()     { return localStorage.getItem(PASS_KEY)     || 'copperwhisk'; }
-function getItems()    { const d = localStorage.getItem(ITEMS_KEY);    return d ? JSON.parse(d) : DEFAULT_ITEMS.map(i=>({...i})); }
-function getFeatured() { const d = localStorage.getItem(FEATURED_KEY); return d ? JSON.parse(d) : DEFAULT_FEATURED.map(i=>({...i})); }
-function saveItems(arr)    { localStorage.setItem(ITEMS_KEY,    JSON.stringify(arr)); }
-function saveFeatured(arr) { localStorage.setItem(FEATURED_KEY, JSON.stringify(arr)); }
-function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+// ── Storage helpers ──
+const getPass      = ()  => localStorage.getItem(PASS_KEY)      || 'copperwhisk';
+const getItems     = ()  => tryParse(ITEMS_KEY,     DEFAULT_ITEMS.map(i=>({...i})));
+const getFeatured  = ()  => tryParse(FEATURED_KEY,  DEFAULT_FEATURED.map(i=>({...i})));
+const getOrders    = ()  => tryParse(ORDERS_KEY,    []);
+const getCustomers = ()  => tryParse(CUSTOMERS_KEY, []);
+const getGallery   = ()  => tryParse(GALLERY_KEY,   []);
+const saveItems    = a   => localStorage.setItem(ITEMS_KEY,    JSON.stringify(a));
+const saveFeatured = a   => localStorage.setItem(FEATURED_KEY, JSON.stringify(a));
+const saveOrders   = a   => localStorage.setItem(ORDERS_KEY,   JSON.stringify(a));
+const saveCustomers= a   => localStorage.setItem(CUSTOMERS_KEY,JSON.stringify(a));
+const saveGallery  = a   => localStorage.setItem(GALLERY_KEY,  JSON.stringify(a));
+const uid          = ()  => Date.now().toString(36) + Math.random().toString(36).slice(2,6);
+
+function tryParse(key, fallback) {
+    try { const d = localStorage.getItem(key); return d ? JSON.parse(d) : fallback; }
+    catch(e) { return fallback; }
+}
 
 // ============================================================
 // AUTH
 // ============================================================
-function checkAuth() {
-    if (sessionStorage.getItem(AUTH_KEY) === '1') showAdmin();
-}
+function checkAuth() { if (sessionStorage.getItem(AUTH_KEY) === '1') showAdmin(); }
 
 document.getElementById('loginForm').addEventListener('submit', e => {
     e.preventDefault();
@@ -355,24 +436,17 @@ document.getElementById('loginForm').addEventListener('submit', e => {
         document.getElementById('loginErr').style.display = 'none';
         showAdmin();
     } else {
-        const err = document.getElementById('loginErr');
-        err.style.display = 'block';
+        document.getElementById('loginErr').style.display = 'block';
         document.getElementById('loginPass').value = '';
     }
 });
 
 function showAdmin() {
     document.getElementById('loginScreen').style.display = 'none';
-    const shell = document.getElementById('adminShell');
-    shell.classList.add('visible');
-    renderMenuList();
-    renderFeaturedList();
+    document.getElementById('adminShell').classList.add('visible');
+    renderOrderList(); renderCustomerList(); renderMenuList(); renderFeaturedList(); renderGalleryAdmin();
 }
-
-function logout() {
-    sessionStorage.removeItem(AUTH_KEY);
-    location.reload();
-}
+function logout() { sessionStorage.removeItem(AUTH_KEY); location.reload(); }
 
 // ============================================================
 // TABS
@@ -385,27 +459,282 @@ function switchTab(name, btn) {
 }
 
 // ============================================================
+// ORDERS — RENDER
+// ============================================================
+function renderOrderList() {
+    const orders = getOrders().slice().reverse();
+    const newCnt  = orders.filter(o => o.status === 'new').length;
+    const revenue = orders.filter(o => o.status === 'complete').reduce((s,o) => s + Number(o.total), 0);
+
+    document.getElementById('orderStats').innerHTML = `
+        <div class="stat-pill"><div class="stat-num">${orders.length}</div><div class="stat-label">Total Orders</div></div>
+        <div class="stat-pill"><div class="stat-num" style="color:#1565c0">${newCnt}</div><div class="stat-label">New</div></div>
+        <div class="stat-pill"><div class="stat-num">$${revenue.toFixed(2)}</div><div class="stat-label">Completed Revenue</div></div>
+    `;
+
+    const el = document.getElementById('orderList');
+    if (!orders.length) { el.innerHTML = '<div class="empty-state"><span>🧺</span>No orders yet — they\'ll appear here when customers check out.</div>'; return; }
+
+    el.innerHTML = orders.map(o => `
+        <div class="card expandable" id="ord-${o.id}" onclick="toggleOrder('${o.id}')">
+            <div class="card-header">
+                <div class="card-info">
+                    <div class="card-name">${esc(o.name)} <span class="status status-${o.status}">${o.status}</span></div>
+                    <div class="card-meta">
+                        <span class="card-price">$${Number(o.total).toFixed(2)}</span>
+                        <span class="card-category">${fmtDate(o.date)}</span>
+                        ${o.items ? `<span class="card-category">${o.items.length} item${o.items.length!==1?'s':''}</span>` : ''}
+                    </div>
+                </div>
+                <span class="expand-chevron">▼</span>
+            </div>
+            <div class="order-body" id="ob-${o.id}">
+                ${o.items && o.items.length ? `
+                <div class="order-items-list">
+                    ${o.items.map(i=>`<div class="order-item-row"><span>${i.emoji||''} ${esc(i.name)} ×${i.qty}</span><span>$${(i.price*i.qty).toFixed(2)}</span></div>`).join('')}
+                    <div class="order-total-row"><span>Total</span><span>$${Number(o.total).toFixed(2)}</span></div>
+                </div>` : ''}
+                <div class="order-contact">
+                    <div><label>Name</label><span>${esc(o.name)}</span></div>
+                    <div><label>Phone</label><span>${o.phone ? `<a href="tel:${esc(o.phone)}" style="color:var(--copper);text-decoration:none;">${esc(o.phone)}</a>` : '—'}</span></div>
+                    <div><label>Email</label><span>${o.email ? `<a href="mailto:${esc(o.email)}" style="color:var(--copper);text-decoration:none;">${esc(o.email)}</a>` : '—'}</span></div>
+                    <div><label>Date</label><span>${fmtDate(o.date)}</span></div>
+                    ${o.notes ? `<div style="grid-column:1/-1"><label>Customer Note</label><span>${esc(o.notes)}</span></div>` : ''}
+                </div>
+                <div class="form-group">
+                    <label>Internal Notes</label>
+                    <textarea rows="2" placeholder="Notes for yourself…" onblur="saveOrderNotes('${o.id}',this.value)">${esc(o.adminNotes||'')}</textarea>
+                </div>
+                <div class="order-actions">
+                    ${o.status !== 'complete' && o.status !== 'cancelled' ? `
+                        <button class="btn-sm btn-${STATUS_FLOW[STATUS_FLOW.indexOf(o.status)+1]||'complete'}" onclick="advanceOrder('${o.id}',event)">${STATUS_NEXT_LABEL[o.status]||''}</button>
+                    ` : ''}
+                    ${o.status !== 'cancelled' && o.status !== 'complete' ? `<button class="btn-sm btn-cancel-order" onclick="cancelOrder('${o.id}',event)">Cancel</button>` : ''}
+                    <button class="btn-sm" style="background:#f5f5f5;color:#666;" onclick="deleteOrder('${o.id}',event)">Delete</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function toggleOrder(id) {
+    const card = document.getElementById('ord-' + id);
+    const body = document.getElementById('ob-'  + id);
+    card.classList.toggle('open');
+    body.classList.toggle('open');
+}
+
+function saveOrderNotes(id, val) {
+    const orders = getOrders();
+    const o = orders.find(x => x.id === id);
+    if (o) { o.adminNotes = val; saveOrders(orders); }
+}
+
+function advanceOrder(id, e) {
+    e.stopPropagation();
+    const orders = getOrders();
+    const o = orders.find(x => x.id === id);
+    if (!o) return;
+    const idx = STATUS_FLOW.indexOf(o.status);
+    if (idx < STATUS_FLOW.length - 1) o.status = STATUS_FLOW[idx + 1];
+    saveOrders(orders);
+    renderOrderList();
+    // Re-open the card
+    setTimeout(() => { toggleOrder(id); }, 50);
+}
+
+function cancelOrder(id, e) {
+    e.stopPropagation();
+    const orders = getOrders();
+    const o = orders.find(x => x.id === id);
+    if (!o) return;
+    o.status = 'cancelled';
+    saveOrders(orders);
+    renderOrderList();
+}
+
+function deleteOrder(id, e) {
+    e.stopPropagation();
+    if (!confirm('Delete this order permanently?')) return;
+    saveOrders(getOrders().filter(o => o.id !== id));
+    renderOrderList();
+    toast('Order deleted.');
+}
+
+// ── Manual order form ──
+let editOrderId = null;
+function openOrderForm(id) {
+    editOrderId = id || null;
+    const orders = getOrders();
+    const o = id ? orders.find(x => x.id === id) : null;
+    document.getElementById('orderFormContainer').innerHTML = `
+        <div class="form-card">
+            <div class="form-title">${o ? 'Edit Order' : 'New Order'}</div>
+            <div class="form-grid">
+                <div class="form-group"><label>Customer Name *</label><input type="text" id="ofName" value="${o?esc(o.name):''}" placeholder="Full name"></div>
+                <div class="form-group"><label>Phone</label><input type="tel" id="ofPhone" value="${o?esc(o.phone||''):''}" placeholder="Phone number"></div>
+                <div class="form-group"><label>Email</label><input type="email" id="ofEmail" value="${o?esc(o.email||''):''}" placeholder="Email address"></div>
+                <div class="form-group"><label>Total ($)</label><input type="number" id="ofTotal" value="${o?o.total:''}" placeholder="0.00" step="0.01" min="0"></div>
+            </div>
+            <div class="form-group full" style="margin-top:0.75rem;">
+                <label>Order Details / Items</label>
+                <textarea id="ofNotes" rows="3" placeholder="e.g. 2× Cinnamon Rolls, 1× Chocolate Fudge">${o?esc(o.notes||''):''}</textarea>
+            </div>
+            <div class="form-actions">
+                <button class="btn-save" onclick="saveManualOrder()">Save</button>
+                <button class="btn-cancel" onclick="closeOrderForm()">Cancel</button>
+            </div>
+        </div>
+    `;
+}
+function closeOrderForm() { document.getElementById('orderFormContainer').innerHTML = ''; editOrderId = null; }
+function saveManualOrder() {
+    const name  = document.getElementById('ofName').value.trim();
+    const phone = document.getElementById('ofPhone').value.trim();
+    const email = document.getElementById('ofEmail').value.trim();
+    const total = parseFloat(document.getElementById('ofTotal').value) || 0;
+    const notes = document.getElementById('ofNotes').value.trim();
+    if (!name) { toast('Please enter a customer name.'); return; }
+    const orders = getOrders();
+    if (editOrderId) {
+        const o = orders.find(x => x.id === editOrderId);
+        if (o) Object.assign(o, { name, phone, email, total, notes });
+    } else {
+        orders.push({ id:uid(), name, phone, email, total, notes, items:[], adminNotes:'', status:'new', date:new Date().toISOString() });
+        upsertCustomer({ name, phone, email });
+    }
+    saveOrders(orders);
+    closeOrderForm();
+    renderOrderList();
+    renderCustomerList();
+    toast(editOrderId ? 'Order updated!' : 'Order added!');
+    editOrderId = null;
+}
+
+// ============================================================
+// CUSTOMERS — RENDER
+// ============================================================
+function renderCustomerList() {
+    const q   = (document.getElementById('custSearch')?.value || '').toLowerCase();
+    const all = getCustomers().slice().sort((a,b) => (b.lastOrder||'').localeCompare(a.lastOrder||''));
+    const filtered = q ? all.filter(c =>
+        c.name.toLowerCase().includes(q) ||
+        (c.phone||'').includes(q) ||
+        (c.email||'').toLowerCase().includes(q)
+    ) : all;
+
+    const el = document.getElementById('customerList');
+    if (!filtered.length) {
+        el.innerHTML = `<div class="empty-state"><span>👤</span>${q ? 'No matches found.' : 'No customers yet — they\'ll be added automatically when orders come in.'}</div>`;
+        return;
+    }
+    el.innerHTML = filtered.map(c => `
+        <div class="card">
+            <div class="card-header">
+                <div class="card-info">
+                    <div class="card-name">${esc(c.name)}</div>
+                    <div class="customer-card-detail" style="margin-top:0.4rem;">
+                        <div><label>Phone</label><span>${c.phone ? `<a href="tel:${esc(c.phone)}" style="color:var(--copper);text-decoration:none;">${esc(c.phone)}</a>` : '—'}</span></div>
+                        <div><label>Email</label><span>${c.email ? `<a href="mailto:${esc(c.email)}" style="color:var(--copper);text-decoration:none;">${esc(c.email)}</a>` : '—'}</span></div>
+                        <div><label>Orders</label><span>${c.orderCount||0}</span></div>
+                        <div><label>Last Order</label><span>${c.lastOrder ? fmtDate(c.lastOrder) : '—'}</span></div>
+                    </div>
+                    <div class="form-group" style="margin-top:0.65rem;">
+                        <label>Notes</label>
+                        <textarea rows="2" placeholder="Anything to remember about this customer…" onblur="saveCustomerNotes('${c.id}',this.value)">${esc(c.notes||'')}</textarea>
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <button class="btn-delete" onclick="deleteCustomer('${c.id}')">Delete</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function saveCustomerNotes(id, val) {
+    const all = getCustomers();
+    const c = all.find(x => x.id === id);
+    if (c) { c.notes = val; saveCustomers(all); }
+}
+
+function deleteCustomer(id) {
+    if (!confirm('Delete this customer?')) return;
+    saveCustomers(getCustomers().filter(c => c.id !== id));
+    renderCustomerList();
+    toast('Customer deleted.');
+}
+
+let editCustId = null;
+function openCustomerForm(id) {
+    editCustId = id || null;
+    const c = id ? getCustomers().find(x => x.id === id) : null;
+    document.getElementById('customerFormContainer').innerHTML = `
+        <div class="form-card">
+            <div class="form-title">${c ? 'Edit Customer' : 'New Customer'}</div>
+            <div class="form-grid">
+                <div class="form-group"><label>Name *</label><input type="text" id="cfName" value="${c?esc(c.name):''}" placeholder="Full name"></div>
+                <div class="form-group"><label>Phone</label><input type="tel" id="cfPhone" value="${c?esc(c.phone||''):''}" placeholder="Phone number"></div>
+                <div class="form-group full"><label>Email</label><input type="email" id="cfEmail" value="${c?esc(c.email||''):''}" placeholder="Email address"></div>
+            </div>
+            <div class="form-actions">
+                <button class="btn-save" onclick="saveCustomer()">Save</button>
+                <button class="btn-cancel" onclick="closeCustomerForm()">Cancel</button>
+            </div>
+        </div>
+    `;
+}
+function closeCustomerForm() { document.getElementById('customerFormContainer').innerHTML = ''; editCustId = null; }
+function saveCustomer() {
+    const name  = document.getElementById('cfName').value.trim();
+    const phone = document.getElementById('cfPhone').value.trim();
+    const email = document.getElementById('cfEmail').value.trim();
+    if (!name) { toast('Please enter a name.'); return; }
+    const all = getCustomers();
+    if (editCustId) {
+        const c = all.find(x => x.id === editCustId);
+        if (c) Object.assign(c, { name, phone, email });
+    } else {
+        all.push({ id:uid(), name, phone, email, notes:'', orderCount:0, totalSpent:0, lastOrder:'' });
+    }
+    saveCustomers(all);
+    closeCustomerForm();
+    renderCustomerList();
+    toast(editCustId ? 'Customer updated!' : 'Customer added!');
+    editCustId = null;
+}
+
+function upsertCustomer({ name, phone, email }) {
+    const all = getCustomers();
+    const key = phone || email;
+    let c = key ? all.find(x => (x.phone && x.phone === phone) || (x.email && x.email === email)) : null;
+    if (c) {
+        c.orderCount = (c.orderCount || 0) + 1;
+        c.lastOrder  = new Date().toISOString();
+        if (phone && !c.phone) c.phone = phone;
+        if (email && !c.email) c.email = email;
+    } else {
+        all.push({ id:uid(), name, phone:phone||'', email:email||'', notes:'', orderCount:1, totalSpent:0, lastOrder:new Date().toISOString() });
+    }
+    saveCustomers(all);
+}
+
+// ============================================================
 // MENU ITEMS — RENDER
 // ============================================================
 function renderMenuList() {
     const items = getItems();
     const container = document.getElementById('menuList');
-    if (!items.length) {
-        container.innerHTML = '<div class="empty-state"><span>🧁</span>No items yet — add your first baked good!</div>';
-        return;
-    }
+    if (!items.length) { container.innerHTML = '<div class="empty-state"><span>🧁</span>No items yet.</div>'; return; }
     const byCategory = {};
-    items.forEach(item => {
-        if (!byCategory[item.category]) byCategory[item.category] = [];
-        byCategory[item.category].push(item);
-    });
+    items.forEach(item => { if (!byCategory[item.category]) byCategory[item.category]=[]; byCategory[item.category].push(item); });
     container.innerHTML = Object.entries(byCategory).map(([cat, catItems]) => `
         <div class="cat-group">
             <div class="cat-label">${cat}</div>
             ${catItems.map(item => `
-                <div class="card" id="item-${item.id}">
+                <div class="card">
                     <div class="card-header">
-                        <span class="card-emoji">${item.emoji || '🍰'}</span>
+                        <span class="card-emoji">${item.emoji||'🍰'}</span>
                         <div class="card-info">
                             <div class="card-name">${esc(item.name)}</div>
                             ${item.desc ? `<div class="card-desc">${esc(item.desc)}</div>` : ''}
@@ -425,46 +754,27 @@ function renderMenuList() {
     `).join('');
 }
 
-// ============================================================
-// MENU ITEMS — FORM
-// ============================================================
 let editingItemId = null;
-
 function openItemForm(id) {
     editingItemId = id || null;
     const items = getItems();
-    const item = id ? items.find(i => i.id === id) : null;
-    const catOptions = CATEGORIES.map(c => `<option value="${c}" ${item && item.category === c ? 'selected' : ''}>${c}</option>`).join('');
+    const item  = id ? items.find(i => i.id === id) : null;
+    const catOpts = CATEGORIES.map(c => `<option value="${c}" ${item&&item.category===c?'selected':''}>${c}</option>`).join('');
     document.getElementById('itemFormContainer').innerHTML = `
         <div class="form-card" id="itemForm">
             <div class="form-title">${item ? 'Edit Item' : 'New Baked Good'}</div>
             <div class="form-grid three">
-                <div class="form-group">
-                    <label>Item Name *</label>
-                    <input type="text" id="fName" placeholder="e.g. Apple Pie" value="${item ? esc(item.name) : ''}">
-                </div>
-                <div class="form-group">
-                    <label>Price *</label>
-                    <input type="number" id="fPrice" placeholder="0.00" step="0.01" min="0" value="${item ? item.price : ''}">
-                </div>
-                <div class="form-group">
-                    <label>Emoji</label>
-                    <input type="text" id="fEmoji" placeholder="🍰" value="${item ? (item.emoji||'') : ''}" maxlength="4">
-                </div>
+                <div class="form-group"><label>Item Name *</label><input type="text" id="fName" placeholder="e.g. Apple Pie" value="${item?esc(item.name):''}"></div>
+                <div class="form-group"><label>Price *</label><input type="number" id="fPrice" placeholder="0.00" step="0.01" min="0" value="${item?item.price:''}"></div>
+                <div class="form-group"><label>Emoji</label><input type="text" id="fEmoji" placeholder="🍰" value="${item?(item.emoji||''):''}" maxlength="4"></div>
             </div>
             <div class="form-grid" style="margin-top:0.75rem;">
-                <div class="form-group">
-                    <label>Category</label>
-                    <select id="fCategory">${catOptions}</select>
-                </div>
-                <div class="form-group">
-                    <label>Custom Category</label>
-                    <input type="text" id="fCategoryCustom" placeholder="Or type a new one">
-                </div>
+                <div class="form-group"><label>Category</label><select id="fCategory">${catOpts}</select></div>
+                <div class="form-group"><label>Custom Category</label><input type="text" id="fCategoryCustom" placeholder="Or type a new one"></div>
             </div>
             <div class="form-group full" style="margin-top:0.75rem;">
                 <label>Description</label>
-                <textarea id="fDesc" placeholder="A short, tasty description...">${item ? esc(item.desc||'') : ''}</textarea>
+                <textarea id="fDesc" placeholder="A short, tasty description...">${item?esc(item.desc||''):''}</textarea>
             </div>
             <div class="form-actions">
                 <button class="btn-save" onclick="saveItem()">Save</button>
@@ -474,29 +784,22 @@ function openItemForm(id) {
     `;
     document.getElementById('itemForm').scrollIntoView({ behavior:'smooth', block:'nearest' });
 }
-
-function closeItemForm() {
-    document.getElementById('itemFormContainer').innerHTML = '';
-    editingItemId = null;
-}
-
+function closeItemForm() { document.getElementById('itemFormContainer').innerHTML = ''; editingItemId = null; }
 function saveItem() {
-    const name  = document.getElementById('fName').value.trim();
-    const price = parseFloat(document.getElementById('fPrice').value);
-    const emoji = document.getElementById('fEmoji').value.trim() || '🍰';
-    const customCat = document.getElementById('fCategoryCustom').value.trim();
-    const category  = customCat || document.getElementById('fCategory').value;
-    const desc  = document.getElementById('fDesc').value.trim();
-
+    const name     = document.getElementById('fName').value.trim();
+    const price    = parseFloat(document.getElementById('fPrice').value);
+    const emoji    = document.getElementById('fEmoji').value.trim() || '🍰';
+    const custom   = document.getElementById('fCategoryCustom').value.trim();
+    const category = custom || document.getElementById('fCategory').value;
+    const desc     = document.getElementById('fDesc').value.trim();
     if (!name) { toast('Please enter an item name.'); return; }
     if (isNaN(price) || price < 0) { toast('Please enter a valid price.'); return; }
-
     const items = getItems();
     if (editingItemId) {
         const idx = items.findIndex(i => i.id === editingItemId);
         if (idx > -1) items[idx] = { ...items[idx], name, price, emoji, category, desc };
     } else {
-        items.push({ id: uid(), name, price, emoji, category, desc });
+        items.push({ id:uid(), name, price, emoji, category, desc });
     }
     saveItems(items);
     closeItemForm();
@@ -504,11 +807,9 @@ function saveItem() {
     toast(editingItemId ? 'Item updated!' : 'Item added!');
     editingItemId = null;
 }
-
 function deleteItem(id) {
     if (!confirm('Delete this item?')) return;
-    const items = getItems().filter(i => i.id !== id);
-    saveItems(items);
+    saveItems(getItems().filter(i => i.id !== id));
     renderMenuList();
     toast('Item deleted.');
 }
@@ -519,18 +820,15 @@ function deleteItem(id) {
 function renderFeaturedList() {
     const featured = getFeatured();
     const container = document.getElementById('featuredList');
-    if (!featured.length) {
-        container.innerHTML = '<div class="empty-state"><span>⭐</span>No featured items yet — add something to spotlight on your homepage!</div>';
-        return;
-    }
+    if (!featured.length) { container.innerHTML = '<div class="empty-state"><span>⭐</span>No featured items yet.</div>'; return; }
     container.innerHTML = featured.map((item, i) => `
         <div class="card">
             <div class="card-header">
-                <span class="card-emoji">${item.emoji || '🍰'}</span>
+                <span class="card-emoji">${item.emoji||'🍰'}</span>
                 <div class="card-info">
                     <div class="card-name">
                         ${esc(item.name)}
-                        ${item.badge ? `<span class="badge-preview">${esc(item.badge)}</span>` : '<span class="badge-none">no badge</span>'}
+                        ${item.badge ? `<span class="card-badge-red">${esc(item.badge)}</span>` : ''}
                     </div>
                     ${item.desc ? `<div class="card-desc">${esc(item.desc)}</div>` : ''}
                     <div class="card-meta">
@@ -547,75 +845,51 @@ function renderFeaturedList() {
     `).join('');
 }
 
-// ============================================================
-// FEATURED — FORM
-// ============================================================
 let editingFeaturedId = null;
-
 function openFeaturedForm(id) {
     const featured = getFeatured();
-    if (!id && featured.length >= 6) {
-        toast('You already have 6 featured items — remove one first.');
-        return;
-    }
+    if (!id && featured.length >= 6) { toast('You already have 6 featured items — remove one first.'); return; }
     editingFeaturedId = id || null;
     const item = id ? featured.find(f => f.id === id) : null;
-
     document.getElementById('featuredFormContainer').innerHTML = `
         <div class="form-card" id="featuredForm">
             <div class="form-title">${item ? 'Edit Featured Item' : 'New Featured Item'}</div>
             <div class="form-grid three">
-                <div class="form-group">
-                    <label>Item Name *</label>
-                    <input type="text" id="ffName" placeholder="e.g. Apple Pie" value="${item ? esc(item.name) : ''}">
-                </div>
-                <div class="form-group">
-                    <label>Price *</label>
-                    <input type="number" id="ffPrice" placeholder="0.00" step="0.01" min="0" value="${item ? item.price : ''}">
-                </div>
-                <div class="form-group">
-                    <label>Emoji</label>
-                    <input type="text" id="ffEmoji" placeholder="🍰" value="${item ? (item.emoji||'') : ''}" maxlength="4">
-                </div>
+                <div class="form-group"><label>Item Name *</label><input type="text" id="ffName" placeholder="e.g. Apple Pie" value="${item?esc(item.name):''}"></div>
+                <div class="form-group"><label>Price *</label><input type="number" id="ffPrice" placeholder="0.00" step="0.01" min="0" value="${item?item.price:''}"></div>
+                <div class="form-group"><label>Emoji</label><input type="text" id="ffEmoji" placeholder="🍰" value="${item?(item.emoji||''):''}" maxlength="4"></div>
             </div>
             <div class="form-group full" style="margin-top:0.75rem;">
                 <label>Description</label>
-                <textarea id="ffDesc" placeholder="A short, tasty description...">${item ? esc(item.desc||'') : ''}</textarea>
+                <textarea id="ffDesc" placeholder="A short, tasty description...">${item?esc(item.desc||''):''}</textarea>
             </div>
             <div class="form-group" style="margin-top:0.75rem;">
                 <label>Badge Label <span style="font-weight:400;color:var(--text-light)">(optional — e.g. Sale!, Limited!, This Week, Seasonal)</span></label>
-                <input type="text" id="ffBadge" placeholder="Leave blank for no badge" value="${item ? esc(item.badge||'') : ''}" maxlength="24">
+                <input type="text" id="ffBadge" placeholder="Leave blank for no badge" value="${item?esc(item.badge||''):''}" maxlength="24">
             </div>
             <div class="form-actions">
-                <button class="btn-save" onclick="saveFeatured()">Save</button>
+                <button class="btn-save" onclick="saveFeaturedItem()">Save</button>
                 <button class="btn-cancel" onclick="closeFeaturedForm()">Cancel</button>
             </div>
         </div>
     `;
     document.getElementById('featuredForm').scrollIntoView({ behavior:'smooth', block:'nearest' });
 }
-
-function closeFeaturedForm() {
-    document.getElementById('featuredFormContainer').innerHTML = '';
-    editingFeaturedId = null;
-}
-
-function saveFeatured() {
+function closeFeaturedForm() { document.getElementById('featuredFormContainer').innerHTML = ''; editingFeaturedId = null; }
+function saveFeaturedItem() {
     const name  = document.getElementById('ffName').value.trim();
     const price = parseFloat(document.getElementById('ffPrice').value);
     const emoji = document.getElementById('ffEmoji').value.trim() || '🍰';
     const desc  = document.getElementById('ffDesc').value.trim();
     const badge = document.getElementById('ffBadge').value.trim();
-
     if (!name) { toast('Please enter an item name.'); return; }
     if (isNaN(price) || price < 0) { toast('Please enter a valid price.'); return; }
-
     const featured = getFeatured();
     if (editingFeaturedId) {
         const idx = featured.findIndex(f => f.id === editingFeaturedId);
         if (idx > -1) featured[idx] = { ...featured[idx], name, price, emoji, desc, badge };
     } else {
-        featured.push({ id: uid(), name, price, emoji, desc, badge });
+        featured.push({ id:uid(), name, price, emoji, desc, badge });
     }
     saveFeatured(featured);
     closeFeaturedForm();
@@ -623,13 +897,89 @@ function saveFeatured() {
     toast(editingFeaturedId ? 'Featured item updated!' : 'Featured item added!');
     editingFeaturedId = null;
 }
-
 function deleteFeatured(id) {
     if (!confirm('Remove this featured item?')) return;
-    const featured = getFeatured().filter(f => f.id !== id);
-    saveFeatured(featured);
+    saveFeatured(getFeatured().filter(f => f.id !== id));
     renderFeaturedList();
     toast('Removed from featured.');
+}
+
+// ============================================================
+// GALLERY — RENDER
+// ============================================================
+function renderGalleryAdmin() {
+    const photos = getGallery();
+    const el = document.getElementById('galleryAdminGrid');
+    if (!photos.length) { el.innerHTML = '<div class="empty-state"><span>📷</span>No photos yet — add your first one above!</div>'; return; }
+    el.innerHTML = `<div class="gallery-admin-grid">${photos.map(p => `
+        <div class="gallery-admin-card">
+            ${p.url
+                ? `<img class="gallery-thumb" src="${esc(p.url)}" alt="${esc(p.caption||'')}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+                : ''}
+            <div class="gallery-thumb-placeholder" ${p.url?'style="display:none"':''}>${p.emoji||'📷'}</div>
+            <div class="gallery-card-info">
+                <div class="gallery-card-caption">${esc(p.caption||'No caption')}</div>
+                <div class="gallery-card-cat">${esc(p.category||'')}</div>
+                <div class="gallery-card-actions">
+                    <button class="btn-delete" onclick="deleteGalleryPhoto('${p.id}')">Remove</button>
+                </div>
+            </div>
+        </div>
+    `).join('')}</div>`;
+}
+
+let editGalleryId = null;
+function openGalleryForm(id) {
+    editGalleryId = id || null;
+    const p = id ? getGallery().find(x => x.id === id) : null;
+    const catOpts = GAL_CATS.map(c => `<option value="${c}" ${p&&p.category===c?'selected':''}>${c}</option>`).join('');
+    document.getElementById('galleryFormContainer').innerHTML = `
+        <div class="form-card" id="galleryForm">
+            <div class="form-title">${p ? 'Edit Photo' : 'Add Photo'}</div>
+            <div class="form-group full">
+                <label>Image URL *</label>
+                <input type="url" id="gfUrl" placeholder="https://… or photos/gallery/filename.jpg" value="${p?esc(p.url||''):''}">
+            </div>
+            <div class="form-grid" style="margin-top:0.75rem;">
+                <div class="form-group"><label>Caption</label><input type="text" id="gfCaption" placeholder="e.g. Fresh cinnamon rolls" value="${p?esc(p.caption||''):''}"></div>
+                <div class="form-group"><label>Category</label><select id="gfCategory">${catOpts}</select></div>
+            </div>
+            <div class="form-group" style="margin-top:0.75rem;">
+                <label><input type="checkbox" id="gfTall" ${p&&p.tall?'checked':''} style="margin-right:0.4rem;"> Tall card (portrait format)</label>
+            </div>
+            <div class="form-actions">
+                <button class="btn-save" onclick="saveGalleryPhoto()">Save</button>
+                <button class="btn-cancel" onclick="closeGalleryForm()">Cancel</button>
+            </div>
+        </div>
+    `;
+    document.getElementById('galleryForm').scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+function closeGalleryForm() { document.getElementById('galleryFormContainer').innerHTML = ''; editGalleryId = null; }
+function saveGalleryPhoto() {
+    const url     = document.getElementById('gfUrl').value.trim();
+    const caption = document.getElementById('gfCaption').value.trim();
+    const category= document.getElementById('gfCategory').value;
+    const tall    = document.getElementById('gfTall').checked;
+    if (!url) { toast('Please enter an image URL.'); return; }
+    const gallery = getGallery();
+    if (editGalleryId) {
+        const idx = gallery.findIndex(x => x.id === editGalleryId);
+        if (idx > -1) gallery[idx] = { ...gallery[idx], url, caption, category, tall };
+    } else {
+        gallery.push({ id:uid(), url, caption, category, tall });
+    }
+    saveGallery(gallery);
+    closeGalleryForm();
+    renderGalleryAdmin();
+    toast(editGalleryId ? 'Photo updated!' : 'Photo added!');
+    editGalleryId = null;
+}
+function deleteGalleryPhoto(id) {
+    if (!confirm('Remove this photo?')) return;
+    saveGallery(getGallery().filter(x => x.id !== id));
+    renderGalleryAdmin();
+    toast('Photo removed.');
 }
 
 // ============================================================
@@ -641,11 +991,9 @@ function changePassword() {
     const confirm = document.getElementById('settingsConfirm').value;
     const err     = document.getElementById('settingsErr');
     err.style.display = 'none';
-
-    if (cur !== getPass())       { err.textContent = 'Current password is incorrect.'; err.style.display='block'; return; }
-    if (next.length < 4)         { err.textContent = 'New password must be at least 4 characters.'; err.style.display='block'; return; }
-    if (next !== confirm)        { err.textContent = 'New passwords do not match.'; err.style.display='block'; return; }
-
+    if (cur !== getPass())  { err.textContent='Current password is incorrect.'; err.style.display='block'; return; }
+    if (next.length < 4)    { err.textContent='New password must be at least 4 characters.'; err.style.display='block'; return; }
+    if (next !== confirm)   { err.textContent='New passwords do not match.'; err.style.display='block'; return; }
     localStorage.setItem(PASS_KEY, next);
     document.getElementById('settingsCurrent').value = '';
     document.getElementById('settingsNew').value = '';
@@ -654,11 +1002,10 @@ function changePassword() {
 }
 
 // ============================================================
-// UTILITIES
+// UTILS
 // ============================================================
-function esc(s) {
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function fmtDate(iso) { try { return new Date(iso).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); } catch(e){ return iso||''; } }
 
 let toastTimer;
 function toast(msg) {

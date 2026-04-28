@@ -846,6 +846,70 @@
         }
 
         /* ============================
+           ORDER FORM MODAL
+        ============================ */
+        .order-modal-overlay {
+            position: fixed; inset: 0;
+            background: rgba(50, 28, 8, 0.55);
+            backdrop-filter: blur(6px);
+            z-index: 3000;
+            display: flex; align-items: center; justify-content: center;
+            padding: 1.5rem;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .order-modal-overlay.open { opacity: 1; pointer-events: all; }
+        .order-modal {
+            background: var(--warm-white);
+            border-radius: 22px;
+            padding: 2rem;
+            width: 100%; max-width: 440px;
+            box-shadow: 0 20px 60px rgba(50, 20, 5, 0.3);
+            border: 1px solid rgba(184, 115, 51, 0.25);
+            transform: translateY(20px);
+            transition: transform 0.35s cubic-bezier(.25,.46,.45,.94);
+        }
+        .order-modal-overlay.open .order-modal { transform: translateY(0); }
+        .order-modal h3 {
+            font-family: 'Lora', serif; font-size: 1.25rem; color: var(--dark-brown);
+            margin-bottom: 0.3rem;
+        }
+        .order-modal p.sub {
+            font-size: 0.8rem; color: var(--text-light); font-style: italic; margin-bottom: 1.4rem;
+        }
+        .om-group { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.75rem; }
+        .om-group label { font-size: 0.77rem; font-weight: 600; color: var(--text-medium); }
+        .om-group input, .om-group textarea {
+            border: 1.5px solid rgba(184,115,51,0.28); border-radius: 12px; padding: 0.7rem 0.95rem;
+            font-family: 'Nunito', sans-serif; font-size: 0.92rem; color: var(--text-dark);
+            background: #fff; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .om-group input:focus, .om-group textarea:focus {
+            border-color: var(--copper); box-shadow: 0 0 0 3px rgba(184,115,51,0.2);
+        }
+        .om-group textarea { resize: none; min-height: 64px; }
+        .om-actions { display: flex; gap: 0.65rem; margin-top: 1.2rem; }
+        .om-submit {
+            flex: 1; background: var(--grad-copper-btn); color: #fff8ee; border: none;
+            padding: 0.9rem; border-radius: 50px; font-weight: 700; font-size: 0.92rem;
+            font-family: 'Nunito', sans-serif; cursor: pointer; letter-spacing: 0.04em;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        .om-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+        .om-back {
+            background: none; border: 1.5px solid rgba(184,115,51,0.3); color: var(--text-medium);
+            padding: 0.9rem 1.3rem; border-radius: 50px; font-size: 0.88rem; font-weight: 600;
+            cursor: pointer; font-family: 'Nunito', sans-serif; transition: all 0.2s;
+        }
+        .om-back:hover { border-color: var(--copper); }
+        .om-confirm {
+            text-align: center; padding: 1rem 0;
+        }
+        .om-confirm .big-emoji { font-size: 2.8rem; display: block; margin-bottom: 0.7rem; }
+        .om-confirm h3 { margin-bottom: 0.5rem; }
+        .om-confirm p { font-size: 0.88rem; color: var(--text-medium); line-height: 1.7; }
+
+        /* ============================
            FADE-IN SCROLL ANIMATIONS
         ============================ */
         .fade-in {
@@ -1368,6 +1432,45 @@
         </div>
     </div>
 
+    <!-- ORDER FORM MODAL -->
+    <div class="order-modal-overlay" id="orderModal">
+        <div class="order-modal">
+            <div id="orderFormView">
+                <h3>Almost there! 🧡</h3>
+                <p class="sub">Just need a little info so we can reach you about your order.</p>
+                <div class="om-group">
+                    <label>Your Name *</label>
+                    <input type="text" id="omName" placeholder="First and last name">
+                </div>
+                <div class="om-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" id="omPhone" placeholder="Best number to reach you">
+                </div>
+                <div class="om-group">
+                    <label>Email <span style="font-weight:400;opacity:0.65">(optional)</span></label>
+                    <input type="email" id="omEmail" placeholder="your@email.com">
+                </div>
+                <div class="om-group">
+                    <label>Notes <span style="font-weight:400;opacity:0.65">(allergies, special requests, delivery notes)</span></label>
+                    <textarea id="omNotes" placeholder="Anything we should know?"></textarea>
+                </div>
+                <div id="omErr" style="color:#c0392b;font-size:0.82rem;margin-bottom:0.5rem;display:none;"></div>
+                <div class="om-actions">
+                    <button class="om-back" onclick="closeOrderModal()">← Back</button>
+                    <button class="om-submit" onclick="submitOrder()">Place My Order</button>
+                </div>
+            </div>
+            <div id="orderConfirmView" class="om-confirm" style="display:none;">
+                <span class="big-emoji">🎉</span>
+                <h3>Order Received!</h3>
+                <p>Thank you so much! We'll reach out shortly to confirm your order and arrange pickup or delivery in the Tri-Cities, TN area.<br><br>— The Copper Whisk 🧡</p>
+                <div class="om-actions" style="justify-content:center;margin-top:1.5rem;">
+                    <button class="om-submit" style="flex:none;padding:0.9rem 2rem;" onclick="closeOrderModal()">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ============================
         // MENU DATA (fallback defaults)
@@ -1480,10 +1583,65 @@
         }
 
         function handleCheckout() {
-            alert('Thank you so much! 🧡\n\nYour order has been received. We\'ll reach out shortly to confirm everything and arrange pickup or delivery in the Tri-Cities, TN area.\n\n— The Copper Whisk');
+            document.getElementById('omName').value = '';
+            document.getElementById('omPhone').value = '';
+            document.getElementById('omEmail').value = '';
+            document.getElementById('omNotes').value = '';
+            document.getElementById('omErr').style.display = 'none';
+            document.getElementById('orderFormView').style.display = 'block';
+            document.getElementById('orderConfirmView').style.display = 'none';
+            document.getElementById('orderModal').classList.add('open');
+        }
+
+        function closeOrderModal() {
+            document.getElementById('orderModal').classList.remove('open');
+        }
+
+        function submitOrder() {
+            const name  = document.getElementById('omName').value.trim();
+            const phone = document.getElementById('omPhone').value.trim();
+            const email = document.getElementById('omEmail').value.trim();
+            const notes = document.getElementById('omNotes').value.trim();
+            const err   = document.getElementById('omErr');
+            err.style.display = 'none';
+            if (!name)  { err.textContent = 'Please enter your name.';         err.style.display = 'block'; return; }
+            if (!phone) { err.textContent = 'Please enter a phone number.';    err.style.display = 'block'; return; }
+
+            const items = Object.values(cart);
+            const total = items.reduce((s, i) => s + i.price * i.qty, 0);
+            const order = {
+                id: Date.now().toString(36) + Math.random().toString(36).slice(2,6),
+                name, phone, email, notes,
+                items: items.map(i => ({ id:i.id, name:i.name, price:i.price, emoji:i.emoji||'', qty:i.qty })),
+                total: Math.round(total * 100) / 100,
+                adminNotes: '',
+                status: 'new',
+                date: new Date().toISOString()
+            };
+
+            try {
+                const orders = JSON.parse(localStorage.getItem('cw_orders') || '[]');
+                orders.push(order);
+                localStorage.setItem('cw_orders', JSON.stringify(orders));
+
+                // Auto-create/update customer record
+                const customers = JSON.parse(localStorage.getItem('cw_customers') || '[]');
+                const existing  = customers.find(c => (c.phone && c.phone === phone) || (c.email && email && c.email === email));
+                if (existing) {
+                    existing.orderCount = (existing.orderCount || 0) + 1;
+                    existing.lastOrder  = order.date;
+                    if (phone && !existing.phone) existing.phone = phone;
+                    if (email && !existing.email) existing.email = email;
+                } else {
+                    customers.push({ id: order.id + 'c', name, phone, email, notes:'', orderCount:1, totalSpent:0, lastOrder:order.date });
+                }
+                localStorage.setItem('cw_customers', JSON.stringify(customers));
+            } catch(e) {}
+
             cart = {};
             refreshCartUI();
-            toggleCart();
+            document.getElementById('orderFormView').style.display  = 'none';
+            document.getElementById('orderConfirmView').style.display = 'block';
         }
 
         // ============================

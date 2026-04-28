@@ -559,226 +559,11 @@
     </header>
 
     <!-- FILTER TABS -->
-    <div class="gallery-filters" id="filters">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="pastries">🍥 Pastries</button>
-        <button class="filter-btn" data-filter="fudge">🍫 Fudge</button>
-        <button class="filter-btn" data-filter="cookies">🍪 Cookies</button>
-        <button class="filter-btn" data-filter="breads">🍞 Breads &amp; Extras</button>
-        <button class="filter-btn" data-filter="sauces">🍓 Sauces</button>
-        <button class="filter-btn" data-filter="kitchen">🏡 Behind the Scenes</button>
-    </div>
+    <div class="gallery-filters" id="filters"></div>
 
     <!-- GALLERY GRID -->
     <div class="gallery-section">
-        <div class="gallery-grid" id="galleryGrid">
-
-            <!-- PASTRIES -->
-            <div class="gallery-card fade-in fd1" data-category="pastries" data-label="Cinnamon Rolls">
-                <img src="photos/gallery/pastry-1.jpg" alt="Cinnamon Rolls"
-                     onload="this.classList.add('loaded')" onerror="this.remove()">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📷</span>
-                    <span class="ph-label">Cinnamon Rolls</span>
-                    <code>photos/gallery/pastry-1.jpg</code>
-                </div>
-                <div class="gallery-card-badge">Pastries</div>
-                <div class="gallery-card-label">Cinnamon Rolls</div>
-            </div>
-
-            <div class="gallery-card tall fade-in fd2" data-category="pastries" data-label="Strawberry Cinnamon Rolls">
-                <img src="photos/gallery/pastry-2.jpg" alt="Strawberry Cinnamon Rolls"
-                     onload="this.classList.add('loaded')" onerror="this.remove()">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📷</span>
-                    <span class="ph-label">Strawberry Cinnamon Rolls</span>
-                    <code>photos/gallery/pastry-2.jpg</code>
-                </div>
-                <div class="gallery-card-badge">Pastries</div>
-                <div class="gallery-card-label">Strawberry Cinnamon Rolls</div>
-            </div>
-
-            <div class="gallery-card fade-in fd3" data-category="pastries" data-label="Fresh from the Oven">
-                <img src="photos/gallery/pastry-3.jpg" alt="Pastries fresh from the oven"
-                     onload="this.classList.add('loaded')" onerror="this.remove()">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📷</span>
-                    <span class="ph-label">Fresh from the Oven</span>
-                    <code>photos/gallery/pastry-3.jpg</code>
-                </div>
-                <div class="gallery-card-badge">Pastries</div>
-                <div class="gallery-card-label">Fresh from the Oven</div>
-            </div>
-
-            <!-- FUDGE -->
-            <div class="gallery-card fade-in fd1" data-category="fudge" data-label="Chocolate Fudge">
-                <img src="photos/gallery/fudge-1.jpg" alt="Chocolate Fudge"
-                     onload="this.classList.add('loaded')" onerror="this.remove()">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📷</span>
-                    <span class="ph-label">Chocolate Fudge</span>
-                    <code>photos/gallery/fudge-1.jpg</code>
-                </div>
-                <div class="gallery-card-badge">Fudge</div>
-                <div class="gallery-card-label">Chocolate Fudge</div>
-            </div>
-
-            <div class="gallery-card fade-in fd2" data-category="fudge" data-label="Biscoff Fudge">
-                <img src="photos/gallery/fudge-2.jpg" alt="Biscoff Fudge"
-                     onload="this.classList.add('loaded')" onerror="this.remove()">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📷</span>
-                    <span class="ph-label">Biscoff Fudge</span>
-                    <code>photos/gallery/fudge-2.jpg</code>
-                </div>
-                <div class="gallery-card-badge">Fudge</div>
-                <div class="gallery-card-label">Biscoff Fudge</div>
-            </div>
-
-            <div class="gallery-card tall fade-in fd3" data-category="fudge" data-label="Peanut Butter Fudge">
-                <img src="photos/gallery/fudge-3.jpg" alt="Peanut Butter Fudge"
-                     onload="this.classList.add('loaded')" onerror="this.remove()">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📷</span>
-                    <span class="ph-label">Peanut Butter Fudge</span>
-                    <code>photos/gallery/fudge-3.jpg</code>
-                </div>
-                <div class="gallery-card-badge">Fudge</div>
-                <div class="gallery-card-label">Peanut Butter Fudge</div>
-            </div>
-
-            <!-- COOKIES -->
-            <div class="gallery-card fade-in fd2" data-category="cookies" data-label="Chocolate Chip Cookies">
-                <img src="photos/gallery/cookie-1.jpg" alt="Chocolate Chip Cookies"
-                     onload="this.classList.add('loaded')" onerror="this.remove()">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📷</span>
-                    <span class="ph-label">Chocolate Chip Cookies</span>
-                    <code>photos/gallery/cookie-1.jpg</code>
-                </div>
-                <div class="gallery-card-badge">Cookies</div>
-                <div class="gallery-card-label">Chocolate Chip Cookies</div>
-            </div>
-
-            <div class="gallery-card fade-in fd3" data-category="cookies" data-label="White Chocolate Macadamia Nut">
-                <img src="photos/gallery/cookie-2.jpg" alt="White Chocolate Macadamia Nut Cookies"
-                     onload="this.classList.add('loaded')" onerror="this.remove()">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📷</span>
-                    <span class="ph-label">White Choc Macadamia Nut</span>
-                    <code>photos/gallery/cookie-2.jpg</code>
-                </div>
-                <div class="gallery-card-badge">Cookies</div>
-                <div class="gallery-card-label">White Chocolate Macadamia Nut</div>
-            </div>
-
-            <!-- BREADS -->
-            <div class="gallery-card tall fade-in fd1" data-category="breads" data-label="Artisan Bread">
-                <img src="photos/gallery/bread-1.jpg" alt="Artisan Bread"
-                     onload="this.classList.add('loaded')" onerror="this.remove()">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📷</span>
-                    <span class="ph-label">Artisan Bread</span>
-                    <code>photos/gallery/bread-1.jpg</code>
-                </div>
-                <div class="gallery-card-badge">Breads &amp; Extras</div>
-                <div class="gallery-card-label">Artisan Bread</div>
-            </div>
-
-            <div class="gallery-card fade-in fd2" data-category="breads" data-label="Biscuits">
-                <img src="photos/gallery/bread-2.jpg" alt="Biscuits"
-                     onload="this.classList.add('loaded')" onerror="this.remove()">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📷</span>
-                    <span class="ph-label">Biscuits</span>
-                    <code>photos/gallery/bread-2.jpg</code>
-                </div>
-                <div class="gallery-card-badge">Breads &amp; Extras</div>
-                <div class="gallery-card-label">Biscuits</div>
-            </div>
-
-            <!-- SAUCES -->
-            <div class="gallery-card fade-in fd1" data-category="sauces" data-label="Blueberry Sauce">
-                <img src="photos/gallery/sauce-1.jpg" alt="Blueberry Sauce"
-                     onload="this.classList.add('loaded')" onerror="this.remove()">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📷</span>
-                    <span class="ph-label">Blueberry Sauce</span>
-                    <code>photos/gallery/sauce-1.jpg</code>
-                </div>
-                <div class="gallery-card-badge">Sauces</div>
-                <div class="gallery-card-label">Blueberry Sauce</div>
-            </div>
-
-            <div class="gallery-card fade-in fd2" data-category="sauces" data-label="Strawberry Sauce">
-                <img src="photos/gallery/sauce-2.jpg" alt="Strawberry Sauce"
-                     onload="this.classList.add('loaded')" onerror="this.remove()">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📷</span>
-                    <span class="ph-label">Strawberry Sauce</span>
-                    <code>photos/gallery/sauce-2.jpg</code>
-                </div>
-                <div class="gallery-card-badge">Sauces</div>
-                <div class="gallery-card-label">Strawberry Sauce</div>
-            </div>
-
-            <!-- KITCHEN / BEHIND THE SCENES -->
-            <div class="gallery-card tall fade-in fd1" data-category="kitchen" data-label="The Baker">
-                <img src="photos/gallery/kitchen-1.jpg" alt="Behind the scenes"
-                     onload="this.classList.add('loaded')" onerror="this.remove()">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📷</span>
-                    <span class="ph-label">Behind the Scenes</span>
-                    <code>photos/gallery/kitchen-1.jpg</code>
-                </div>
-                <div class="gallery-card-badge">Behind the Scenes</div>
-                <div class="gallery-card-label">The Baker</div>
-            </div>
-
-            <div class="gallery-card fade-in fd2" data-category="kitchen" data-label="In the Kitchen">
-                <img src="photos/gallery/kitchen-2.jpg" alt="In the kitchen"
-                     onload="this.classList.add('loaded')" onerror="this.remove()">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📷</span>
-                    <span class="ph-label">In the Kitchen</span>
-                    <code>photos/gallery/kitchen-2.jpg</code>
-                </div>
-                <div class="gallery-card-badge">Behind the Scenes</div>
-                <div class="gallery-card-label">In the Kitchen</div>
-            </div>
-
-            <div class="gallery-card fade-in fd3" data-category="kitchen" data-label="The Breakfast Meal">
-                <img src="photos/gallery/kitchen-3.jpg" alt="The Breakfast Meal"
-                     onload="this.classList.add('loaded')" onerror="this.remove()">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📷</span>
-                    <span class="ph-label">The Breakfast Meal</span>
-                    <code>photos/gallery/kitchen-3.jpg</code>
-                </div>
-                <div class="gallery-card-badge">Behind the Scenes</div>
-                <div class="gallery-card-label">The Breakfast Meal</div>
-            </div>
-
-        </div><!-- /gallery-grid -->
-
-        <!-- PHOTO PATH REFERENCE -->
-        <div class="upload-cta fade-in">
-            <h3>Adding Your Photos</h3>
-            <p>Drop your images into the <code style="font-style:normal; background:none; border:none; padding:0; color:var(--copper)">photos/</code> folder using the file paths shown on each card. Photos load automatically — no code changes needed.</p>
-            <code>
-photos/hero.jpg              ← Hero background<br>
-photos/story.jpg             ← Our Story photo<br>
-photos/strip-1.jpg           ← Photo strip (3 images)<br>
-photos/specialty-*.jpg       ← Specialty cards<br>
-photos/gallery/pastry-*.jpg  ← Gallery — Pastries<br>
-photos/gallery/fudge-*.jpg   ← Gallery — Fudge<br>
-photos/gallery/cookie-*.jpg  ← Gallery — Cookies<br>
-photos/gallery/bread-*.jpg   ← Gallery — Breads<br>
-photos/gallery/sauce-*.jpg   ← Gallery — Sauces<br>
-photos/gallery/kitchen-*.jpg ← Gallery — Behind the Scenes
-            </code>
-        </div>
-
+        <div class="gallery-grid" id="galleryGrid"></div>
     </div><!-- /gallery-section -->
 
     <footer class="gallery-footer">
@@ -809,55 +594,134 @@ photos/gallery/kitchen-*.jpg ← Gallery — Behind the Scenes
 
     <script>
         // ============================
-        // FILTER
+        // DEFAULT PHOTOS (fallback)
         // ============================
-        const cards  = [...document.querySelectorAll('.gallery-card')];
-        const btns   = [...document.querySelectorAll('.filter-btn')];
+        const DEFAULT_PHOTOS = [
+            { id:'d1',  url:'photos/gallery/pastry-1.jpg',  caption:'Cinnamon Rolls',              category:'Pastries',          tall:false },
+            { id:'d2',  url:'photos/gallery/pastry-2.jpg',  caption:'Strawberry Cinnamon Rolls',   category:'Pastries',          tall:true  },
+            { id:'d3',  url:'photos/gallery/pastry-3.jpg',  caption:'Fresh from the Oven',         category:'Pastries',          tall:false },
+            { id:'d4',  url:'photos/gallery/fudge-1.jpg',   caption:'Chocolate Fudge',             category:'Fudge',             tall:false },
+            { id:'d5',  url:'photos/gallery/fudge-2.jpg',   caption:'Biscoff Fudge',               category:'Fudge',             tall:false },
+            { id:'d6',  url:'photos/gallery/fudge-3.jpg',   caption:'Peanut Butter Fudge',         category:'Fudge',             tall:true  },
+            { id:'d7',  url:'photos/gallery/cookie-1.jpg',  caption:'Chocolate Chip Cookies',      category:'Cookies',           tall:false },
+            { id:'d8',  url:'photos/gallery/cookie-2.jpg',  caption:'White Choc Macadamia Nut',    category:'Cookies',           tall:false },
+            { id:'d9',  url:'photos/gallery/bread-1.jpg',   caption:'Artisan Bread',               category:'Breads & Extras',   tall:true  },
+            { id:'d10', url:'photos/gallery/bread-2.jpg',   caption:'Biscuits',                    category:'Breads & Extras',   tall:false },
+            { id:'d11', url:'photos/gallery/sauce-1.jpg',   caption:'Blueberry Sauce',             category:'Sauces',            tall:false },
+            { id:'d12', url:'photos/gallery/sauce-2.jpg',   caption:'Strawberry Sauce',            category:'Sauces',            tall:false },
+            { id:'d13', url:'photos/gallery/kitchen-1.jpg', caption:'The Baker',                   category:'Behind the Scenes', tall:true  },
+            { id:'d14', url:'photos/gallery/kitchen-2.jpg', caption:'In the Kitchen',              category:'Behind the Scenes', tall:false },
+            { id:'d15', url:'photos/gallery/kitchen-3.jpg', caption:'The Breakfast Meal',          category:'Behind the Scenes', tall:false },
+        ];
 
-        btns.forEach(btn => btn.addEventListener('click', () => {
-            btns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const f = btn.dataset.filter;
-            cards.forEach(c => {
-                const show = f === 'all' || c.dataset.category === f;
-                c.classList.toggle('hidden', !show);
+        const CAT_SLUG = {
+            'Pastries':'pastries', 'Fudge':'fudge', 'Cookies':'cookies',
+            'Breads & Extras':'breads', 'Sauces':'sauces',
+            'Behind the Scenes':'kitchen', 'Other':'other'
+        };
+        const CAT_ICON = {
+            'Pastries':'🍥','Fudge':'🍫','Cookies':'🍪',
+            'Breads & Extras':'🍞','Sauces':'🍓',
+            'Behind the Scenes':'🏡','Other':'📷'
+        };
+
+        function getPhotos() {
+            try {
+                const d = localStorage.getItem('cw_gallery');
+                const stored = d ? JSON.parse(d) : [];
+                return stored.length ? stored : DEFAULT_PHOTOS;
+            } catch(e) { return DEFAULT_PHOTOS; }
+        }
+
+        // ============================
+        // RENDER
+        // ============================
+        let allCards = [];
+
+        function renderGallery() {
+            const photos = getPhotos();
+            const grid   = document.getElementById('galleryGrid');
+
+            grid.innerHTML = photos.map((p, i) => {
+                const slug = CAT_SLUG[p.category] || 'other';
+                const fd   = `fd${(i % 4) + 1}`;
+                return `
+                    <div class="gallery-card ${p.tall ? 'tall' : ''} fade-in ${fd}"
+                         data-category="${slug}" data-label="${esc(p.caption||'')}">
+                        ${p.url ? `<img src="${esc(p.url)}" alt="${esc(p.caption||'')}"
+                             onload="this.classList.add('loaded')" onerror="this.remove()">` : ''}
+                        <div class="gallery-placeholder">
+                            <span class="ph-icon">📷</span>
+                            <span class="ph-label">${esc(p.caption||'Photo')}</span>
+                        </div>
+                        <div class="gallery-card-badge">${esc(p.category||'')}</div>
+                        <div class="gallery-card-label">${esc(p.caption||'')}</div>
+                    </div>`;
+            }).join('');
+
+            allCards = [...document.querySelectorAll('.gallery-card')];
+
+            // Attach click handlers for lightbox
+            allCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const visible = visibleCards();
+                    const idx = visible.indexOf(card);
+                    if (idx !== -1) openLightbox(idx);
+                });
             });
-        }));
+
+            // Build filter buttons from categories present
+            const cats = ['all', ...new Set(photos.map(p => CAT_SLUG[p.category] || 'other'))];
+            const catLabels = { all:'All', pastries:'🍥 Pastries', fudge:'🍫 Fudge', cookies:'🍪 Cookies', breads:'🍞 Breads & Extras', sauces:'🍓 Sauces', kitchen:'🏡 Behind the Scenes', other:'📷 Other' };
+            document.getElementById('filters').innerHTML = cats.map(slug =>
+                `<button class="filter-btn ${slug==='all'?'active':''}" data-filter="${slug}" onclick="filterGallery('${slug}',this)">${catLabels[slug]||slug}</button>`
+            ).join('');
+
+            // Scroll-in animation
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+            }, { threshold: 0.08 });
+            allCards.forEach(el => obs.observe(el));
+            document.querySelectorAll('.fade-in:not(.gallery-card)').forEach(el => obs.observe(el));
+        }
+
+        function filterGallery(f, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            allCards.forEach(c => c.classList.toggle('hidden', f !== 'all' && c.dataset.category !== f));
+        }
+
+        function esc(s) {
+            return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
 
         // ============================
         // LIGHTBOX
         // ============================
         let lbIndex = 0;
-        const visibleCards = () => cards.filter(c => !c.classList.contains('hidden'));
+        const visibleCards = () => allCards.filter(c => !c.classList.contains('hidden'));
 
         function openLightbox(idx) {
             const visible = visibleCards();
             if (!visible.length) return;
             lbIndex = ((idx % visible.length) + visible.length) % visible.length;
-            const card = visible[lbIndex];
-            const img  = card.querySelector('img');
-            const lb   = document.getElementById('lightbox');
-            const lbImg = document.getElementById('lbImg');
-            const lbPlaceholder = document.getElementById('lbPlaceholder');
-            const lbPlaceholderLabel = document.getElementById('lbPlaceholderLabel');
-            const lbCaption = document.getElementById('lbCaption');
-
-            lbCaption.textContent = card.dataset.label || '';
+            const card    = visible[lbIndex];
+            const img     = card.querySelector('img');
+            const lbImg   = document.getElementById('lbImg');
+            const lbPh    = document.getElementById('lbPlaceholder');
+            const lbPhLbl = document.getElementById('lbPlaceholderLabel');
+            document.getElementById('lbCaption').textContent = card.dataset.label || '';
             lbImg.classList.remove('loaded');
-
             if (img && img.classList.contains('loaded')) {
-                lbImg.src = img.src;
-                lbImg.alt = img.alt;
-                lbPlaceholder.style.display = 'none';
-                lbImg.style.display = 'block';
+                lbImg.src = img.src; lbImg.alt = img.alt;
+                lbPh.style.display = 'none'; lbImg.style.display = 'block';
                 lbImg.onload = () => lbImg.classList.add('loaded');
                 if (lbImg.complete) lbImg.classList.add('loaded');
             } else {
-                lbImg.style.display = 'none';
-                lbPlaceholder.style.display = 'flex';
-                lbPlaceholderLabel.textContent = card.dataset.label || 'Photo coming soon';
+                lbImg.style.display = 'none'; lbPh.style.display = 'flex';
+                lbPhLbl.textContent = card.dataset.label || 'Photo coming soon';
             }
-            lb.classList.add('open');
+            document.getElementById('lightbox').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
 
@@ -866,14 +730,6 @@ photos/gallery/kitchen-*.jpg ← Gallery — Behind the Scenes
             document.body.style.overflow = '';
         }
 
-        cards.forEach((card, i) => {
-            card.addEventListener('click', () => {
-                const visible = visibleCards();
-                const visIdx = visible.indexOf(card);
-                if (visIdx !== -1) openLightbox(visIdx);
-            });
-        });
-
         document.getElementById('lbClose').addEventListener('click', closeLightbox);
         document.getElementById('lbPrev').addEventListener('click', () => openLightbox(lbIndex - 1));
         document.getElementById('lbNext').addEventListener('click', () => openLightbox(lbIndex + 1));
@@ -881,24 +737,23 @@ photos/gallery/kitchen-*.jpg ← Gallery — Behind the Scenes
             if (e.target === document.getElementById('lightbox')) closeLightbox();
         });
         document.addEventListener('keydown', e => {
-            const lb = document.getElementById('lightbox');
-            if (!lb.classList.contains('open')) return;
-            if (e.key === 'Escape') closeLightbox();
-            if (e.key === 'ArrowLeft')  openLightbox(lbIndex - 1);
-            if (e.key === 'ArrowRight') openLightbox(lbIndex + 1);
+            if (!document.getElementById('lightbox').classList.contains('open')) return;
+            if (e.key === 'Escape')      closeLightbox();
+            if (e.key === 'ArrowLeft')   openLightbox(lbIndex - 1);
+            if (e.key === 'ArrowRight')  openLightbox(lbIndex + 1);
         });
 
         // ============================
-        // SCROLL: fade-in + back-to-top
+        // SCROLL: back-to-top
         // ============================
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.08 });
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
         window.addEventListener('scroll', () => {
             document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 400);
         }, { passive: true });
+
+        // ============================
+        // INIT
+        // ============================
+        renderGallery();
     </script>
 </body>
 </html>
