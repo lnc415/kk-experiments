@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — The Copper Whisk</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lora:wght@400;600&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --copper: #b87333;
+            --copper-light: #d4955a;
+            --copper-btn: linear-gradient(135deg, #c8893e 0%, #b87333 35%, #d4a055 58%, #a86828 100%);
+            --dark-brown: #5c3317;
+            --text-dark: #3d2410;
+            --text-mid: #6b4226;
+            --text-light: #9b7350;
+            --cream: #faf5ea;
+            --border: rgba(184,115,51,0.22);
+            --ring: rgba(184,115,51,0.45);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Nunito',sans-serif; background:#f4ede0; color:var(--text-dark); min-height:100vh; }
+
+        /* ── LOGIN ── */
+        #loginScreen {
+            min-height:100vh; display:flex; align-items:center; justify-content:center; padding:2rem;
+        }
+        .login-card {
+            background:var(--cream); border-radius:20px; padding:2.8rem 2.4rem; width:100%; max-width:360px;
+            box-shadow:0 8px 40px rgba(92,51,23,0.15); border:1px solid var(--border);
+        }
+        .login-logo {
+            font-family:'Dancing Script',cursive; font-size:1.9rem; color:var(--copper); text-align:center;
+            margin-bottom:0.3rem;
+        }
+        .login-sub { text-align:center; font-size:0.82rem; color:var(--text-light); margin-bottom:2rem; font-style:italic; }
+        .login-card input[type=password] {
+            width:100%; border:1.5px solid var(--border); border-radius:12px; padding:0.85rem 1rem;
+            font-size:0.95rem; font-family:'Nunito',sans-serif; background:#fff;
+            transition:border-color 0.2s; outline:none; margin-bottom:0.8rem;
+        }
+        .login-card input[type=password]:focus { border-color:var(--copper); box-shadow:0 0 0 3px var(--ring); }
+        .login-err { color:#c0392b; font-size:0.82rem; margin-bottom:0.6rem; display:none; }
+        .btn-copper {
+            width:100%; background:var(--copper-btn); color:#fff8ee; border:none; padding:0.9rem;
+            border-radius:50px; font-weight:700; font-size:0.95rem; font-family:'Nunito',sans-serif;
+            cursor:pointer; letter-spacing:0.04em; transition:opacity 0.2s, transform 0.2s;
+        }
+        .btn-copper:hover:not(:disabled) { opacity:0.9; transform:translateY(-1px); }
+        .btn-copper:disabled { opacity:0.45; cursor:not-allowed; }
+
+        /* ── ADMIN SHELL ── */
+        #adminShell { display:none; min-height:100vh; flex-direction:column; }
+        #adminShell.visible { display:flex; }
+        .admin-header {
+            background:var(--dark-brown); color:#fde9c0; padding:0.95rem 1.6rem;
+            display:flex; align-items:center; justify-content:space-between;
+            box-shadow:0 2px 12px rgba(20,8,2,0.3);
+        }
+        .admin-header-logo { font-family:'Dancing Script',cursive; font-size:1.35rem; color:var(--copper-light); }
+        .admin-header-right { display:flex; align-items:center; gap:1rem; }
+        .view-site-link {
+            font-size:0.8rem; color:rgba(253,220,160,0.65); text-decoration:none;
+            transition:color 0.2s;
+        }
+        .view-site-link:hover { color:#fde9c0; }
+        .logout-btn {
+            background:none; border:1px solid rgba(253,220,160,0.3); color:rgba(253,220,160,0.7);
+            padding:0.35rem 0.9rem; border-radius:50px; font-size:0.8rem; cursor:pointer;
+            font-family:'Nunito',sans-serif; transition:all 0.2s;
+        }
+        .logout-btn:hover { border-color:rgba(253,220,160,0.7); color:#fde9c0; }
+
+        .tab-bar {
+            background:#fff; border-bottom:1px solid var(--border); padding:0 1.2rem;
+            display:flex; gap:0.25rem; overflow-x:auto;
+        }
+        .tab-btn {
+            background:none; border:none; border-bottom:2.5px solid transparent; padding:0.9rem 1.1rem;
+            font-size:0.88rem; font-weight:600; color:var(--text-light); cursor:pointer;
+            font-family:'Nunito',sans-serif; white-space:nowrap; transition:color 0.2s, border-color 0.2s;
+        }
+        .tab-btn.active { border-bottom-color:var(--copper); color:var(--copper); }
+        .tab-btn:hover:not(.active) { color:var(--text-mid); }
+
+        .tab-content { display:none; flex:1; }
+        .tab-content.active { display:block; }
+
+        .content-wrap { max-width:860px; margin:0 auto; padding:2rem 1.4rem 4rem; }
+
+        /* ── CARDS ── */
+        .card {
+            background:var(--cream); border:1px solid var(--border); border-radius:16px; padding:1.4rem;
+            margin-bottom:0.85rem; box-shadow:0 2px 10px rgba(92,51,23,0.07);
+        }
+        .card-header { display:flex; align-items:center; gap:0.6rem; margin-bottom:0; }
+        .card-emoji { font-size:1.5rem; line-height:1; }
+        .card-info { flex:1; }
+        .card-name { font-family:'Lora',serif; font-size:0.97rem; font-weight:600; color:var(--dark-brown); }
+        .card-desc { font-size:0.78rem; color:var(--text-light); margin-top:0.15rem; line-height:1.4; }
+        .card-meta { display:flex; gap:0.7rem; margin-top:0.3rem; align-items:center; }
+        .card-price { font-family:'Lora',serif; font-size:0.9rem; font-weight:700; color:var(--copper); }
+        .card-category {
+            font-size:0.7rem; background:rgba(184,115,51,0.12); color:var(--copper);
+            padding:0.15rem 0.6rem; border-radius:50px; font-weight:600;
+        }
+        .card-badge {
+            font-size:0.7rem; padding:0.15rem 0.6rem; border-radius:50px; font-weight:700;
+            background:linear-gradient(135deg,#e05a20,#c03010); color:#fff; letter-spacing:0.04em;
+        }
+        .card-actions { display:flex; gap:0.5rem; align-items:center; flex-shrink:0; }
+        .btn-edit {
+            background:none; border:1.5px solid var(--border); color:var(--text-mid); padding:0.35rem 0.85rem;
+            border-radius:50px; font-size:0.78rem; font-weight:600; cursor:pointer; font-family:'Nunito',sans-serif;
+            transition:all 0.2s;
+        }
+        .btn-edit:hover { border-color:var(--copper); color:var(--copper); background:rgba(184,115,51,0.06); }
+        .btn-delete {
+            background:none; border:1.5px solid rgba(192,57,43,0.25); color:#c0392b; padding:0.35rem 0.75rem;
+            border-radius:50px; font-size:0.78rem; font-weight:600; cursor:pointer; font-family:'Nunito',sans-serif;
+            transition:all 0.2s;
+        }
+        .btn-delete:hover { background:rgba(192,57,43,0.08); border-color:rgba(192,57,43,0.5); }
+
+        /* ── CATEGORY GROUP ── */
+        .cat-group { margin-bottom:1.8rem; }
+        .cat-label {
+            font-family:'Lora',serif; font-size:0.82rem; font-weight:600; color:var(--copper);
+            text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.65rem;
+            padding-bottom:0.45rem; border-bottom:1px solid var(--border);
+        }
+
+        /* ── FORM ── */
+        .form-card {
+            background:#fff; border:1.5px solid var(--copper-light); border-radius:16px; padding:1.5rem;
+            margin-bottom:1.2rem; box-shadow:0 4px 20px rgba(184,115,51,0.12);
+        }
+        .form-title { font-family:'Lora',serif; font-size:1rem; font-weight:600; color:var(--dark-brown); margin-bottom:1.1rem; }
+        .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; }
+        .form-grid.three { grid-template-columns:1fr 1fr 1fr; }
+        @media(max-width:560px) { .form-grid,.form-grid.three { grid-template-columns:1fr; } }
+        .form-group { display:flex; flex-direction:column; gap:0.35rem; }
+        .form-group.full { grid-column:1/-1; }
+        label { font-size:0.78rem; font-weight:600; color:var(--text-mid); }
+        input[type=text], input[type=number], select, textarea {
+            border:1.5px solid var(--border); border-radius:10px; padding:0.65rem 0.85rem;
+            font-size:0.9rem; font-family:'Nunito',sans-serif; background:#fff; outline:none;
+            transition:border-color 0.2s, box-shadow 0.2s; color:var(--text-dark);
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color:var(--copper); box-shadow:0 0 0 3px var(--ring);
+        }
+        textarea { resize:vertical; min-height:70px; }
+        .form-actions { display:flex; gap:0.65rem; margin-top:1rem; }
+        .btn-save {
+            background:var(--copper-btn); color:#fff8ee; border:none; padding:0.7rem 1.8rem;
+            border-radius:50px; font-weight:700; font-size:0.88rem; font-family:'Nunito',sans-serif;
+            cursor:pointer; transition:opacity 0.2s, transform 0.2s; letter-spacing:0.03em;
+        }
+        .btn-save:hover { opacity:0.9; transform:translateY(-1px); }
+        .btn-cancel {
+            background:none; border:1.5px solid var(--border); color:var(--text-mid); padding:0.7rem 1.4rem;
+            border-radius:50px; font-size:0.88rem; font-weight:600; cursor:pointer; font-family:'Nunito',sans-serif;
+            transition:all 0.2s;
+        }
+        .btn-cancel:hover { border-color:var(--text-mid); }
+
+        /* ── ADD BUTTON ── */
+        .add-btn {
+            display:inline-flex; align-items:center; gap:0.45rem;
+            background:var(--copper-btn); color:#fff8ee; border:none; padding:0.7rem 1.5rem;
+            border-radius:50px; font-weight:700; font-size:0.88rem; font-family:'Nunito',sans-serif;
+            cursor:pointer; margin-bottom:1.4rem; letter-spacing:0.03em;
+            box-shadow:0 3px 12px rgba(184,115,51,0.3); transition:all 0.2s;
+        }
+        .add-btn:hover { opacity:0.9; transform:translateY(-1px); box-shadow:0 5px 18px rgba(184,115,51,0.4); }
+        .add-btn svg { width:16px; height:16px; stroke:currentColor; stroke-width:2.5; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+
+        /* ── EMPTY STATE ── */
+        .empty-state {
+            text-align:center; padding:3rem 1.5rem; color:var(--text-light);
+            font-family:'Lora',serif; font-style:italic;
+        }
+        .empty-state span { display:block; font-size:2rem; margin-bottom:0.7rem; }
+
+        /* ── FEATURED BADGE PREVIEW ── */
+        .badge-preview {
+            display:inline-block; font-size:0.7rem; padding:0.15rem 0.6rem; border-radius:50px;
+            font-weight:700; background:linear-gradient(135deg,#e05a20,#c03010); color:#fff;
+            letter-spacing:0.04em; margin-left:0.5rem; vertical-align:middle;
+        }
+        .badge-none { color:var(--text-light); font-size:0.78rem; font-style:italic; }
+
+        /* ── SETTINGS ── */
+        .settings-section { max-width:440px; }
+        .settings-label { font-family:'Lora',serif; font-size:1rem; font-weight:600; color:var(--dark-brown); margin-bottom:1rem; }
+        .settings-note { font-size:0.8rem; color:var(--text-light); margin-bottom:1.2rem; line-height:1.6; }
+
+        /* ── TOAST ── */
+        #toast {
+            position:fixed; bottom:2rem; left:50%; transform:translateX(-50%) translateY(80px);
+            background:var(--dark-brown); color:#fde9c0; padding:0.75rem 1.6rem; border-radius:50px;
+            font-size:0.88rem; font-weight:600; box-shadow:0 4px 20px rgba(20,8,2,0.3);
+            transition:transform 0.35s cubic-bezier(.25,.46,.45,.94), opacity 0.35s;
+            opacity:0; pointer-events:none; z-index:9999; white-space:nowrap;
+        }
+        #toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
+
+        /* ── FEATURED LIMIT NOTICE ── */
+        .limit-note { font-size:0.78rem; color:var(--text-light); margin-bottom:1rem; font-style:italic; }
+    </style>
+</head>
+<body>
+
+<!-- ======================== LOGIN ======================== -->
+<div id="loginScreen">
+    <div class="login-card">
+        <div class="login-logo">The Copper Whisk</div>
+        <div class="login-sub">Admin Panel</div>
+        <form id="loginForm">
+            <input type="password" id="loginPass" placeholder="Password" autocomplete="current-password">
+            <div class="login-err" id="loginErr">Incorrect password — try again.</div>
+            <button type="submit" class="btn-copper">Log In</button>
+        </form>
+    </div>
+</div>
+
+<!-- ======================== ADMIN SHELL ======================== -->
+<div id="adminShell">
+    <div class="admin-header">
+        <span class="admin-header-logo">The Copper Whisk</span>
+        <div class="admin-header-right">
+            <a href="index.html" class="view-site-link" target="_blank">View site →</a>
+            <button class="logout-btn" onclick="logout()">Log out</button>
+        </div>
+    </div>
+
+    <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab('menu',this)">Menu Items</button>
+        <button class="tab-btn" onclick="switchTab('featured',this)">Featured</button>
+        <button class="tab-btn" onclick="switchTab('settings',this)">Settings</button>
+    </div>
+
+    <!-- ===== TAB: MENU ITEMS ===== -->
+    <div class="tab-content active" id="tab-menu">
+        <div class="content-wrap">
+            <button class="add-btn" onclick="openItemForm()">
+                <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Add Item
+            </button>
+
+            <div id="itemFormContainer"></div>
+            <div id="menuList"></div>
+        </div>
+    </div>
+
+    <!-- ===== TAB: FEATURED ===== -->
+    <div class="tab-content" id="tab-featured">
+        <div class="content-wrap">
+            <p class="limit-note">Featured items appear as spotlight cards on your homepage. Add up to 6. Use the badge to call out sales, limited items, or seasonal specials.</p>
+
+            <button class="add-btn" onclick="openFeaturedForm()">
+                <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Add Featured Item
+            </button>
+
+            <div id="featuredFormContainer"></div>
+            <div id="featuredList"></div>
+        </div>
+    </div>
+
+    <!-- ===== TAB: SETTINGS ===== -->
+    <div class="tab-content" id="tab-settings">
+        <div class="content-wrap">
+            <div class="settings-section">
+                <div class="settings-label">Change Password</div>
+                <p class="settings-note">This password protects the admin panel. Keep it simple — something your daughter can remember.</p>
+                <div class="form-card">
+                    <div class="form-group" style="margin-bottom:0.75rem;">
+                        <label>Current Password</label>
+                        <input type="password" id="settingsCurrent" placeholder="Current password">
+                    </div>
+                    <div class="form-group" style="margin-bottom:0.75rem;">
+                        <label>New Password</label>
+                        <input type="password" id="settingsNew" placeholder="New password">
+                    </div>
+                    <div class="form-group" style="margin-bottom:1rem;">
+                        <label>Confirm New Password</label>
+                        <input type="password" id="settingsConfirm" placeholder="Confirm new password">
+                    </div>
+                    <div id="settingsErr" style="color:#c0392b;font-size:0.82rem;margin-bottom:0.6rem;display:none;"></div>
+                    <button class="btn-save" onclick="changePassword()">Update Password</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ============================================================
+// DATA & STORAGE
+// ============================================================
+const PASS_KEY     = 'cw_password';
+const ITEMS_KEY    = 'cw_items';
+const FEATURED_KEY = 'cw_featured';
+const AUTH_KEY     = 'cw_authed';
+
+const CATEGORIES = ['Pastries','Fudge','Cookies','Breads & Extras','Sauces','Combos','Cakes','Pies','Other'];
+const BG_CLASSES = ['bg1','bg2','bg3','bg4','bg5','bg6'];
+
+const DEFAULT_ITEMS = [
+    { id:'1', name:'Cinnamon Rolls',               desc:'Soft, gooey & spiced just right',                  price:4.50,  emoji:'🌀', category:'Pastries' },
+    { id:'2', name:'Strawberry Cinnamon Rolls',    desc:'Classic roll with a fresh strawberry twist',        price:4.75,  emoji:'🌸', category:'Pastries' },
+    { id:'3', name:'Chocolate Fudge',              desc:'Rich, dense & deeply chocolatey',                  price:6.00,  emoji:'🍫', category:'Fudge' },
+    { id:'4', name:'Biscoff Fudge',                desc:'Warm spiced cookie butter in every bite',          price:6.50,  emoji:'🍂', category:'Fudge' },
+    { id:'5', name:'Peanut Butter Fudge',          desc:'Creamy, sweet & smooth',                           price:6.00,  emoji:'🥜', category:'Fudge' },
+    { id:'6', name:'Chocolate Chip Cookies',       desc:'Crisp edges, soft centers, real chocolate',        price:2.75,  emoji:'🍪', category:'Cookies' },
+    { id:'7', name:'White Chocolate Macadamia Nut',desc:'Buttery, chewy & perfectly sweet',                 price:3.00,  emoji:'🍪', category:'Cookies' },
+    { id:'8', name:'Artisan Bread',                desc:'Crusty outside, chewy & warm inside',              price:9.00,  emoji:'🍞', category:'Breads & Extras' },
+    { id:'9', name:'Biscuits',                     desc:'Flaky, buttery & golden brown',                    price:2.00,  emoji:'🍞', category:'Breads & Extras' },
+    { id:'10',name:'Blueberry Sauce',              desc:'Sweet, jammy & perfect over anything',             price:5.00,  emoji:'🫐', category:'Sauces' },
+    { id:'11',name:'Strawberry Sauce',             desc:'Bright, fresh & made from real fruit',             price:5.00,  emoji:'🍓', category:'Sauces' },
+    { id:'12',name:'Breakfast Meal',               desc:'Cinnamon roll · artisan bread · sauce · biscuit',  price:14.00, emoji:'🍽️', category:'Combos' },
+];
+
+const DEFAULT_FEATURED = [
+    { id:'f1', name:'Cinnamon Rolls',        desc:'Soft, gooey & spiced just right',         price:4.50, emoji:'🌀', badge:'' },
+    { id:'f2', name:'Chocolate Fudge',       desc:'Rich, dense & deeply chocolatey',         price:6.00, emoji:'🍫', badge:'' },
+    { id:'f3', name:'Artisan Bread',         desc:'Crusty outside, chewy & warm inside',     price:9.00, emoji:'🍞', badge:'' },
+    { id:'f4', name:'Signature Cookies',     desc:'Crisp edges, soft centers, real chocolate',price:2.75,emoji:'🍪', badge:'' },
+];
+
+function getPass()     { return localStorage.getItem(PASS_KEY)     || 'copperwhisk'; }
+function getItems()    { const d = localStorage.getItem(ITEMS_KEY);    return d ? JSON.parse(d) : DEFAULT_ITEMS.map(i=>({...i})); }
+function getFeatured() { const d = localStorage.getItem(FEATURED_KEY); return d ? JSON.parse(d) : DEFAULT_FEATURED.map(i=>({...i})); }
+function saveItems(arr)    { localStorage.setItem(ITEMS_KEY,    JSON.stringify(arr)); }
+function saveFeatured(arr) { localStorage.setItem(FEATURED_KEY, JSON.stringify(arr)); }
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+
+// ============================================================
+// AUTH
+// ============================================================
+function checkAuth() {
+    if (sessionStorage.getItem(AUTH_KEY) === '1') showAdmin();
+}
+
+document.getElementById('loginForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const val = document.getElementById('loginPass').value;
+    if (val === getPass()) {
+        sessionStorage.setItem(AUTH_KEY, '1');
+        document.getElementById('loginErr').style.display = 'none';
+        showAdmin();
+    } else {
+        const err = document.getElementById('loginErr');
+        err.style.display = 'block';
+        document.getElementById('loginPass').value = '';
+    }
+});
+
+function showAdmin() {
+    document.getElementById('loginScreen').style.display = 'none';
+    const shell = document.getElementById('adminShell');
+    shell.classList.add('visible');
+    renderMenuList();
+    renderFeaturedList();
+}
+
+function logout() {
+    sessionStorage.removeItem(AUTH_KEY);
+    location.reload();
+}
+
+// ============================================================
+// TABS
+// ============================================================
+function switchTab(name, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + name).classList.add('active');
+}
+
+// ============================================================
+// MENU ITEMS — RENDER
+// ============================================================
+function renderMenuList() {
+    const items = getItems();
+    const container = document.getElementById('menuList');
+    if (!items.length) {
+        container.innerHTML = '<div class="empty-state"><span>🧁</span>No items yet — add your first baked good!</div>';
+        return;
+    }
+    const byCategory = {};
+    items.forEach(item => {
+        if (!byCategory[item.category]) byCategory[item.category] = [];
+        byCategory[item.category].push(item);
+    });
+    container.innerHTML = Object.entries(byCategory).map(([cat, catItems]) => `
+        <div class="cat-group">
+            <div class="cat-label">${cat}</div>
+            ${catItems.map(item => `
+                <div class="card" id="item-${item.id}">
+                    <div class="card-header">
+                        <span class="card-emoji">${item.emoji || '🍰'}</span>
+                        <div class="card-info">
+                            <div class="card-name">${esc(item.name)}</div>
+                            ${item.desc ? `<div class="card-desc">${esc(item.desc)}</div>` : ''}
+                            <div class="card-meta">
+                                <span class="card-price">$${Number(item.price).toFixed(2)}</span>
+                                <span class="card-category">${esc(item.category)}</span>
+                            </div>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-edit" onclick="openItemForm('${item.id}')">Edit</button>
+                            <button class="btn-delete" onclick="deleteItem('${item.id}')">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `).join('');
+}
+
+// ============================================================
+// MENU ITEMS — FORM
+// ============================================================
+let editingItemId = null;
+
+function openItemForm(id) {
+    editingItemId = id || null;
+    const items = getItems();
+    const item = id ? items.find(i => i.id === id) : null;
+    const catOptions = CATEGORIES.map(c => `<option value="${c}" ${item && item.category === c ? 'selected' : ''}>${c}</option>`).join('');
+    document.getElementById('itemFormContainer').innerHTML = `
+        <div class="form-card" id="itemForm">
+            <div class="form-title">${item ? 'Edit Item' : 'New Baked Good'}</div>
+            <div class="form-grid three">
+                <div class="form-group">
+                    <label>Item Name *</label>
+                    <input type="text" id="fName" placeholder="e.g. Apple Pie" value="${item ? esc(item.name) : ''}">
+                </div>
+                <div class="form-group">
+                    <label>Price *</label>
+                    <input type="number" id="fPrice" placeholder="0.00" step="0.01" min="0" value="${item ? item.price : ''}">
+                </div>
+                <div class="form-group">
+                    <label>Emoji</label>
+                    <input type="text" id="fEmoji" placeholder="🍰" value="${item ? (item.emoji||'') : ''}" maxlength="4">
+                </div>
+            </div>
+            <div class="form-grid" style="margin-top:0.75rem;">
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="fCategory">${catOptions}</select>
+                </div>
+                <div class="form-group">
+                    <label>Custom Category</label>
+                    <input type="text" id="fCategoryCustom" placeholder="Or type a new one">
+                </div>
+            </div>
+            <div class="form-group full" style="margin-top:0.75rem;">
+                <label>Description</label>
+                <textarea id="fDesc" placeholder="A short, tasty description...">${item ? esc(item.desc||'') : ''}</textarea>
+            </div>
+            <div class="form-actions">
+                <button class="btn-save" onclick="saveItem()">Save</button>
+                <button class="btn-cancel" onclick="closeItemForm()">Cancel</button>
+            </div>
+        </div>
+    `;
+    document.getElementById('itemForm').scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+function closeItemForm() {
+    document.getElementById('itemFormContainer').innerHTML = '';
+    editingItemId = null;
+}
+
+function saveItem() {
+    const name  = document.getElementById('fName').value.trim();
+    const price = parseFloat(document.getElementById('fPrice').value);
+    const emoji = document.getElementById('fEmoji').value.trim() || '🍰';
+    const customCat = document.getElementById('fCategoryCustom').value.trim();
+    const category  = customCat || document.getElementById('fCategory').value;
+    const desc  = document.getElementById('fDesc').value.trim();
+
+    if (!name) { toast('Please enter an item name.'); return; }
+    if (isNaN(price) || price < 0) { toast('Please enter a valid price.'); return; }
+
+    const items = getItems();
+    if (editingItemId) {
+        const idx = items.findIndex(i => i.id === editingItemId);
+        if (idx > -1) items[idx] = { ...items[idx], name, price, emoji, category, desc };
+    } else {
+        items.push({ id: uid(), name, price, emoji, category, desc });
+    }
+    saveItems(items);
+    closeItemForm();
+    renderMenuList();
+    toast(editingItemId ? 'Item updated!' : 'Item added!');
+    editingItemId = null;
+}
+
+function deleteItem(id) {
+    if (!confirm('Delete this item?')) return;
+    const items = getItems().filter(i => i.id !== id);
+    saveItems(items);
+    renderMenuList();
+    toast('Item deleted.');
+}
+
+// ============================================================
+// FEATURED — RENDER
+// ============================================================
+function renderFeaturedList() {
+    const featured = getFeatured();
+    const container = document.getElementById('featuredList');
+    if (!featured.length) {
+        container.innerHTML = '<div class="empty-state"><span>⭐</span>No featured items yet — add something to spotlight on your homepage!</div>';
+        return;
+    }
+    container.innerHTML = featured.map((item, i) => `
+        <div class="card">
+            <div class="card-header">
+                <span class="card-emoji">${item.emoji || '🍰'}</span>
+                <div class="card-info">
+                    <div class="card-name">
+                        ${esc(item.name)}
+                        ${item.badge ? `<span class="badge-preview">${esc(item.badge)}</span>` : '<span class="badge-none">no badge</span>'}
+                    </div>
+                    ${item.desc ? `<div class="card-desc">${esc(item.desc)}</div>` : ''}
+                    <div class="card-meta">
+                        <span class="card-price">$${Number(item.price).toFixed(2)}</span>
+                        <span class="card-category">Slot ${i+1} of 6</span>
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <button class="btn-edit" onclick="openFeaturedForm('${item.id}')">Edit</button>
+                    <button class="btn-delete" onclick="deleteFeatured('${item.id}')">Remove</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// ============================================================
+// FEATURED — FORM
+// ============================================================
+let editingFeaturedId = null;
+
+function openFeaturedForm(id) {
+    const featured = getFeatured();
+    if (!id && featured.length >= 6) {
+        toast('You already have 6 featured items — remove one first.');
+        return;
+    }
+    editingFeaturedId = id || null;
+    const item = id ? featured.find(f => f.id === id) : null;
+
+    document.getElementById('featuredFormContainer').innerHTML = `
+        <div class="form-card" id="featuredForm">
+            <div class="form-title">${item ? 'Edit Featured Item' : 'New Featured Item'}</div>
+            <div class="form-grid three">
+                <div class="form-group">
+                    <label>Item Name *</label>
+                    <input type="text" id="ffName" placeholder="e.g. Apple Pie" value="${item ? esc(item.name) : ''}">
+                </div>
+                <div class="form-group">
+                    <label>Price *</label>
+                    <input type="number" id="ffPrice" placeholder="0.00" step="0.01" min="0" value="${item ? item.price : ''}">
+                </div>
+                <div class="form-group">
+                    <label>Emoji</label>
+                    <input type="text" id="ffEmoji" placeholder="🍰" value="${item ? (item.emoji||'') : ''}" maxlength="4">
+                </div>
+            </div>
+            <div class="form-group full" style="margin-top:0.75rem;">
+                <label>Description</label>
+                <textarea id="ffDesc" placeholder="A short, tasty description...">${item ? esc(item.desc||'') : ''}</textarea>
+            </div>
+            <div class="form-group" style="margin-top:0.75rem;">
+                <label>Badge Label <span style="font-weight:400;color:var(--text-light)">(optional — e.g. Sale!, Limited!, This Week, Seasonal)</span></label>
+                <input type="text" id="ffBadge" placeholder="Leave blank for no badge" value="${item ? esc(item.badge||'') : ''}" maxlength="24">
+            </div>
+            <div class="form-actions">
+                <button class="btn-save" onclick="saveFeatured()">Save</button>
+                <button class="btn-cancel" onclick="closeFeaturedForm()">Cancel</button>
+            </div>
+        </div>
+    `;
+    document.getElementById('featuredForm').scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+function closeFeaturedForm() {
+    document.getElementById('featuredFormContainer').innerHTML = '';
+    editingFeaturedId = null;
+}
+
+function saveFeatured() {
+    const name  = document.getElementById('ffName').value.trim();
+    const price = parseFloat(document.getElementById('ffPrice').value);
+    const emoji = document.getElementById('ffEmoji').value.trim() || '🍰';
+    const desc  = document.getElementById('ffDesc').value.trim();
+    const badge = document.getElementById('ffBadge').value.trim();
+
+    if (!name) { toast('Please enter an item name.'); return; }
+    if (isNaN(price) || price < 0) { toast('Please enter a valid price.'); return; }
+
+    const featured = getFeatured();
+    if (editingFeaturedId) {
+        const idx = featured.findIndex(f => f.id === editingFeaturedId);
+        if (idx > -1) featured[idx] = { ...featured[idx], name, price, emoji, desc, badge };
+    } else {
+        featured.push({ id: uid(), name, price, emoji, desc, badge });
+    }
+    saveFeatured(featured);
+    closeFeaturedForm();
+    renderFeaturedList();
+    toast(editingFeaturedId ? 'Featured item updated!' : 'Featured item added!');
+    editingFeaturedId = null;
+}
+
+function deleteFeatured(id) {
+    if (!confirm('Remove this featured item?')) return;
+    const featured = getFeatured().filter(f => f.id !== id);
+    saveFeatured(featured);
+    renderFeaturedList();
+    toast('Removed from featured.');
+}
+
+// ============================================================
+// SETTINGS
+// ============================================================
+function changePassword() {
+    const cur     = document.getElementById('settingsCurrent').value;
+    const next    = document.getElementById('settingsNew').value;
+    const confirm = document.getElementById('settingsConfirm').value;
+    const err     = document.getElementById('settingsErr');
+    err.style.display = 'none';
+
+    if (cur !== getPass())       { err.textContent = 'Current password is incorrect.'; err.style.display='block'; return; }
+    if (next.length < 4)         { err.textContent = 'New password must be at least 4 characters.'; err.style.display='block'; return; }
+    if (next !== confirm)        { err.textContent = 'New passwords do not match.'; err.style.display='block'; return; }
+
+    localStorage.setItem(PASS_KEY, next);
+    document.getElementById('settingsCurrent').value = '';
+    document.getElementById('settingsNew').value = '';
+    document.getElementById('settingsConfirm').value = '';
+    toast('Password updated!');
+}
+
+// ============================================================
+// UTILITIES
+// ============================================================
+function esc(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+let toastTimer;
+function toast(msg) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 2800);
+}
+
+// ============================================================
+// INIT
+// ============================================================
+checkAuth();
+</script>
+</body>
+</html>
