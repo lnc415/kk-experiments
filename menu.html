@@ -549,7 +549,7 @@
         <div class="variant-card">
             <div class="variant-card-emoji" id="variantEmoji"></div>
             <div class="variant-card-title" id="variantTitle"></div>
-            <div class="variant-card-sub">Choose your size</div>
+            <div class="variant-card-sub">Choose your option</div>
             <div class="variant-options" id="variantOptions"></div>
             <button class="variant-cancel" onclick="document.getElementById('variantOverlay').classList.remove('open')">Cancel</button>
         </div>
@@ -571,8 +571,8 @@
                 <div class="om-group"><label>Notes</label><textarea id="omNotes" placeholder="Anything we should know?"></textarea></div>
                 <p class="om-err" id="omErr"></p>
                 <div class="om-btn-row">
-                    <button class="om-cancel" onclick="closeOrderModal()">Cancel</button>
-                    <button class="om-submit" onclick="submitOrder()">Send Order 🧡</button>
+                    <button class="om-cancel" onclick="closeOrderModal()">← Back</button>
+                    <button class="om-submit" onclick="submitOrder()">Place My Order</button>
                 </div>
             </div>
             <div id="orderConfirmView" style="display:none">
@@ -763,6 +763,8 @@
             document.getElementById('omName').value = '';
             document.getElementById('omPhone').value = '';
             document.getElementById('omEmail').value = '';
+            document.getElementById('omDate').value = '';
+            document.getElementById('omTime').value = '';
             document.getElementById('omNotes').value = '';
             document.getElementById('omErr').style.display = 'none';
             document.getElementById('orderFormView').style.display  = 'block';

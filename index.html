@@ -1502,7 +1502,7 @@
         <div class="variant-card">
             <div class="variant-card-emoji" id="variantEmoji"></div>
             <div class="variant-card-title" id="variantTitle"></div>
-            <div class="variant-card-sub">Choose your size</div>
+            <div class="variant-card-sub">Choose your option</div>
             <div class="variant-options" id="variantOptions"></div>
             <button class="variant-cancel" onclick="document.getElementById('variantOverlay').classList.remove('open')">Cancel</button>
         </div>
@@ -1595,7 +1595,7 @@
                     <div class="specialty-body">
                         <div class="specialty-name">${item.name}</div>
                         <div class="specialty-desc">${item.desc || ''}</div>
-                        <div class="specialty-price">${item.variants ? '$' + item.variants[0].price + ' – $' + item.variants[item.variants.length-1].price : '$' + Number(item.price).toFixed(2)}</div>
+                        <div class="specialty-price">${item.variants ? '$' + Number(item.variants[0].price).toFixed(2).replace(/\.00$/,'') + ' – $' + Number(item.variants[item.variants.length-1].price).toFixed(2).replace(/\.00$/,'') : '$' + Number(item.price).toFixed(2)}</div>
                         ${item.badge ? `<div style="font-size:0.72rem;font-weight:700;color:#c03010;letter-spacing:0.05em;margin-bottom:0.5rem;">${item.badge}</div>` : ''}
                         ${item.variants
                             ? `<button class="add-to-cart-btn" onclick="openVariantPicker('${item.id}')">Choose Size →</button>`
@@ -1702,6 +1702,8 @@
             document.getElementById('omName').value = '';
             document.getElementById('omPhone').value = '';
             document.getElementById('omEmail').value = '';
+            document.getElementById('omDate').value = '';
+            document.getElementById('omTime').value = '';
             document.getElementById('omNotes').value = '';
             document.getElementById('omErr').style.display = 'none';
             document.getElementById('orderFormView').style.display = 'block';
