@@ -313,6 +313,36 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        .menu-item-variants {
+            margin-top: 0.55rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.22rem;
+        }
+        .menu-variant-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.28rem 0.7rem;
+            border-radius: 7px;
+            background: rgba(184,115,51,0.06);
+            border: 1px solid rgba(184,115,51,0.13);
+        }
+        .menu-variant-label {
+            font-size: 0.79rem;
+            color: var(--text-medium);
+            font-family: 'Nunito', sans-serif;
+            font-weight: 600;
+        }
+        .menu-variant-price {
+            font-family: 'Lora', serif;
+            font-size: 0.84rem;
+            font-weight: 700;
+            background: linear-gradient(175deg, #d4955a, #9a5e28);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
         .menu-order-note {
             text-align: center;
             margin-top: 2.8rem;
@@ -404,23 +434,15 @@
         // DEFAULT MENU DATA
         // ============================
         const DEFAULT_ITEMS = [
-            { id:'1',  name:'Cinnamon Rolls',                desc:'Soft, gooey & spiced just right',                         price:4.50,  emoji:'🌀', category:'Pastries' },
-            { id:'2',  name:'Strawberry Cinnamon Rolls',     desc:'Classic roll with a fresh strawberry twist',               price:4.75,  emoji:'🌸', category:'Pastries' },
-            { id:'3',  name:'Chocolate Fudge',               desc:'Rich, dense & deeply chocolatey',                         price:6.00,  emoji:'🍫', category:'Fudge' },
-            { id:'4',  name:'Biscoff Fudge',                 desc:'Warm spiced cookie butter in every bite',                  price:6.50,  emoji:'🍂', category:'Fudge' },
-            { id:'5',  name:'Peanut Butter Fudge',           desc:'Creamy, sweet & smooth',                                  price:6.00,  emoji:'🥜', category:'Fudge' },
-            { id:'6',  name:'Chocolate Chip Cookies',        desc:'Crisp edges, soft centers, real chocolate',                price:2.75,  emoji:'🍪', category:'Cookies' },
-            { id:'7',  name:'White Chocolate Macadamia Nut', desc:'Buttery, chewy & perfectly sweet',                        price:3.00,  emoji:'🍪', category:'Cookies' },
-            { id:'8',  name:'Artisan Bread',                 desc:'Crusty outside, chewy & warm inside',                     price:9.00,  emoji:'🍞', category:'Breads & Extras' },
-            { id:'9',  name:'Biscuits',                      desc:'Flaky, buttery & golden brown',                           price:2.00,  emoji:'🍞', category:'Breads & Extras' },
-            { id:'10', name:'Blueberry Sauce',               desc:'Sweet, jammy & perfect over anything',                    price:5.00,  emoji:'🫐', category:'Sauces' },
-            { id:'11', name:'Strawberry Sauce',              desc:'Bright, fresh & made from real fruit',                    price:5.00,  emoji:'🍓', category:'Sauces' },
-            { id:'12', name:'Breakfast Meal',                desc:'Cinnamon roll · artisan bread · sauce of your choice · biscuit', price:14.00, emoji:'🍽️', category:'Combos' },
+            { id:'1', name:'Cinnamon Roll',  desc:'Soft, gooey & spiced just right — priced per roll', price:4.50,  emoji:'🌀', category:'Pastries' },
+            { id:'2', name:'Cream Puffs',    desc:'Light, airy shells filled with cream',               emoji:'🍮',  category:'Pastries',
+              variants:[{label:'½ Dozen', price:8.00},{label:'1 Dozen', price:14.00}] },
+            { id:'4', name:'Bread Loaf', desc:'Crusty outside, chewy & warm inside', emoji:'🍞', category:'Breads',
+              variants:[{label:'9 in', price:7.00},{label:'13 in', price:12.00}] },
         ];
 
         const CAT_ICONS = {
-            'Pastries':'🍥', 'Fudge':'🍫', 'Cookies':'🍪', 'Breads & Extras':'🍞',
-            'Sauces':'🍓', 'Combos':'🍽️', 'Cakes':'🎂', 'Pies':'🥧', 'Other':'🍰'
+            'Pastries':'🍥', 'Breads':'🍞', 'Cakes':'🎂', 'Pies':'🥧', 'Other':'🍰'
         };
 
         function getItems() {
@@ -454,8 +476,13 @@
                                 <div class="menu-item-left">
                                     <div class="menu-item-name">${item.emoji ? item.emoji + ' ' : ''}${item.name}</div>
                                     ${item.desc ? `<div class="menu-item-sub">${item.desc}</div>` : ''}
+                                    ${item.variants ? `<div class="menu-item-variants">${item.variants.map(v=>`
+                                        <div class="menu-variant-row">
+                                            <span class="menu-variant-label">${v.label}</span>
+                                            <span class="menu-variant-price">$${Number(v.price).toFixed(2)}</span>
+                                        </div>`).join('')}</div>` : ''}
                                 </div>
-                                <span class="menu-item-price">$${Number(item.price).toFixed(2)}</span>
+                                ${item.variants ? '' : `<span class="menu-item-price">$${Number(item.price).toFixed(2)}</span>`}
                             </div>
                         `).join('')}
                     </div>
