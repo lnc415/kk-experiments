@@ -1550,7 +1550,8 @@
         // MENU DATA (fallback defaults)
         // ============================
         const DEFAULT_FEATURED = [
-            { id:'f1', name:'Cinnamon Roll',    desc:'Soft, gooey & spiced just right — priced per roll', price:4.50,  emoji:'🌀' },
+            { id:'f1', name:'Cinnamon Roll', desc:'Soft, gooey & spiced just right', emoji:'🌀',
+              variants:[{label:'Single', price:4.50},{label:'Half Dozen', price:27.00}] },
             { id:'f2', name:'Cream Puffs',      desc:'Light, airy shells filled with cream',               emoji:'🍮',
               variants:[{label:'½ Dozen', price:8.00},{label:'1 Dozen', price:14.00}] },
             { id:'f3', name:'Bread Loaf', desc:'Crusty outside, chewy & warm inside', emoji:'🍞',
