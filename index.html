@@ -1524,8 +1524,18 @@
                     <label>Email <span style="font-weight:400;opacity:0.65">(optional)</span></label>
                     <input type="email" id="omEmail" placeholder="your@email.com">
                 </div>
+                <div class="om-group" style="display:flex;gap:0.7rem;">
+                    <div style="flex:1">
+                        <label>Need By — Date *</label>
+                        <input type="date" id="omDate">
+                    </div>
+                    <div style="flex:1">
+                        <label>Time</label>
+                        <input type="time" id="omTime">
+                    </div>
+                </div>
                 <div class="om-group">
-                    <label>Notes <span style="font-weight:400;opacity:0.65">(allergies, special requests, delivery notes)</span></label>
+                    <label>Notes <span style="font-weight:400;opacity:0.65">(allergies, special requests, etc.)</span></label>
                     <textarea id="omNotes" placeholder="Anything we should know?"></textarea>
                 </div>
                 <div id="omErr" style="color:#c0392b;font-size:0.82rem;margin-bottom:0.5rem;display:none;"></div>
@@ -1703,14 +1713,17 @@
         }
 
         function submitOrder() {
-            const name  = document.getElementById('omName').value.trim();
-            const phone = document.getElementById('omPhone').value.trim();
-            const email = document.getElementById('omEmail').value.trim();
-            const notes = document.getElementById('omNotes').value.trim();
-            const err   = document.getElementById('omErr');
+            const name    = document.getElementById('omName').value.trim();
+            const phone   = document.getElementById('omPhone').value.trim();
+            const email   = document.getElementById('omEmail').value.trim();
+            const needDate = document.getElementById('omDate').value;
+            const needTime = document.getElementById('omTime').value;
+            const notes   = document.getElementById('omNotes').value.trim();
+            const err     = document.getElementById('omErr');
             err.style.display = 'none';
-            if (!name)  { err.textContent = 'Please enter your name.';         err.style.display = 'block'; return; }
-            if (!phone) { err.textContent = 'Please enter a phone number.';    err.style.display = 'block'; return; }
+            if (!name)     { err.textContent = 'Please enter your name.';         err.style.display = 'block'; return; }
+            if (!phone)    { err.textContent = 'Please enter a phone number.';    err.style.display = 'block'; return; }
+            if (!needDate) { err.textContent = 'Please enter a date you need this by.'; err.style.display = 'block'; return; }
 
             const items = Object.values(cart);
             const total = items.reduce((s, i) => s + i.price * i.qty, 0);
@@ -1751,12 +1764,13 @@
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify({
                     _subject: `New Order from ${name} — The Copper Whisk`,
-                    Name:     name,
-                    Phone:    phone,
-                    Email:    email || 'Not provided',
-                    Items:    itemLines,
-                    Total:    `$${orderTotal.toFixed(2)}`,
-                    Notes:    notes || 'None',
+                    Name:      name,
+                    Phone:     phone,
+                    Email:     email || 'Not provided',
+                    'Need By': needTime ? `${needDate} at ${needTime}` : needDate,
+                    Items:     itemLines,
+                    Total:     `$${orderTotal.toFixed(2)}`,
+                    Notes:     notes || 'None',
                     'Order ID': order.id
                 })
             }).catch(() => {});
