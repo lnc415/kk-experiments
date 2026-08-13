@@ -1742,6 +1742,24 @@
                 localStorage.setItem('cw_customers', JSON.stringify(customers));
             } catch(e) {}
 
+            // Send order email via Formspree
+            const itemLines = Object.values(cart).map(i => `${i.emoji || ''} ${i.name} x${i.qty} — $${(i.price * i.qty).toFixed(2)}`).join('\n');
+            const orderTotal = Object.values(cart).reduce((s, i) => s + i.price * i.qty, 0);
+            fetch('https://formspree.io/f/xvkprewg', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({
+                    _subject: `New Order from ${name} — The Copper Whisk`,
+                    Name:     name,
+                    Phone:    phone,
+                    Email:    email || 'Not provided',
+                    Items:    itemLines,
+                    Total:    `$${orderTotal.toFixed(2)}`,
+                    Notes:    notes || 'None',
+                    'Order ID': order.id
+                })
+            }).catch(() => {});
+
             cart = {};
             refreshCartUI();
             document.getElementById('orderFormView').style.display  = 'none';
